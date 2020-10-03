@@ -1,0 +1,83 @@
+@import url("https://rsms.me/inter/inter.css");
+
+.sign-background {
+    position: absolute;
+    width: 340px;
+    height: 500px;
+    left: 470px;
+    top: 110px;
+}
+
+.login-background {
+    position: absolute;
+    width: 340px;
+    height: 460px;
+    left: 470px;
+    top: 130px;
+}
+
+.sign-form {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
+}
+
+.sign-form_title {
+    text-align: center;
+
+    margin-top: 70px;
+    margin-bottom: 40px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+
+    color: #1E1E1E;
+}
+
+.sign-form_input-bloc_label {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 16px;;
+    color: #999999;
+}
+
+.sign-form_label {
+    font-size: 9px;
+}
+
+.sign-form_input {
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid #3369F3;
+    outline: none;
+    width: 100%;
+}
+
+.sign-form_button-block {
+    text-align: center;
+    margin-top: 64px;
+    display: grid;
+}
+
+.sign-form_button-block-form_submit {
+    width: 280px;
+    height: 37px;
+    background: #3369F3;
+    border-radius: 8px;
+    border: none;
+    color: #FFFFFF;
+    margin: auto;
+    outline: none;
+}
+
+.sign-form_button-block-form_cancel {
+    font-size: 11px;
+    color: #3369F3;
+    background-color: #FFFFFF;
+    border: none;
+    outline: none;
+    margin-top: 14px;
+}
