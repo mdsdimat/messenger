@@ -59,6 +59,19 @@ body, h1, h2, h3, h4, p, a {
     outline: none;
 }
 
+.profile_form_field_input-file {
+    display: none;
+}
+
+.profile_form_field_input-file-label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: right;
+    color: #999999;
+}
+
 .profile_buttons {
     text-align: left;
 }
