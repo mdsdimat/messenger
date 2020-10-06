@@ -10,7 +10,73 @@ body, h1, h2, h3, h4, p, a {
     height: 100vh;
 }
 
+.modal-wrapper {
+    position:fixed;
+    display:flex;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.7);
+    z-index:100;
+}
+
+.overlay {
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+.modal-window {
+    width: 400px;
+    height: 145px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
+    z-index:2;
+}
+
+.modal-window_title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #1E1E1E;
+    margin: 30px 0 30px 0;
+}
+
+.modal-window_buttons {
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.modal-window_buttons_error {
+    width: 155px;
+    height: 37px;
+    background: #FF2F2F;
+    border-radius: 8px;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+}
+
+.modal-window_buttons_cancel {
+    width: 155px;
+    height: 37px;
+    background: #E2E2E2;
+    border-radius: 8px;
+    color: #1E1E1E;
+    border: none;
+    outline: none;
+}
+
 .chat_list {
+    width: 25vw;
     height: 100vh;
     background-color: #FBFBFB;
     display: inline-block;
@@ -180,6 +246,20 @@ body, h1, h2, h3, h4, p, a {
     float: left;
 }
 
+.chat-body_header_input {
+    margin: 18px 0 0 12px;
+    max-width: 543px;
+    height: 16px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #1E1E1E;
+    float: left;
+    border: none;
+    outline: none;
+}
+
 .chat-body_header_menu {
     height: 34px;
     padding-top: 12px;
@@ -297,7 +377,7 @@ body, h1, h2, h3, h4, p, a {
 }
 
 .chat-body_menu-list_text {
-    width: 95px;
+    width: 100px;
     height: 14px;
     font-style: normal;
     font-weight: 500;
@@ -309,12 +389,10 @@ body, h1, h2, h3, h4, p, a {
 }
 
 .chat-body_header_menu_list {
-    position: absolute;
     width: 162px;
     height: 90px;
-    left: 870px;
-    top: 65px;
-    float: right;
+    margin-top: 25px;
+    float: left;
 
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
