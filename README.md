@@ -75,3 +75,6 @@ README — первое, что прочитает пользователь, к�
 ### **Netlify**
 https://condescending-sinoussi-9e3337.netlify.app
 
+### **Figma**
+https://www.figma.com/file/AG2n7JlgcJ8COTcW5wcIHP/Messanger?node-id=24%3A0
+

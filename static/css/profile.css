@@ -1,0 +1,104 @@
+@import url("https://rsms.me/inter/inter.css");
+
+body, h1, h2, h3, h4, p, a {
+    margin: 0;
+    font-family: Inter, sans-serif;
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile_image {
+    margin-top: 60px;
+}
+
+.profile_name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    color: #1E1E1E;
+    margin-top: 20px;
+}
+
+.profile_form {
+    margin: 100px auto;
+    max-width: 400px;
+}
+
+.profile_form_field {
+    clear:both;
+    text-align:right;
+    margin: 10px;
+    padding-bottom: 10px;
+}
+
+.profile_form_field-border {
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.profile_form_field_label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    color: #1E1E1E;
+    float: left;
+}
+
+.profile_form_field_input {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: right;
+    color: #999999;
+    border: none;
+    outline: none;
+}
+
+.profile_buttons {
+    text-align: left;
+}
+
+.profile_form_field_button {
+    width: 130px;
+    height: 13px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    color: #3369F3;
+    border: none;
+    outline: none;
+    background: #ffffff;
+    text-align: left;
+    margin: 10px 0 10px 0;
+}
+
+.profile_form_field_button-error {
+    color: #FF0000;
+}
+
+.back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.profile_form_save-button {
+    width: 280px;
+    height: 37px;
+    background: #3369F3;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    text-align: center;
+    color: #FFFFFF;
+}

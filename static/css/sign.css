@@ -81,3 +81,17 @@
     outline: none;
     margin-top: 14px;
 }
+
+.sign-form_input-error {
+    color: #FF2F2F;
+}
+
+.sign-form_error-text {
+    height: 8px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 8px;
+    color: #FF2F2F;
+    margin-top: 5px;
+}
