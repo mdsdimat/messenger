@@ -1,85 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
     <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
-<main>
-    <div class="chat">
-        <div class="chat_list">
-            <div class="chat_list_header">
-                <a class="chat_list_header_profile-link">Профиль</a>
-                <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">
-            </div>
-            <div class="chat_list_body">
-                <ul class="chat_list_body_common">
-                    <li>
-                        <div class="chat_list_body_item">
-                            <div class="chat_list_body_item_photo">
-                                <img src="img/icons/ellipse.svg">
-                            </div>
-                            <div class="chat_list_body_item_message">
-                                <div class="chat_list_body_item_message_name">Андрей</div>
-                                <div class="chat_list_body_item_message_content">Изображение</div>
-                            </div>
-                            <div class="chat_list_body_item_desc">
-                                <div class="chat_list_body_item_desc_date">11:59</div>
-                                <div class="chat_list_body_item_desc_count">2</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="chat_list_body_item_current">
-                        <div class="chat_list_body_item">
-                            <div class="chat_list_body_item_photo">
-                                <img src="img/icons/ellipse.svg">
-                            </div>
-                            <div class="chat_list_body_item_message">
-                                <div class="chat_list_body_item_message_name">Андрей</div>
-                                <div class="chat_list_body_item_message_content">Изображение</div>
-                            </div>
-                            <div class="chat_list_body_item_desc">
-                                <div class="chat_list_body_item_desc_date">11:59</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="chat_list_body_item">
-                            <div class="chat_list_body_item_photo">
-                                <img src="img/icons/ellipse.svg">
-                            </div>
-                            <div class="chat_list_body_item_message">
-                                <div class="chat_list_body_item_message_name">Андрей</div>
-                                <div class="chat_list_body_item_message_content">Изображение</div>
-                            </div>
-                            <div class="chat_list_body_item_desc">
-                                <div class="chat_list_body_item_desc_date">11:59</div>
-                                <div class="chat_list_body_item_desc_count">2</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="chat_list_body_item">
-                            <div class="chat_list_body_item_photo">
-                                <img src="img/icons/ellipse.svg">
-                            </div>
-                            <div class="chat_list_body_item_message">
-                                <div class="chat_list_body_item_message_name">Андрей</div>
-                                <div class="chat_list_body_item_message_content">Изображение</div>
-                            </div>
-                            <div class="chat_list_body_item_desc">
-                                <div class="chat_list_body_item_desc_date">11:59</div>
-                                <div class="chat_list_body_item_desc_count">2</div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+<main class="chat">
+    <div class="chat_list">
+        <header class="chat_list_header">
+            <a class="chat_list_header_profile-link">Профиль</a>
+            <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">
+        </header>
+        <div class="chat_list_body">
+            <ul class="chat_list_body_common">
+                <li class="chat_list_body_item">
+                    <div class="chat_list_body_item_photo">
+                        <img src="img/icons/ellipse.svg">
+                    </div>
+                    <div class="chat_list_body_item_message">
+                        <div class="chat_list_body_item_message_name">Андрей</div>
+                        <div class="chat_list_body_item_message_content">Изображение</div>
+                    </div>
+                    <div class="chat_list_body_item_desc">
+                        <div class="chat_list_body_item_desc_date">11:59</div>
+                        <div class="chat_list_body_item_desc_count">2</div>
+                    </div>
+                </li>
+                <li class="chat_list_body_item chat_list_body_item_current">
+                    <div class="chat_list_body_item_photo">
+                        <img src="img/icons/ellipse.svg">
+                    </div>
+                    <div class="chat_list_body_item_message">
+                        <div class="chat_list_body_item_message_name">Андрей</div>
+                        <div class="chat_list_body_item_message_content">Изображение</div>
+                    </div>
+                    <div class="chat_list_body_item_desc">
+                        <div class="chat_list_body_item_desc_date">11:59</div>
+                    </div>
+                </li>
+                <li class="chat_list_body_item">
+                    <div class="chat_list_body_item_photo">
+                        <img src="img/icons/ellipse.svg">
+                    </div>
+                    <div class="chat_list_body_item_message">
+                        <div class="chat_list_body_item_message_name">Андрей</div>
+                        <div class="chat_list_body_item_message_content">Изображение</div>
+                    </div>
+                    <div class="chat_list_body_item_desc">
+                        <div class="chat_list_body_item_desc_date">11:59</div>
+                        <div class="chat_list_body_item_desc_count">2</div>
+                    </div>
+                </li>
+                <li class="chat_list_body_item">
+                    <div class="chat_list_body_item_photo">
+                        <img src="img/icons/ellipse.svg">
+                    </div>
+                    <div class="chat_list_body_item_message">
+                        <div class="chat_list_body_item_message_name">Андрей</div>
+                        <div class="chat_list_body_item_message_content">Изображение</div>
+                    </div>
+                    <div class="chat_list_body_item_desc">
+                        <div class="chat_list_body_item_desc_date">11:59</div>
+                        <div class="chat_list_body_item_desc_count">2</div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="chat-body">
-            <div class="chat-body_central-text">Выберете чат чтобы отправить сообщение</div>
-        </div>
+    </div>
+    <div class="chat-body">
+        <p class="chat-body_central-text">Выберете чат чтобы отправить сообщение</p>
     </div>
 </main>
 

@@ -1,66 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
     <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
-<main>
-    <div class="profile">
-        <img class="back" src="img/icons/back_arrow_ellipse.svg">
-        <img class="profile_image" src="img/profilePhoto.svg">
-        <div class="profile_name">Дима</div>
-        <form class="profile_form js-form">
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Имя</label>
-                <input class="profile_form_field_input" name="first_name" type="text" placeholder="Дима">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Фамилия</label>
-                <input class="profile_form_field_input" name="second_name" type="text" placeholder="Димский">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Отображаемое имя</label>
-                <input class="profile_form_field_input" name="display_name" type="text" placeholder="Dima">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Login</label>
-                <input class="profile_form_field_input" name="login" type="text" placeholder="Dima">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Email</label>
-                <input class="profile_form_field_input" name="email" type="text" placeholder="asdf@yanex.ru">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Телефон</label>
-                <input class="profile_form_field_input" name="phone" type="text" placeholder="+375291234567">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Аватар</label>
-                <label class="profile_form_field_input-file-label">
-                    <input class="profile_form_field_input-file" name="avatar" type="file">
-                    Выберете файл
-                </label>
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Пароль</label>
-                <input class="profile_form_field_input" name="password" type="password" placeholder="пароль">
-            </div>
-            <div class="profile_form_field profile_form_field-border">
-                <label class="profile_form_field_label">Пароль (ещё раз)</label>
-                <input class="profile_form_field_input" name="confirmPassword" type="password" placeholder="ещё раз">
-            </div>
-            <button class="profile_form_save-button">Сохранить</button>
-        </form>
-    </div>
+<main class="profile">
+    <img class="back" src="img/icons/back_arrow_ellipse.svg">
+    <img class="profile_image" src="img/profilePhoto.svg">
+    <h1 class="profile_name">Дима</h1>
+    <form class="profile_form form js-form">
+        <div class="field field-border">
+            <label class="field_label">Имя</label>
+            <input class="field_input" name="first_name" type="text" placeholder="Дима">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Фамилия</label>
+            <input class="field_input" name="second_name" type="text" placeholder="Димский">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Отображаемое имя</label>
+            <input class="field_input" name="display_name" type="text" placeholder="Dima">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Login</label>
+            <input class="field_input" name="login" type="text" placeholder="Dima">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Email</label>
+            <input class="field_input" name="email" type="text" placeholder="asdf@yanex.ru">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Телефон</label>
+            <input class="field_input" name="phone" type="text" placeholder="+375291234567">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Аватар</label>
+            <label class="field_input-file-label">
+                <input class="field_input-file" name="avatar" type="file">
+                Выберете файл
+            </label>
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Пароль</label>
+            <input class="field_input" name="password" type="password" placeholder="пароль">
+        </div>
+        <div class="field field-border">
+            <label class="field_label">Пароль (ещё раз)</label>
+            <input class="field_input" name="confirmPassword" type="password" placeholder="ещё раз">
+        </div>
+        <button class="profile_form_save-button">Сохранить</button>
+    </form>
 </main>
-
 
 <script>
     document.querySelector('.js-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        let formData = new FormData(this);
+        const formData = new FormData(this);
         for (let pair of formData.entries()) {
             console.log(`${pair[0]}: ${pair[1]}`);
         }

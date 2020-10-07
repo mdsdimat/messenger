@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="css/sign.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 <main class="sign-form login-background">
     <div class="sign-form_title">Вход</div>
-    <form class="js-form">
-        <div class="sign-form_input-bloc_label">
+    <form class="js-form form">
+        <div class="sign-form_input-block_label">
             <label class="sign-form_label">Почта
                 <input name="post" class="sign-form_input" type="text" value="testmail@sdg.dfg">
             </label>
         </div>
-        <div class="sign-form_input-bloc_label">
+        <div class="sign-form_input-block_label">
             <label class="sign-form_label">Пароль
                 <input name="password" class="sign-form_input" type="password" value="password">
             </label>
@@ -29,7 +30,7 @@
 <script>
     document.querySelector('.js-form').addEventListener('submit', function (e) {
         e.preventDefault();
-        let formData = new FormData(this);
+        const formData = new FormData(this);
         for (let pair of formData.entries()) {
             console.log(`${pair[0]}: ${pair[1]}`);
         }

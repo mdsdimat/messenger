@@ -1,31 +1,25 @@
-@import url("https://rsms.me/inter/inter.css");
-
-body, h1, h2, h3, h4, p, a {
-    margin: 0;
-    font-family: Inter, sans-serif;
-}
-
 .chat {
     width: 100vw;
     height: 100vh;
+    display: flex;
 }
 
 .modal-wrapper {
-    position:fixed;
-    display:flex;
-    width:100%;
-    height:100%;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,.7);
-    z-index:100;
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .7);
+    z-index: 100;
 }
 
 .overlay {
-    position:absolute;
-    width:100%;
-    height:100%;
-    z-index:1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 .modal-window {
@@ -34,7 +28,7 @@ body, h1, h2, h3, h4, p, a {
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;
-    z-index:2;
+    z-index: 2;
 }
 
 .modal-window_title {
@@ -44,7 +38,7 @@ body, h1, h2, h3, h4, p, a {
     line-height: 18px;
     text-align: center;
     color: #1E1E1E;
-    margin: 30px 0 30px 0;
+    margin: 30px 0;
 }
 
 .modal-window_buttons {
@@ -62,7 +56,6 @@ body, h1, h2, h3, h4, p, a {
     border-radius: 8px;
     color: #FFFFFF;
     border: none;
-    outline: none;
 }
 
 .modal-window_buttons_cancel {
@@ -72,7 +65,6 @@ body, h1, h2, h3, h4, p, a {
     border-radius: 8px;
     color: #1E1E1E;
     border: none;
-    outline: none;
 }
 
 .chat_list {
@@ -81,13 +73,13 @@ body, h1, h2, h3, h4, p, a {
     background-color: #FBFBFB;
     display: inline-block;
     min-width: 255px;
-    float: left;
+    margin-right: auto;
 }
 
 .chat_list_header {
     border-bottom: 1px solid #EAEAEA;
     height: 102px;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
 }
 
 .chat_list_header_profile-link {
@@ -103,7 +95,7 @@ body, h1, h2, h3, h4, p, a {
     text-align: right;
     color: #999999;
 
-    float: right;
+    margin-left: auto;
     margin-top: 21px;
 }
 
@@ -116,7 +108,6 @@ body, h1, h2, h3, h4, p, a {
     background: #EFEFEF;
     border-radius: 5px;
     border: none;
-    outline: none;
 
     text-align: center;
     font-style: normal;
@@ -129,7 +120,7 @@ body, h1, h2, h3, h4, p, a {
 .chat-body {
     width: 75vw;
     height: 100vh;
-    float: right;
+    margin-left: auto;
 }
 
 .chat-body_central-text {
@@ -156,7 +147,8 @@ body, h1, h2, h3, h4, p, a {
     list-style-type: none;
     height: 71px;
     border-bottom: 1px solid #EAEAEA;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
+    display: flex;
 }
 
 .chat_list_body_item_current {
@@ -167,7 +159,7 @@ body, h1, h2, h3, h4, p, a {
     width: 47px;
     height: 47px;
     padding-top: 12px;
-    float: left;
+    margin-right: auto;
 }
 
 .chat_list_body_item_message {
@@ -175,7 +167,7 @@ body, h1, h2, h3, h4, p, a {
     min-width: 155px;
     padding-top: 12px;
     margin-left: 10px;
-    float: left;
+    margin-right: auto;
 }
 
 .chat_list_body_item_message_name {
@@ -199,7 +191,6 @@ body, h1, h2, h3, h4, p, a {
     height: 47px;
     margin-left: auto;
     margin-right: 0;
-    float: right;
 }
 
 .chat_list_body_item_desc_date {
@@ -229,25 +220,25 @@ body, h1, h2, h3, h4, p, a {
     list-style-type: none;
     height: 54px;
     border-bottom: 1px solid #EAEAEA;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
+    display: flex;
 }
 
 .chat-body_header_photo {
     width: 34px;
     height: 34px;
     padding-top: 10px;
-    float: left;
 }
 
 .chat-body_header_desc {
     height: 34px;
     padding-top: 12px;
     margin-left: 10px;
-    float: left;
+    margin-right: auto;
 }
 
 .chat-body_header_input {
-    margin: 18px 0 0 12px;
+    margin: 18px auto 0 12px;
     max-width: 543px;
     height: 16px;
     font-style: normal;
@@ -255,42 +246,40 @@ body, h1, h2, h3, h4, p, a {
     font-size: 16px;
     line-height: 16px;
     color: #1E1E1E;
-    float: left;
     border: none;
-    outline: none;
 }
 
 .chat-body_header_menu {
     height: 34px;
     padding-top: 12px;
-    float: right;
+    margin-left: auto;
+    display: flex;
 }
 
 .chat-body_footer {
-    position:fixed;
-    right:0;
-    bottom:0;
-    width:75%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 75%;
     height: 54px;
     border-top: 1px solid #EAEAEA;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
     background: url("../img/icons/arrow_ellipse.svg") no-repeat center right;
+    display: flex;
 }
 
 .chat-body_footer_clip {
     padding-top: 11px;
-    float: left;
 }
 
 .chat-body_footer_message {
-    float: left;
+    margin-right: auto;
     height: 32px;
     margin-top: 11px;
 
     background: #EFEFEF;
     border-radius: 30px;
     border: none;
-    outline: none;
 
     font-style: normal;
     font-weight: 500;
@@ -302,10 +291,11 @@ body, h1, h2, h3, h4, p, a {
 
 .chat-body_main {
     border-top: 1px solid #EAEAEA;
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
 }
 
 .chat-body_main_message {
+    width: 100%;
     max-width: 400px;
     background: #F8F8F8;
     font-style: normal;
@@ -317,6 +307,10 @@ body, h1, h2, h3, h4, p, a {
     border-radius: 5%;
 }
 
+.flex-container {
+    display: flex;
+}
+
 .chat-body_main_message-self {
     background: #E4EDFD;
     font-style: normal;
@@ -326,7 +320,7 @@ body, h1, h2, h3, h4, p, a {
     color: #1E1E1E;
     margin-top: 15px;
     border-radius: 5%;
-    float: right;
+    margin-left: auto;
 }
 
 .chat-body_main_message_time {
@@ -370,10 +364,11 @@ body, h1, h2, h3, h4, p, a {
 .chat-body_menu-list_item {
     margin: 15px 0 0 15px;
     height: 22px;
+    display: flex;
 }
 
 .chat-body_menu-list_img {
-    float: left;
+    margin-right: auto;
 }
 
 .chat-body_menu-list_text {
@@ -384,7 +379,7 @@ body, h1, h2, h3, h4, p, a {
     font-size: 12px;
     line-height: 14px;
     color: #1E1E1E;
-    float: right;
+    margin-left: auto;
     margin-top: 5px;
 }
 
@@ -392,7 +387,7 @@ body, h1, h2, h3, h4, p, a {
     width: 162px;
     height: 90px;
     margin-top: 25px;
-    float: left;
+    margin-right: auto;
 
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);

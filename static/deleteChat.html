@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
     <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 <main>
     <div class="modal-wrapper">
         <div class="modal-window">
-            <div class="modal-window_title">Вы хотите удалить чат</div>
+            <p class="modal-window_title">Вы хотите удалить чат</p>
             <div class="modal-window_buttons">
                 <button class="modal-window_buttons_error">Удалить</button>
                 <button class="modal-window_buttons_cancel">Отменить</button>
@@ -20,7 +21,9 @@
     <div class="chat">
         <div class="chat_list">
             <div class="chat_list_header">
-                <a class="chat_list_header_profile-link">Профиль</a>
+                <div class="flex-container">
+                    <a class="chat_list_header_profile-link">Профиль</a>
+                </div>
                 <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">
             </div>
             <div class="chat_list_body">
@@ -116,9 +119,11 @@
                     <img class="chat-body_main_img" src="img/jonas-allert-Rpz-455NaQw-unsplash.jpg">
                     <div class="chat-body_main_message_time">15:58</div>
                 </div>
-                <div class="chat-body_main_message-self">
-                    <p class="chat-body_main_message_text">Круто!</p>
-                    <div class="chat-body_main_message_time">15:58</div>
+                <div class="flex-container">
+                    <div class="chat-body_main_message-self">
+                        <p class="chat-body_main_message_text">Круто!</p>
+                        <div class="chat-body_main_message_time">15:58</div>
+                    </div>
                 </div>
             </div>
             <div class="chat-body_footer">
