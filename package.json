@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/mdsdimat/mf.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
     "express": "4.17.1"
+  },
+  "dependencies": {
+    "@types/node": "^14.11.11",
+    "handlebars": "^4.7.6"
   }
 }
