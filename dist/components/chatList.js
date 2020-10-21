@@ -38,14 +38,6 @@ export default class ChatList extends Block {
             '    </div>';
     }
     render() {
-        Handlebars.registerHelper('ifCont', function (value, opts) {
-            if (value > 1) {
-                return opts.fn(this);
-            }
-            else {
-                return opts.inverse(this);
-            }
-        });
         return Handlebars.compile(this.getTemplate())(this.props);
     }
 }
