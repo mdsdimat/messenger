@@ -1,0 +1,47 @@
+/// <reference path="../../globals.d.ts" />
+// @ts-ignore
+import Block from '/src/modules/block.js';
+import Input from "./form/input.js";
+
+export default class Profile extends Block {
+    props: object;
+
+    constructor(props) {
+        // Создаем враппер дом-элемент button
+        super("div", props);
+    }
+
+    getFields() {
+        let renderField = '';
+        // @ts-ignore
+        this.props.fields.forEach((field) => {
+            const input = new Input(field);
+            renderField += '<div class="field field-border">\n' +
+                '            <label class="field_label">' + field.placeholder + '</label>\n' +
+                input.render() +
+                '        </div>';
+        });
+        return renderField;
+    }
+    getTemplate() {
+        return '<main class="profile">\n' +
+            '    <img class="back" src="img/icons/back_arrow_ellipse.svg">\n' +
+            '    <img class="profile_image" src="{{photo}}">\n' +
+            '    <h1 class="profile_name">{{name}}</h1>\n' +
+            '    <form class="profile_form form">\n' +
+                     this.getFields() +
+            '        <div class="profile_buttons">\n' +
+            '            <div class="field-border">\n' +
+            '                <button class="field_button">Изменить данные</button>\n' +
+            '            </div>\n' +
+            '            <div>\n' +
+            '                <button class="field_button button-error">Выйти</button>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </form>';
+    }
+
+    render() {
+        return Handlebars.compile(this.getTemplate())(this.props);
+    }
+};
