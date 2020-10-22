@@ -73,6 +73,12 @@ const page = new Profile({
             placeholder: 'Пароль (ещё раз)',
             value: 'password',
         },
+    ],
+    buttons: [
+        {
+            className: 'profile_form_save-button',
+            text: 'Сохранить',
+        }
     ]
 });
 

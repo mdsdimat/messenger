@@ -7,6 +7,7 @@ function render(query, block) {
 }
 
 const page = new Sign({
+    typeBackground: 'sign-background',
     title: 'Регистрация',
     fields: [
         {
@@ -58,7 +59,18 @@ const page = new Sign({
             type: 'password',
             value: 'password',
         },
-    ]
+    ],
+    buttons: [
+        {
+            type: 'submit',
+            className: 'sign-form_button-block-form_submit',
+            text: 'Зарегистрироваться',
+        },
+        {
+            className: 'sign-form_button-block-form_cancel',
+            text: 'Войти',
+        }
+    ],
 });
 
 render(".app", page);

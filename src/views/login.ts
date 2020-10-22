@@ -1,4 +1,4 @@
-import Login from "../components/login.js";
+import Signin from "../components/signin.js";
 
 function render(query, block) {
     const root = document.querySelector(query);
@@ -6,7 +6,8 @@ function render(query, block) {
     return root;
 }
 
-const page = new Login({
+const page = new Signin({
+    typeBackground: 'login-background',
     title: 'Вход',
     fields: [
         {
@@ -23,6 +24,16 @@ const page = new Login({
             type: 'password',
             value: '123456',
         },
+    ],
+    buttons: [
+        {
+            className: 'sign-form_button-block-form_submit',
+            text: 'Авторизоваться',
+        },
+        {
+            className: 'sign-form_button-block-form_cancel',
+            text: 'Нет аккаунта?',
+        }
     ]
 });
 
@@ -35,4 +46,5 @@ element[0].addEventListener('submit', function (e) {
     for (let pair of formData.entries()) {
         console.log(`${pair[0]}: ${pair[1]}`);
     }
+    console.log(page.props);
 });

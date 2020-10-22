@@ -2,6 +2,7 @@
 // @ts-ignore
 import Block from '/src/modules/block.js';
 import Input from "./form/input.js";
+import Button from "./form/button.js";
 
 export default class Profile extends Block {
     props: object;
@@ -34,20 +35,26 @@ export default class Profile extends Block {
         });
         return renderField;
     }
+    getButtons() {
+        let renderField = '';
+        // @ts-ignore
+        this.props.buttons.forEach((field) => {
+            const button = new Button(field);
+            renderField += `<div ${field.className ? `class="${field.className}"` : ''}>\n` +
+                                button.render() +
+                '           </div>\n';
+        });
+        return renderField;
+    }
     getTemplate() {
         return '<main class="profile">\n' +
             '    <img class="back" src="img/icons/back_arrow_ellipse.svg">\n' +
             '    <img class="profile_image" src="{{photo}}">\n' +
             '    <h1 class="profile_name">{{name}}</h1>\n' +
-            '    <form class="profile_form form">\n' +
+            '    <form class="profile_form form js-form">\n' +
                      this.getFields() +
-            '        <div class="profile_buttons">\n' +
-            '            <div class="field-border">\n' +
-            '                <button class="field_button">Изменить данные</button>\n' +
-            '            </div>\n' +
-            '            <div>\n' +
-            '                <button class="field_button button-error">Выйти</button>\n' +
-            '            </div>\n' +
+            '        <div class="{{buttonsClassName}}">\n' +
+                        this.getButtons() +
             '        </div>\n' +
             '    </form>';
     }

@@ -2,6 +2,7 @@
 // @ts-ignore
 import Block from '/src/modules/block.js';
 import Input from "./form/input.js";
+import Button from "./form/button.js";
 
 export default class Login extends Block {
     props: object;
@@ -25,8 +26,18 @@ export default class Login extends Block {
         return renderFields;
     }
 
+    getButtons():string {
+        let renderFields: string = '';
+        // @ts-ignore
+        this.props.buttons.forEach((field) => {
+            const input = new Button(field);
+            renderFields += input.render();
+        });
+        return renderFields;
+    }
+
     getTemplate() {
-        return '<main class="sign-form sign-background">\n' +
+        return '<main class="sign-form {{typeBackground}}">\n' +
             '    <div class="sign-form_title">{{title}}</div>\n' +
             '    <form class="js-form">\n' +
                      this.getFields() +
@@ -37,8 +48,7 @@ export default class Login extends Block {
             '            <div class="sign-form_error-text">Пароли не совпадают</div>\n' +
             '        </div>\n' +
             '        <div class="sign-form_button-block">\n' +
-            '            <button type="submit" class="sign-form_button-block-form_submit">Зарегистрироваться</button>\n' +
-            '            <button class="sign-form_button-block-form_cancel">Войти</button>\n' +
+                        this.getButtons() +
             '        </div>\n' +
             '    </form>\n' +
             '</main>';
