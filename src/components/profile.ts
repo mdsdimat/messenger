@@ -16,10 +16,21 @@ export default class Profile extends Block {
         // @ts-ignore
         this.props.fields.forEach((field) => {
             const input = new Input(field);
-            renderField += '<div class="field field-border">\n' +
-                '            <label class="field_label">' + field.placeholder + '</label>\n' +
-                input.render() +
-                '        </div>';
+            if (field.type === 'file') {
+                renderField += '' +
+                    '        <div class="field field-border">\n' +
+                    '            <label class="field_label">Аватар</label>\n' +
+                    '            <label class="field_input-file-label">\n' +
+                                     input.render() +
+                    '                Выберете файл\n' +
+                    '            </label>\n' +
+                    '        </div>'
+            } else {
+                renderField += '<div class="field field-border">\n' +
+                    '            <label class="field_label">' + field.placeholder + '</label>\n' +
+                                 input.render() +
+                    '        </div>';
+            }
         });
         return renderField;
     }
