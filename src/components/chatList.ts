@@ -44,7 +44,6 @@ export default class ChatList extends Block {
     }
 
     render() {
-
         return Handlebars.compile(this.getTemplate())(this.props);
     }
 };

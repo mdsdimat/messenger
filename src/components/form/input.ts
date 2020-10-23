@@ -8,10 +8,18 @@ export default class Input extends Block {
 
     constructor(props) {
         super("div", props);
+
     }
 
     getTemplate() {
-        return '<input name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}">';
+        Handlebars.registerHelper('validation', function(context) {
+            if (context.validation) {
+                return JSON.stringify(context.validation);
+            }
+            return false;
+        });
+
+        return '<input name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}" data-validation="{{validation this}}"">';
     }
 
     render() {

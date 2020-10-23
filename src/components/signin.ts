@@ -8,8 +8,11 @@ export default class Login extends Block {
     props: object;
 
     constructor(props) {
-        // Создаем враппер дом-элемент button
         super("div", props);
+    }
+
+    componentDidMount(oldProps) {
+        console.log(345);
     }
 
     getFields():string {
@@ -17,10 +20,11 @@ export default class Login extends Block {
         // @ts-ignore
         this.props.fields.forEach((field) => {
             const input = new Input(field);
-            renderFields += '<div class="sign-form_input-block_label">\n' +
+            renderFields += '<div class="sign-form_input-block_label js-valid">\n' +
                 '            <label class="sign-form_label">' + field.label + '\n' +
                                 input.render() +
                 '            </label>\n' +
+                '            <div class="sign-form_error-text js-error-message" hidden></div>\n' +
                 '        </div>'
         });
         return renderFields;
@@ -41,12 +45,6 @@ export default class Login extends Block {
             '    <div class="sign-form_title">{{title}}</div>\n' +
             '    <form class="js-form">\n' +
                      this.getFields() +
-            '        <div class="sign-form_input-block_label">\n' +
-            '            <label class="sign-form_label">Пароль (ещё раз)\n' +
-            '                <input name="confirm_password" class="sign-form_input sign-form_input-error" type="password" value="password1">\n' +
-            '            </label>\n' +
-            '            <div class="sign-form_error-text">Пароли не совпадают</div>\n' +
-            '        </div>\n' +
             '        <div class="sign-form_button-block">\n' +
                         this.getButtons() +
             '        </div>\n' +
