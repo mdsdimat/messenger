@@ -1,0 +1,49 @@
+.error-page {
+    font-style: normal;
+    text-align: center;
+}
+
+.error-page_number {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    left: 600px;
+    top: 280px;
+
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 40px;
+    /* identical to box height, or 100% */
+
+    color: #1E1E1E;
+}
+
+.error-page_desc {
+    position: absolute;
+    width: 180px;
+    height: 20px;
+    left: 550px;
+    top: 340px;
+
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+
+    color: #1E1E1E;
+}
+
+.error-page_link {
+    position: absolute;
+    width: 78px;
+    height: 11px;
+    left: 600px;
+    top: 429px;
+
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 11px;
+    /* identical to box height, or 100% */
+
+    color: #3369F3;
+}

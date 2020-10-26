@@ -1,0 +1,10 @@
+@import url("https://rsms.me/inter/inter.css");
+
+body, h1, h2, h3, h4, p, a {
+    margin: 0;
+    font-family: Inter, sans-serif;
+}
+
+.input-error {
+    color: #FF2F2F;
+}
