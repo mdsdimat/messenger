@@ -16,3 +16,6 @@ https://www.figma.com/file/AG2n7JlgcJ8COTcW5wcIHP/Messanger?node-id=24%3A0
 /renameChat - переименовать чат
 /signin - регистрация
 /login -авторизация
+
+### **build**
+npm run build
