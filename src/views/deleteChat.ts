@@ -1,10 +1,5 @@
-import Chat from "../components/chat.js";
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.appendChild(block.getContent());
-    return root;
-}
+import Chat from "../components/chat/chat.js";
+import {render} from "../modules/scripts.js"
 
 const page = new Chat({
     isShowDeleteModal: true,

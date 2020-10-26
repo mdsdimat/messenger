@@ -1,14 +1,10 @@
 import Sign from "../components/signin.js";
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.appendChild(block.getContent());
-    return root;
-}
+import {render} from "../modules/scripts.js"
 
 const page = new Sign({
     typeBackground: 'sign-background',
     title: 'Регистрация',
+    formClassName: 'js-form',
     fields: [
         {
             label: 'Имя',
@@ -37,6 +33,13 @@ const page = new Sign({
             className: 'sign-form_input',
             type: 'text',
             value: 'dima@yandex.ru',
+            validation: {
+                rules: [
+                    {
+                        name: 'email'
+                    }
+                ]
+            },
         },
         {
             label: 'Телефон',
@@ -44,6 +47,13 @@ const page = new Sign({
             className: 'sign-form_input',
             type: 'text',
             value: '+375291234567',
+            validation: {
+                rules: [
+                    {
+                        name: 'mobile'
+                    }
+                ]
+            },
         },
         {
             label: 'Пароль',
@@ -51,6 +61,14 @@ const page = new Sign({
             className: 'sign-form_input',
             type: 'password',
             value: 'password',
+            validation: {
+                rules: [
+                    {
+                        name: 'max',
+                        value: 5,
+                    }
+                ]
+            },
         },
         {
             label: 'Пароль (ещё раз)',
@@ -60,6 +78,7 @@ const page = new Sign({
             value: 'password',
         },
     ],
+    buttonsClassName: 'sign-form_button-block',
     buttons: [
         {
             type: 'submit',
@@ -74,12 +93,3 @@ const page = new Sign({
 });
 
 render(".app", page);
-
-const element = document.getElementsByClassName('js-form');
-element[0].addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
-});

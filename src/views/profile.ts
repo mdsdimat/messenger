@@ -1,14 +1,10 @@
 import Profile from "../components/profile.js";
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.appendChild(block.getContent());
-    return root;
-}
+import {render} from "../modules/scripts.js"
 
 const page = new Profile({
     photo: 'img/profilePhoto.svg',
     name: 'Дима',
+    formClassName: 'profile_form form js-form',
     fields: [
         {
             name: 'email',
@@ -39,12 +35,3 @@ const page = new Profile({
 });
 
 render(".app", page);
-
-const element = document.getElementsByClassName('js-form');
-element[0].addEventListener('submit', function (e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    for (let pair of formData.entries()) {
-        console.log(`${pair[0]}: ${pair[1]}`);
-    }
-});

@@ -1,13 +1,10 @@
 /// <reference path="../../globals.d.ts" />
 
-// @ts-ignore
-import Block from '/src/modules/block.js';
+import Block from "../modules/block.js";
 
 export default class ErrorPage extends Block {
-    props: object;
 
-    constructor(props) {
-        // Создаем враппер дом-элемент button
+    constructor(props: {}) {
         super("div", props);
     }
 
@@ -17,10 +14,5 @@ export default class ErrorPage extends Block {
             '        <p class="error-page_desc">{{desc}}</p>\n' +
             '        <a href="/" class="error-page_link">{{linkText}}</a>\n' +
             '    </main>';
-    }
-
-    render() {
-
-        return Handlebars.compile(this.getTemplate())(this.props);
     }
 };

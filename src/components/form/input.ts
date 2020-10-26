@@ -1,29 +1,21 @@
 /// <reference path="../../../globals.d.ts" />
-
-// @ts-ignore
-import Block from '/src/modules/block.js';
+import Block from "../../modules/block.js";
+import Validation from "../../modules/validation.js";
 
 export default class Input extends Block {
-    props: object;
+    props: any;
 
-    constructor(props) {
+    constructor(props: {}) {
         super("div", props);
+    }
 
+    initEvents(block:Block) {
+        const validation = new Validation(this.props);
+        block._element.firstChild.onfocus = (e) => {validation.validator(e)};
+        block._element.firstChild.onblur = (e) => {validation.validator(e)};
     }
 
     getTemplate() {
-        Handlebars.registerHelper('validation', function(context) {
-            if (context.validation) {
-                return JSON.stringify(context.validation);
-            }
-            return false;
-        });
-
-        return '<input name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}" data-validation="{{validation this}}"">';
-    }
-
-    render() {
-
-        return Handlebars.compile(this.getTemplate())(this.props);
+        return '<input name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}">';
     }
 };

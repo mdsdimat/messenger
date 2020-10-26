@@ -1,10 +1,12 @@
 {
   "name": "html",
   "version": "1.0.0",
-  "description": "Даже законченный проект остаётся только заготовкой, пока им не начнут пользоваться. Но сначала пользователь должен понять, зачем ему пользоваться вашим кодом. В этом помогает файл README.",
+  "description": "Desc",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "npx postcss src/css/*.css --use autoprefixer -d static/css/",
+    "build": "tsc && npm run build-css"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,9 @@
   },
   "dependencies": {
     "@types/node": "^14.11.11",
-    "handlebars": "^4.7.6"
+    "autoprefixer": "^10.0.1",
+    "handlebars": "^4.7.6",
+    "postcss-cli": "^8.1.0",
+    "postcss-scss": "^3.0.2"
   }
 }

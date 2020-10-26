@@ -1,14 +1,10 @@
 import Profile from "../components/profile.js";
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.appendChild(block.getContent());
-    return root;
-}
+import {render} from "../modules/scripts.js"
 
 const page = new Profile({
     photo: 'img/profilePhoto.svg',
     name: 'Дима',
+    formClassName: 'profile_form form js-form',
     fields: [
         {
             name: 'name',
@@ -16,6 +12,17 @@ const page = new Profile({
             type: 'text',
             placeholder: 'Имя',
             value: 'Дима',
+            validation: {
+                rules: [
+                    {
+                        name: 'max',
+                        value: 3,
+                    },
+                    {
+                        name: 'required',
+                    }
+                ],
+            }
         },
         {
             name: 'second_name',

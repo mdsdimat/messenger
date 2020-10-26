@@ -1,15 +1,10 @@
 import Signin from "../components/signin.js";
-import Validation from "../modules/validation.js";
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.appendChild(block.getContent());
-    return root;
-}
+import {render} from "../modules/scripts.js"
 
 const page = new Signin({
     typeBackground: 'login-background',
     title: 'Вход',
+    formClassName: 'js-form',
     fields: [
         {
             label: 'Почта',
@@ -43,6 +38,7 @@ const page = new Signin({
             }
         },
     ],
+    buttonsClassName: 'sign-form_button-block',
     buttons: [
         {
             className: 'sign-form_button-block-form_submit',
@@ -57,8 +53,8 @@ const page = new Signin({
 
 render(".app", page);
 
-const validation = new Validation(page);
-validation.setValidation();
+// const validation = new Validation(page);
+// validation.setValidation();
 
 // const form = document.getElementsByClassName('js-form');
 // form[0].addEventListener('submit', function (e) {
