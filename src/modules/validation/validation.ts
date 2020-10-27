@@ -41,8 +41,7 @@ export default abstract class Validation {
     doValidation(validation: [] | undefined, target: ITarget) {
         if (validation === undefined) {return true;}
         for (let i = 0; i < validation.length; i++) {
-            const rule = validation[i];
-            const validResult = this.getValidationFunction(rule, target.value);
+            const validResult = this.getValidationFunction(validation[i], target.value);
             const message = <HTMLElement>target.closest('.js-valid').getElementsByClassName('js-error-message')[0];
             if (validResult !== undefined && !validResult.valid) {
                 target.classList.add('input-error');
