@@ -34,10 +34,10 @@ const page = new Sign({
             type: 'text',
             value: 'dima@yandex.ru',
             validation: [
-                    {
-                        name: 'email'
-                    }
-                ]
+                {
+                    name: 'email'
+                }
+            ]
         },
         {
             label: 'Телефон',
@@ -46,10 +46,10 @@ const page = new Sign({
             type: 'text',
             value: '+375291234567',
             validation: [
-                    {
-                        name: 'mobile'
-                    }
-                ]
+                {
+                    name: 'mobile'
+                }
+            ]
         },
         {
             label: 'Пароль',
@@ -58,11 +58,14 @@ const page = new Sign({
             type: 'password',
             value: 'password',
             validation: [
-                    {
-                        name: 'max',
-                        value: 5,
-                    }
-                ]
+                {
+                    name: 'max',
+                    value: 5,
+                },
+                {
+                    name: 'required'
+                }
+            ]
         },
         {
             label: 'Пароль (ещё раз)',
