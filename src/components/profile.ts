@@ -6,8 +6,8 @@ import Form from "./form/form.js";
 
 export default class Profile extends Block {
     props: {
-        fields: any;
-        buttons: any;
+        fields: [];
+        buttons: [];
     };
 
     constructor(props: {}) {

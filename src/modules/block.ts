@@ -11,14 +11,10 @@ abstract class Block {
     _meta: {tagName: string, props: {}|null};
     private _id: string;
     private eventBus: () => EventBus;
-    static _instances: any;
+    static _instances: Block[];
     static hydrate: () => void;
     props: {[key: string]: unknown};
 
-    /** JSDoc
-     *
-     * @returns {void}
-     */
     constructor(tagName:string = "div", props:{} = {}) {
         this._id = 'uniq' + parseInt(String(Math.random() * 1000000));
         const eventBus = new EventBus();
@@ -38,30 +34,30 @@ abstract class Block {
         Block._instances.push(this);
     }
 
-    _registerEvents() {
+    _registerEvents(): void {
         this.eventBus().on(Block.EVENTS.INIT, this.init);
         this.eventBus().on(Block.EVENTS.FLOW_CDM, this._componentDidMount);
         this.eventBus().on(Block.EVENTS.FLOW_RENDER, this._render);
         this.eventBus().on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate);
     }
 
-    _createResources() {
+    _createResources(): void {
         const tagName = this._meta.tagName;
         this._element = this._createDocumentElement(tagName);
     }
 
-    init = () => {
+    init = (): void => {
         this._createResources();
         this._element.setAttribute('_key', this.getId());
     }
 
-    _componentDidMount = (oldProps: {}) => {
+    _componentDidMount = (oldProps: {}): void => {
         this.componentDidMount(oldProps);
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidMount(oldProps: {}) {
+    componentDidMount(oldProps: {}): {} {
         return oldProps;
     }
 
@@ -80,8 +76,10 @@ abstract class Block {
         }
     }
 
-    initEvents(block:any) {
-        return block;
+    initEvents(block: Block): void {
+        if (block) {
+            return;
+        }
     }
 
     setProps = (nextProps: {}) => {

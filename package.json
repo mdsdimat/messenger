@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "npx postcss src/css/*.css --use autoprefixer -d static/css/",
-    "build": "tsc && npm run build-css && rm -r static/img && cp -r src/img static/img",
+    "build": "npx tsc && npm run build-css && cp -r src/img/ static/ && cp -a src/pages/. static/",
     "start": "npm run build && node server.js"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "autoprefixer": "^10.0.1",
     "handlebars": "^4.7.6",
     "postcss-cli": "^8.1.0",
-    "postcss-scss": "^3.0.2"
+    "postcss-scss": "^3.0.2",
+    "typescript": "^4.0.5"
   }
 }

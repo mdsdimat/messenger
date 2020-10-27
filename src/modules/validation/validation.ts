@@ -8,23 +8,26 @@ interface ITarget {
     classList: DOMTokenList,
     closest: (key: string) => Element,
     hidden: boolean,
+    getElementsByTagName: (key: string) => ITarget[],
+    name: string
 }
 
 export interface IEvent {
     target: ITarget,
+    preventDefault: () => void,
 }
 
-interface IValidationFunc {
+interface IValidationResult {
     valid: boolean,
     message: string,
 }
 
-interface IField {
-    name:string,
+export interface IField {
+    name: string,
     validation: []
 }
 
-export default class Validation {
+export default abstract class Validation {
     props: IProps;
     regMobile = new RegExp(/^(\+)[37]\d{11}$/);
     regEmail = new RegExp(/\S+@\S+\.\S+/);
@@ -33,50 +36,35 @@ export default class Validation {
         this.props = props;
     }
 
-    validator = (event: IEvent) => {
-        const validation = this.props.validation;
-        const target = event.target;
-        this.doValidation(validation, target);
-    }
+    abstract validate(event: IEvent): void;
 
-    doValidation(validation: [], target: ITarget) {
-        if (!validation) {return true;}
+    doValidation(validation: [] | undefined, target: ITarget) {
+        if (validation === undefined) {return true;}
         for (let i = 0; i < validation.length; i++) {
             const rule = validation[i];
-            const validFunc = this.getValidationFunction(rule, target.value);
-
-            target.classList.remove('input-error');
+            const validResult = this.getValidationFunction(rule, target.value);
             const message = <HTMLElement>target.closest('.js-valid').getElementsByClassName('js-error-message')[0];
-            message.textContent = '';
-            message.hidden = true;
-            if (validFunc !== undefined &&!validFunc.valid) {
+            if (validResult !== undefined && !validResult.valid) {
                 target.classList.add('input-error');
-                const message = <HTMLElement>target.closest('.js-valid').getElementsByClassName('js-error-message')[0];
-                message.textContent = validFunc.message;
-                message.hidden = false;
+                this.showErrorMessage(message, validResult.message)
+            } else if (target.classList.contains('input-error')) {
+                target.classList.remove('input-error');
+                this.hideErrorMessage(message);
             }
         }
     }
 
-    getField(name: string): IField | undefined {
-        return this.props.fields.find((field: {name:string}) => {
-            if (field.name === name) {
-                return name;
-            }
-        });
+    hideErrorMessage(message: HTMLElement): void {
+        message.textContent = '';
+        message.hidden = true;
     }
 
-    formValidation(e: any) {
-        const target = e.target;
-        const inputs = target.getElementsByTagName('input');
-        for (let input of inputs) {
-            const searchedField: IField|undefined = this.getField(input.name);
-            if (searchedField !== undefined) {this.doValidation(searchedField.validation, input);}
-        }
-        e.preventDefault();
+    showErrorMessage(message: HTMLElement, messageText: string): void {
+        message.textContent = messageText;
+        message.hidden = false;
     }
 
-    getValidationFunction(rule:{name:string, value:number}, value:string): IValidationFunc|undefined {
+    getValidationFunction(rule: { name: string, value: number }, value: string): IValidationResult | undefined {
         switch (rule.name) {
             case 'max': {
                 return this.max(rule.value, value);
@@ -95,25 +83,25 @@ export default class Validation {
         }
     }
 
-    max(maxVal:number, val:string): IValidationFunc|undefined {
+    max(maxVal: number, val: string): IValidationResult | undefined {
         if (val.length > maxVal) {
             return {valid: false, message: `Длина должна быть меньше ${maxVal}`};
         }
     }
 
-    required(val:string): IValidationFunc|undefined {
+    required(val: string): IValidationResult | undefined {
         if (val.length === 0) {
             return {valid: false, message: `Обязательно для заполнения`};
         }
     }
 
-    mobile(val:string): IValidationFunc|undefined {
+    mobile(val: string): IValidationResult | undefined {
         if (!this.regMobile.test(val)) {
             return {valid: false, message: `Не соответствует формату`};
         }
     }
 
-    email(val:string): IValidationFunc|undefined {
+    email(val: string): IValidationResult | undefined {
         if (!this.regEmail.test(val)) {
             return {valid: false, message: `Не соответствует формату`};
         }

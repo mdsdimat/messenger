@@ -1,11 +1,11 @@
 /// <reference path="../../../globals.d.ts" />
 import Block from "../../modules/block.js";
-import Validation, {IEvent} from "../../modules/validation.js";
+import {IEvent} from "../../modules/validation/validation.js";
+import FormValidation from "../../modules/validation/formValidation.js";
 
 export default class Form extends Block {
     props: any;
-    renderToString: any;
-    _element: any;
+    _element: Element;
     fields: string;
     buttons: string;
 
@@ -16,8 +16,8 @@ export default class Form extends Block {
     }
 
     initEvents(block: Block) {
-        const validation = new Validation(this.props);
-        block._element.onsubmit = (e: IEvent) => {validation.formValidation(e)};
+        const validation = new FormValidation(this.props);
+        block._element.onsubmit = (e: IEvent) => {validation.validate(e)};
     }
 
     getTemplate() {
