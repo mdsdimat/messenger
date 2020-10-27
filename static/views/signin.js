@@ -32,13 +32,11 @@ const page = new Sign({
             className: 'sign-form_input',
             type: 'text',
             value: 'dima@yandex.ru',
-            validation: {
-                rules: [
-                    {
-                        name: 'email'
-                    }
-                ]
-            },
+            validation: [
+                {
+                    name: 'email'
+                }
+            ]
         },
         {
             label: 'Телефон',
@@ -46,13 +44,11 @@ const page = new Sign({
             className: 'sign-form_input',
             type: 'text',
             value: '+375291234567',
-            validation: {
-                rules: [
-                    {
-                        name: 'mobile'
-                    }
-                ]
-            },
+            validation: [
+                {
+                    name: 'mobile'
+                }
+            ]
         },
         {
             label: 'Пароль',
@@ -60,14 +56,12 @@ const page = new Sign({
             className: 'sign-form_input',
             type: 'password',
             value: 'password',
-            validation: {
-                rules: [
-                    {
-                        name: 'max',
-                        value: 5,
-                    }
-                ]
-            },
+            validation: [
+                {
+                    name: 'max',
+                    value: 5,
+                }
+            ]
         },
         {
             label: 'Пароль (ещё раз)',

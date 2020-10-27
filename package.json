@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "npx postcss src/css/*.css --use autoprefixer -d static/css/",
-    "build": "tsc && npm run build-css && rm -r static/img && cp -r src/img static/img"
+    "build": "tsc && npm run build-css && rm -r static/img && cp -r src/img static/img",
+    "start": "npm run build && node server.js"
   },
   "repository": {
     "type": "git",

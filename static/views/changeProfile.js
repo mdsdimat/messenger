@@ -11,17 +11,15 @@ const page = new Profile({
             type: 'text',
             placeholder: 'Имя',
             value: 'Дима',
-            validation: {
-                rules: [
-                    {
-                        name: 'max',
-                        value: 3,
-                    },
-                    {
-                        name: 'required',
-                    }
-                ],
-            }
+            validation: [
+                {
+                    name: 'max',
+                    value: 3,
+                },
+                {
+                    name: 'required',
+                }
+            ],
         },
         {
             name: 'second_name',

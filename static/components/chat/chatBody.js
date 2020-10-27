@@ -8,7 +8,6 @@ export default class ChatBody extends Block {
         super("div", props);
     }
     getTemplate() {
-        console.log(353452342);
         const header = new ChatBodyHeader(this.props.header);
         const body = new ChatBodyMain(this.props.body);
         const footer = new ChatBodyFooter(this.props.footer);

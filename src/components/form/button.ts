@@ -2,8 +2,7 @@
 import Block from "../../modules/block.js";
 
 export default class Button extends Block {
-    props: object;
-    renderToString: any;
+    props: {};
 
     constructor(props: {}) {
         super("div", props);

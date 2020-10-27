@@ -12,8 +12,7 @@ const page = new Profile({
             type: 'text',
             placeholder: 'Имя',
             value: 'Дима',
-            validation: {
-                rules: [
+            validation: [
                     {
                         name: 'max',
                         value: 3,
@@ -22,7 +21,6 @@ const page = new Profile({
                         name: 'required',
                     }
                 ],
-            }
         },
         {
             name: 'second_name',

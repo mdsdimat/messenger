@@ -6,11 +6,27 @@ class Block {
      */
     constructor(tagName = "div", props = {}) {
         this._element = null;
+        this.init = () => {
+            this._createResources();
+            this._element.setAttribute('_key', this.getId());
+        };
+        this._componentDidMount = (oldProps) => {
+            this.componentDidMount(oldProps);
+            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        };
         this.setProps = (nextProps) => {
             if (!nextProps) {
                 return;
             }
             Object.assign(this.props, nextProps);
+        };
+        this._render = () => {
+            const block = this.render();
+            // Этот небезопасный метод для упрощения логики
+            // Используйте шаблонизатор из npm или напишите свой безопасный
+            // Нужно не в строку компилировать (или делать это правильно),
+            // либо сразу в DOM-элементы возвращать из compile DOM-ноду
+            this._element.innerHTML = block;
         };
         this._id = 'uniq' + parseInt(String(Math.random() * 1000000));
         const eventBus = new EventBus();
@@ -20,29 +36,20 @@ class Block {
         };
         this.props = this._makePropsProxy(props);
         this.eventBus = () => eventBus;
-        this._registerEvents(eventBus);
-        eventBus.emit(Block.EVENTS.INIT);
-        eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
+        this._registerEvents();
+        this.eventBus().emit(Block.EVENTS.INIT);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
         Block._instances.push(this);
     }
-    _registerEvents(eventBus) {
-        eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    _registerEvents() {
+        this.eventBus().on(Block.EVENTS.INIT, this.init);
+        this.eventBus().on(Block.EVENTS.FLOW_CDM, this._componentDidMount);
+        this.eventBus().on(Block.EVENTS.FLOW_RENDER, this._render);
+        this.eventBus().on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate);
     }
     _createResources() {
-        // @ts-ignore
-        const { tagName } = this._meta;
+        const tagName = this._meta.tagName;
         this._element = this._createDocumentElement(tagName);
-    }
-    init() {
-        this._createResources();
-        this._element.setAttribute('_key', this.getId());
-    }
-    _componentDidMount(oldProps) {
-        this.componentDidMount(oldProps);
-        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
     // Может переопределять пользователь, необязательно трогать
     componentDidMount(oldProps) {
@@ -50,14 +57,10 @@ class Block {
     }
     _componentDidUpdate(oldProps, newProps) {
         const response = this.componentDidUpdate(oldProps, newProps);
-        if (oldProps === newProps) {
-            if (response) {
-                this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-            }
+        if (response && Object.assign({}, oldProps) !== Object.assign({}, newProps)) {
+            return;
         }
-        else {
-            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-        }
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
     // Может переопределять пользователь, необязательно трогать
     componentDidUpdate(oldProps, newProps) {
@@ -73,14 +76,6 @@ class Block {
     }
     get element() {
         return this._element;
-    }
-    _render() {
-        const block = this.render();
-        // Этот небезопасный метод для упрощения логики
-        // Используйте шаблонизатор из npm или напишите свой безопасный
-        // Нужно не в строку компилировать (или делать это правильно),
-        // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-        this._element.innerHTML = block;
     }
     renderToString() {
         const wrapper = document.createElement('div');

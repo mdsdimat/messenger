@@ -6,13 +6,17 @@ import ChatBodyMain from "./chatBodyMain.js";
 import ChatBodyFooter from "./chatBodyFooter.js";
 
 export default class ChatBody extends Block {
+    props: {
+        header: {},
+        body: {},
+        footer: {},
+    };
 
     constructor(props: {}) {
         super("div", props);
     }
 
     getTemplate() {
-        console.log(353452342)
         const header = new ChatBodyHeader(this.props.header);
         const body = new ChatBodyMain(this.props.body);
         const footer = new ChatBodyFooter(this.props.footer);

@@ -5,6 +5,10 @@ import ChatList from "./chatList.js";
 import ChatBody from "./chatBody.js";
 
 export default class Chat extends Block {
+    props: {
+        list: {},
+        body: {},
+    };
 
     constructor(props: {}) {
         super("div", props);

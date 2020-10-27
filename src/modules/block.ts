@@ -8,18 +8,18 @@ abstract class Block {
     };
 
     _element:any = null;
-    _meta: {}|null;
+    _meta: {tagName: string, props: {}|null};
     private _id: string;
     private eventBus: () => EventBus;
     static _instances: any;
     static hydrate: () => void;
-    props: any;
+    props: {[key: string]: unknown};
 
     /** JSDoc
      *
      * @returns {void}
      */
-    constructor(tagName:string|null = "div", props:{}|null = {}) {
+    constructor(tagName:string = "div", props:{} = {}) {
         this._id = 'uniq' + parseInt(String(Math.random() * 1000000));
         const eventBus = new EventBus();
         this._meta = {
@@ -31,35 +31,33 @@ abstract class Block {
 
         this.eventBus = () => eventBus;
 
-        this._registerEvents(eventBus);
-        eventBus.emit(Block.EVENTS.INIT);
-        eventBus.emit(Block.EVENTS.FLOW_CDM, this.props);
+        this._registerEvents();
+        this.eventBus().emit(Block.EVENTS.INIT);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
 
         Block._instances.push(this);
     }
 
-    _registerEvents(eventBus: EventBus) {
-        eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    _registerEvents() {
+        this.eventBus().on(Block.EVENTS.INIT, this.init);
+        this.eventBus().on(Block.EVENTS.FLOW_CDM, this._componentDidMount);
+        this.eventBus().on(Block.EVENTS.FLOW_RENDER, this._render);
+        this.eventBus().on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate);
     }
 
     _createResources() {
-        // @ts-ignore
-        const { tagName } = this._meta;
+        const tagName = this._meta.tagName;
         this._element = this._createDocumentElement(tagName);
     }
 
-    init() {
+    init = () => {
         this._createResources();
         this._element.setAttribute('_key', this.getId());
     }
 
-    _componentDidMount(oldProps: {}) {
+    _componentDidMount = (oldProps: {}) => {
         this.componentDidMount(oldProps);
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
-
     }
 
     // Может переопределять пользователь, необязательно трогать
@@ -69,13 +67,10 @@ abstract class Block {
 
     _componentDidUpdate(oldProps: {}, newProps: {}) {
         const response = this.componentDidUpdate(oldProps, newProps);
-        if (oldProps === newProps) {
-            if (response) {
-                this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-            }
-        } else {
-            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        if (response && {...oldProps} !== {...newProps}) {
+            return
         }
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
     // Может переопределять пользователь, необязательно трогать
@@ -104,7 +99,7 @@ abstract class Block {
         return this._element;
     }
 
-    _render() {
+    _render = () => {
         const block = this.render();
         // Этот небезопасный метод для упрощения логики
         // Используйте шаблонизатор из npm или напишите свой безопасный
@@ -133,18 +128,18 @@ abstract class Block {
         return this.element;
     }
 
-    _makePropsProxy(props) {
+    _makePropsProxy(props: {[key:string]: unknown}) {
         // Можно и так передать this
         // Такой способ больше не применяется с приходом ES6+
         const self = this;
         return new Proxy(props, {
-            set(target, prop, value) {
+            set(target: {[key:string]: unknown}, prop: string, value) {
                 const oldProp = {...target};
                 target[prop] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProp, target);
                 return true;
             },
-            get(target, prop) {
+            get(target: {[key:string]: unknown}, prop: string) {
                 const value = target[prop];
                 return typeof value === "function" ? value.bind(target) : value;
             }
