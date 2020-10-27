@@ -60,6 +60,9 @@ const page = new Sign({
                 {
                     name: 'max',
                     value: 5,
+                },
+                {
+                    name: 'required'
                 }
             ]
         },

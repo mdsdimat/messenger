@@ -8,17 +8,19 @@ export default class Validation {
         if (validation === undefined) {
             return true;
         }
+        const message = target.closest('.js-valid').getElementsByClassName('js-error-message')[0];
+        let isValid = true;
         for (let i = 0; i < validation.length; i++) {
             const validResult = this.getValidationFunction(validation[i], target.value);
-            const message = target.closest('.js-valid').getElementsByClassName('js-error-message')[0];
             if (validResult !== undefined && !validResult.valid) {
                 target.classList.add('input-error');
                 this.showErrorMessage(message, validResult.message);
+                isValid = validResult.valid;
             }
-            else if (target.classList.contains('input-error')) {
-                target.classList.remove('input-error');
-                this.hideErrorMessage(message);
-            }
+        }
+        if (isValid && target.classList.contains('input-error')) {
+            target.classList.remove('input-error');
+            this.hideErrorMessage(message);
         }
     }
     hideErrorMessage(message) {
