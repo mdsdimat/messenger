@@ -1,18 +1,24 @@
 /// <reference path="../../../globals.d.ts" />
 
 import Block from "../../modules/block.js";
+import Button from "../form/button.js";
 
 export default class ChatList extends Block {
-
+    props: any;
     constructor(props: {}) {
         super("div", props);
+    }
+
+    getProfileButton() {
+        const button = new Button(this.props.profileButton);
+        return button.renderToString();
     }
 
     getTemplate() {
         return '<div class="chat_list">\n' +
             '        <header class="chat_list_header">\n' +
             '            <div class="flex-container">\n' +
-            '                <a class="chat_list_header_profile-link">Профиль</a>\n' +
+                            this.getProfileButton() +
             '            </div>\n' +
             '            <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">\n' +
             '        </header>\n' +

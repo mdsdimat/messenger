@@ -1,4 +1,5 @@
 import Profile from "../components/profile.js";
+import HTTPTransport from "../modules/transport.js";
 
 export default class ViewProfile extends Profile {
     constructor(props: {}) {
@@ -31,6 +32,11 @@ export default class ViewProfile extends Profile {
                 {
                     className: 'field_button button-error',
                     text: 'Выйти',
+                    action: () => {
+                        console.log(34234)
+                        const requester = new HTTPTransport();
+                        requester.post('https://ya-praktikum.tech/api/v2/auth/logout');
+                    }
                 },
             ]
         };

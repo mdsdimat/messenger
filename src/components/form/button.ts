@@ -4,9 +4,7 @@ import {IEvent} from "../../modules/validation/validation.js";
 
 export default class Button extends Block {
     props: {
-        actions: {
-            goto: () => {}
-        }
+        action: () => {}
     };
 
     constructor(props: {}) {
@@ -14,10 +12,11 @@ export default class Button extends Block {
     }
 
     initEvents(block: Block) {
-        if (block._element && this.props.actions) {
+        console.log(block._element);
+        if (block._element && this.props.action) {
             block._element.onclick = (e: IEvent) => {
                 e.preventDefault();
-                this.props.actions.goto();
+                this.props.action();
             };
         }
     }

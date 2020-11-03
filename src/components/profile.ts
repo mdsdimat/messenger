@@ -42,7 +42,7 @@ export default class Profile extends Block {
         this.props.buttons.forEach((field: {buttonsClassName: string}) => {
             const button = new Button(field);
             renderField += `<div ${field.buttonsClassName ? `class="${field.buttonsClassName}"` : ''}>\n` +
-                                button.render() +
+                                button.renderToString() +
                 '           </div>\n';
         });
         return renderField;

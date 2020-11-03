@@ -82,11 +82,9 @@ export default class Signin extends Sign {
                 {
                     className: 'sign-form_button-block-form_cancel',
                     text: 'Войти',
-                    actions: {
-                        goto: () => {
-                            const router = new Router();
-                            router.go("#/login");
-                        }
+                    action: () => {
+                        const router = new Router();
+                        router.go("#/login");
                     }
                 }
             ],

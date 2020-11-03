@@ -5,6 +5,7 @@ import NotFoundPage from "./views/404.js";
 import ServerErrorPage from "./views/500.js";
 import ViewProfile from "./views/profile.js";
 import ChangeProfile from "./views/changeProfile.js";
+import MainChat from "./views/chat.js";
 
 const router = new Router(".app");
 
@@ -15,8 +16,9 @@ router
     .use("#/500", ServerErrorPage)
     .use("#/profile", ViewProfile)
     .use("#/edit-profile", ChangeProfile)
+    .use('#/chat', MainChat)
     .start();
 
-router.go("#/signin");
+router.go("#/chat");
 
 
