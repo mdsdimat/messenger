@@ -1,7 +1,10 @@
 import Sign from "../components/signin.js";
+import Router from "../modules/routing/router.js";
+import {submitForm} from "../modules/scripts.js";
 
 export default class Signin extends Sign {
     constructor(props: {}) {
+        super(props);
         props = {
             typeBackground: 'sign-background',
             title: 'Регистрация',
@@ -9,24 +12,24 @@ export default class Signin extends Sign {
             fields: [
                 {
                     label: 'Имя',
-                    name: 'name',
+                    name: 'first_name',
                     className: 'sign-form_input',
                     type: 'text',
-                    value: 'Дима',
+                    value: 'Name',
                 },
                 {
                     label: 'Фамилия',
                     name: 'second_name',
                     className: 'sign-form_input',
                     type: 'text',
-                    value: 'Димский',
+                    value: 'Second',
                 },
                 {
                     label: 'Логин',
                     name: 'login',
                     className: 'sign-form_input',
                     type: 'text',
-                    value: 'dima',
+                    value: 'login25435234',
                 },
                 {
                     label: 'Почта',
@@ -45,7 +48,7 @@ export default class Signin extends Sign {
                     name: 'phone',
                     className: 'sign-form_input',
                     type: 'text',
-                    value: '+375291234567',
+                    value: '+79261234567',
                     validation: [
                         {
                             name: 'mobile'
@@ -57,7 +60,7 @@ export default class Signin extends Sign {
                     name: 'password',
                     className: 'sign-form_input',
                     type: 'password',
-                    value: 'password',
+                    value: 'passw',
                     validation: [
                         {
                             name: 'max',
@@ -67,14 +70,7 @@ export default class Signin extends Sign {
                             name: 'required'
                         }
                     ]
-                },
-                {
-                    label: 'Пароль (ещё раз)',
-                    name: 'confirm_password',
-                    className: 'sign-form_input',
-                    type: 'password',
-                    value: 'password',
-                },
+                }
             ],
             buttonsClassName: 'sign-form_button-block',
             buttons: [
@@ -86,9 +82,38 @@ export default class Signin extends Sign {
                 {
                     className: 'sign-form_button-block-form_cancel',
                     text: 'Войти',
+                    actions: {
+                        goto: () => {
+                            const router = new Router();
+                            router.go("#/login");
+                        }
+                    }
                 }
             ],
+            actions: {
+                submit: () => {
+                    submitForm(this.props.formClassName, 'https://ya-praktikum.tech/api/v2/auth/signup')
+                }
+            }
         };
-        super(props);
+        this.setProps(props)
     }
+
+    // submitForm = () => {
+    //     const form = <HTMLFormElement>document.querySelector(`.${this.props.formClassName}`)
+    //     if (form) {
+    //         const formData = new FormData(form);
+    //         const requester = new HTTPTransport();
+    //         const options = {
+    //             method: METHODS.POST,
+    //             data: formData
+    //         }
+    //         requester.post('https://ya-praktikum.tech/api/v2/auth/signup', options)
+    //             .then((result: XMLHttpRequest) => {
+    //                 console.log(result.responseText)
+    //             })
+    //
+    //
+    //     }
+    // }
 }

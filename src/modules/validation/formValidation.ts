@@ -2,15 +2,19 @@ import Validation, {IEvent, IField} from "./validation.js";
 
 export default class FormValidation extends Validation {
     validate = (e: IEvent) => {
+        e.preventDefault();
         const target = e.target;
         const inputs = target.getElementsByTagName('input');
+        let isValid = true;
         for (let input of inputs) {
             const searchedField: IField | undefined = this.getField(input.name);
             if (searchedField !== undefined) {
-                this.doValidation(searchedField.validation, input);
+                if (!this.doValidation(searchedField.validation, input)) {
+                    isValid = false;
+                }
             }
         }
-        e.preventDefault();
+        return isValid;
     }
 
     getField(name: string): IField | undefined {

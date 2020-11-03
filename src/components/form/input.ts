@@ -11,9 +11,11 @@ export default class Input extends Block {
     }
 
     initEvents(block: Block) {
-        const validation = new InputValidation(this.props);
-        block._element.firstChild.onfocus = (e: IEvent) => {validation.validate(e)};
-        block._element.firstChild.onblur = (e: IEvent) => {validation.validate(e)};
+        if (block._element) {
+            const validation = new InputValidation(this.props);
+            block._element.firstChild.onfocus = (e: IEvent) => {validation.validate(e)};
+            block._element.firstChild.onblur = (e: IEvent) => {validation.validate(e)};
+        }
     }
 
     getTemplate() {

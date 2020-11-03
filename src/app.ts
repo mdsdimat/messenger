@@ -19,6 +19,4 @@ router
 
 router.go("#/signin");
 
-setTimeout(() => {
-    router.go("#/404");
-}, 3000);
+

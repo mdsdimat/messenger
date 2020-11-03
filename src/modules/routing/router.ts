@@ -6,8 +6,8 @@ export default class Router {
     private routes: any[];
     private history: History;
     private _currentRoute: Route|null;
-    private _rootQuery: string;
-    constructor(rootQuery: string) {
+    private readonly _rootQuery: string;
+    constructor(rootQuery: string = '.app') {
         if (Router.__instance) {
             return Router.__instance;
         }
@@ -49,12 +49,14 @@ export default class Router {
     }
 
     go(pathname: string) {
-        this.history.pushState({}, "", pathname);
+        this.history.pushState({ prevUrl: this._currentRoute?this._currentRoute.getPathName():null }, "", pathname);
         this._onRoute(pathname);
     }
 
     back() {
-        window.history.back();
+        if (this.history.state.prevUrl) {
+            this.go(this.history.state.prevUrl)
+        }
     }
 
     forward() {
@@ -65,26 +67,3 @@ export default class Router {
         return this.routes.find(route => route.match(pathname));
     }
 }
-
-// const router = new Router(".app");
-// //
-// // Можно обновиться на /user и получить сразу пользователя
-// router
-//     .use("/", Chats)
-//     .use("/users", Users)
-//     .start();
-
-// // Через секунду контент изменится сам, достаточно дернуть переход
-// setTimeout(() => {
-//     router.go("/users");
-// }, 1000);
-//
-// // А можно и назад
-// setTimeout(() => {
-//     router.back();
-// }, 3000);
-//
-// // И снова вперед
-// setTimeout(() => {
-//     router.forward();
-// }, 5000);

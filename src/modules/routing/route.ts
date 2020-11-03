@@ -25,9 +25,17 @@ export default class Route {
         }
     }
 
+    getPathName() {
+        return this._pathname;
+    }
+
     leave() {
         if (this._block) {
             this._block.hide();
+            const node = document.querySelector(`[_key=${this._block.getId()}`);
+            if (node) {
+                node.remove();
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 import Sign from "../components/signin.js";
+import {submitForm} from "../modules/scripts.js";
 
 export default class Login extends Sign {
     constructor(props: {}) {
@@ -8,15 +9,15 @@ export default class Login extends Sign {
             formClassName: 'js-form',
             fields: [
                 {
-                    label: 'Почта',
-                    name: 'email',
+                    label: 'Логин',
+                    name: 'login',
                     className: 'sign-form_input',
                     type: 'text',
-                    value: 'test@test.re',
+                    value: 'login25435234',
                     validation: [
                         {
                             name: 'max',
-                            value: 10,
+                            value: 20,
                         },
                         {
                             name: 'required',
@@ -28,6 +29,7 @@ export default class Login extends Sign {
                     name: 'password',
                     className: 'sign-form_input',
                     type: 'password',
+                    value: 'passw',
                     validation: [
                         {
                             name: 'required',
@@ -45,8 +47,14 @@ export default class Login extends Sign {
                     className: 'sign-form_button-block-form_cancel',
                     text: 'Нет аккаунта?',
                 }
-            ]
+            ],
+            actions: {
+                submit: () => {
+                    submitForm(this.props.formClassName, 'https://ya-praktikum.tech/api/v2/auth/signin')
+                }
+            }
         };
         super(props);
+        this.setProps(props)
     }
 }

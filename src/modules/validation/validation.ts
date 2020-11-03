@@ -29,7 +29,7 @@ export interface IField {
 
 export default abstract class Validation {
     props: IProps;
-    regMobile = new RegExp(/^(\+)[37]\d{11}$/);
+    regMobile = new RegExp(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/);
     regEmail = new RegExp(/\S+@\S+\.\S+/);
 
     constructor(props: IProps) {
@@ -38,7 +38,7 @@ export default abstract class Validation {
 
     abstract validate(event: IEvent): void;
 
-    doValidation(validation: [] | undefined, target: ITarget) {
+    doValidation(validation: [] | undefined, target: ITarget): boolean {
         if (validation === undefined) {return true;}
         const message = <HTMLElement>target.closest('.js-valid').getElementsByClassName('js-error-message')[0];
         let isValid = true;
@@ -54,6 +54,7 @@ export default abstract class Validation {
             target.classList.remove('input-error');
             this.hideErrorMessage(message);
         }
+        return isValid;
     }
 
     hideErrorMessage(message: HTMLElement): void {
