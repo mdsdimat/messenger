@@ -4,13 +4,8 @@ import Input from "./form/input.js";
 import Button from "./form/button.js";
 import Form from "./form/form.js";
 
-export default class Login extends Block {
-    props: {
-        buttons: [];
-        fields: [
-            label: any
-        ];
-    };
+export default class Sign extends Block {
+    props: any;
 
     constructor(props: {}) {
         super("div", props);
@@ -18,24 +13,28 @@ export default class Login extends Block {
 
     getFields():string {
         let renderFields: string = '';
-        this.props.fields.forEach((field) => {
-            const input = new Input(field);
-            renderFields += '<div class="sign-form_input-block_label js-valid">\n' +
-                '            <label class="sign-form_label">' + field.label + '\n' +
-                                input.renderToString() +
-                '            </label>\n' +
-                '            <div class="sign-form_error-text js-error-message" hidden></div>\n' +
-                '        </div>'
-        });
+        if (this.props.fields) {
+            this.props.fields.forEach((field: any) => {
+                const input = new Input(field);
+                renderFields += '<div class="sign-form_input-block_label js-valid">\n' +
+                    '            <label class="sign-form_label">' + field.label + '\n' +
+                    input.renderToString() +
+                    '            </label>\n' +
+                    '            <div class="sign-form_error-text js-error-message" hidden></div>\n' +
+                    '        </div>'
+            });
+        }
         return renderFields;
     }
 
     getButtons():string {
         let renderFields: string = '';
-        this.props.buttons.forEach((field) => {
-            const button = new Button(field);
-            renderFields += button.renderToString();
-        });
+        if (this.props.buttons) {
+            this.props.buttons.forEach((field: any) => {
+                const button = new Button(field);
+                renderFields += button.renderToString();
+            });
+        }
         return renderFields;
     }
 

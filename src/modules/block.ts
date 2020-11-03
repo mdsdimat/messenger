@@ -1,3 +1,4 @@
+/// <reference path="../../globals.d.ts" />
 import EventBus from "./event-bus.js";
 abstract class Block {
     static EVENTS = {
@@ -9,13 +10,13 @@ abstract class Block {
 
     _element:any = null;
     _meta: {tagName: string, props: {}|null};
-    private _id: string;
+    private readonly _id: string;
     private eventBus: () => EventBus;
     static _instances: Block[];
     static hydrate: () => void;
     props: {[key: string]: unknown};
 
-    constructor(tagName:string = "div", props:{} = {}) {
+    protected constructor(tagName:string = "div", props:{} = {}) {
         this._id = 'uniq' + parseInt(String(Math.random() * 1000000));
         const eventBus = new EventBus();
         this._meta = {
@@ -51,17 +52,16 @@ abstract class Block {
         this._element.setAttribute('_key', this.getId());
     }
 
-    _componentDidMount = (oldProps: {}): void => {
-        this.componentDidMount(oldProps);
+    _componentDidMount = (): void => {
+        this.componentDidMount();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidMount(oldProps: {}): {} {
-        return oldProps;
+    componentDidMount() {
     }
 
-    _componentDidUpdate(oldProps: {}, newProps: {}) {
+    _componentDidUpdate = (oldProps: {}, newProps: {}): void => {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (response && {...oldProps} !== {...newProps}) {
             return

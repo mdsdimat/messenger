@@ -16,8 +16,10 @@ export default class Form extends Block {
     }
 
     initEvents(block: Block) {
-        const validation = new FormValidation(this.props);
-        block._element.onsubmit = (e: IEvent) => {validation.validate(e)};
+        if (block._element) {
+            const validation = new FormValidation(this.props);
+            block._element.onsubmit = (e: IEvent) => {validation.validate(e)};
+        }
     }
 
     getTemplate() {
