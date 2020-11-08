@@ -1,6 +1,6 @@
 /// <reference path="../../../globals.d.ts" />
 import Block from "../../modules/block.js";
-import {IEvent} from "../../modules/validation/validation.js";
+import {IEvent} from "../../modules/validation/validation";
 
 export default class Button extends Block {
     props: {
@@ -12,7 +12,6 @@ export default class Button extends Block {
     }
 
     initEvents(block: Block) {
-        console.log(block._element);
         if (block._element && this.props.action) {
             block._element.onclick = (e: IEvent) => {
                 e.preventDefault();
