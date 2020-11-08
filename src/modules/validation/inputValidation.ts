@@ -1,4 +1,4 @@
-import Validation, {IEvent} from "./validation.js";
+import Validation, {IEvent} from "./validation";
 
 export default class InputValidation extends Validation {
     validate = (event: IEvent) => {
