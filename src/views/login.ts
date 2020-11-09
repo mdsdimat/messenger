@@ -1,5 +1,6 @@
 import Sign from "../components/signin.js";
-import {submitForm} from "../modules/scripts.js";
+import {getFormData} from "../modules/scripts";
+import AuthController from "../http/controllers/AuthController";
 
 export default class Login extends Sign {
     constructor(props: {}) {
@@ -50,7 +51,9 @@ export default class Login extends Sign {
             ],
             actions: {
                 submit: () => {
-                    submitForm(this.props.formClassName, 'https://ya-praktikum.tech/api/v2/auth/signin')
+                    const formData = getFormData(this.props.formClassName)
+                    const auth = new AuthController();
+                    auth.login(formData, 'https://ya-praktikum.tech/api/v2/auth/signin');
                 }
             }
         };

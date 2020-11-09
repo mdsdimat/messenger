@@ -1,6 +1,7 @@
 import Sign from "../components/signin.js";
 import Router from "../modules/routing/router.js";
-import {submitForm} from "../modules/scripts.js";
+import {getFormData} from "../modules/scripts.js";
+import AuthController from "../http/controllers/AuthController";
 
 export default class Signin extends Sign {
     constructor(props: {}) {
@@ -90,28 +91,12 @@ export default class Signin extends Sign {
             ],
             actions: {
                 submit: () => {
-                    submitForm(this.props.formClassName, 'https://ya-praktikum.tech/api/v2/auth/signup')
+                    const formData = getFormData(this.props.formClassName)
+                    const auth = new AuthController();
+                    auth.signin(formData, 'https://ya-praktikum.tech/api/v2/auth/signup');
                 }
             }
         };
         this.setProps(props)
     }
-
-    // submitForm = () => {
-    //     const form = <HTMLFormElement>document.querySelector(`.${this.props.formClassName}`)
-    //     if (form) {
-    //         const formData = new FormData(form);
-    //         const requester = new HTTPTransport();
-    //         const options = {
-    //             method: METHODS.POST,
-    //             data: formData
-    //         }
-    //         requester.post('https://ya-praktikum.tech/api/v2/auth/signup', options)
-    //             .then((result: XMLHttpRequest) => {
-    //                 console.log(result.responseText)
-    //             })
-    //
-    //
-    //     }
-    // }
 }

@@ -1,5 +1,5 @@
 import Profile from "../components/profile.js";
-import HTTPTransport from "../modules/transport.js";
+import HTTPTransport from "../http/services/transport.js";
 
 export default class ViewProfile extends Profile {
     constructor(props: {}) {

@@ -3,6 +3,10 @@ export const METHODS = {
     POST: 'POST',
 };
 
+export const STATUS_TEXTS = {
+    OK: 'OK',
+};
+
 interface IOptions {
     data?: FormData,
     timeout?: number,
@@ -13,8 +17,8 @@ interface IData {
     [key: string]: any
 }
 
-function queryStringify(data: IData|undefined) {
-    if (!data) {return;}
+function queryStringify(data: IData|undefined): string {
+    if (data === undefined) {return ''}
     if (Object.keys(data).length > 0) {
         let query = '?';
         for (let key in data) {
@@ -22,7 +26,7 @@ function queryStringify(data: IData|undefined) {
         }
         return query.slice(0, -1);
     }
-    return;
+    return '';
 }
 
 function formDataToJson(formData: FormData) {
@@ -75,8 +79,11 @@ export default class HTTPTransport {
             xhr.ontimeout = reject;
 
             if (method === METHODS.GET || !data) {
+                xhr.setRequestHeader('accept', 'application/json');
+                xhr.withCredentials = true;
                 xhr.send();
             } else {
+                xhr.withCredentials = true;
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(formDataToJson(data));
             }
