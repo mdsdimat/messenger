@@ -53,8 +53,8 @@ abstract class Block {
     }
 
     _componentDidMount = (): void => {
-        this.componentDidMount();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
+        this.componentDidMount();
     }
 
     // Может переопределять пользователь, необязательно трогать
@@ -65,6 +65,7 @@ abstract class Block {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (response && {...oldProps} !== {...newProps}) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+            Block.hydrate()
         }
     }
 
@@ -98,7 +99,9 @@ abstract class Block {
 
     _render = () => {
         const block = this.render();
-        this._element.innerHTML = block;
+        if (this._element) {
+            this._element.innerHTML = block;
+        }
     }
 
     renderToString() {

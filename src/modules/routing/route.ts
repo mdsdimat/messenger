@@ -32,10 +32,10 @@ export default class Route {
     leave() {
         if (this._block) {
             this._block.hide();
-            const node = document.querySelector(`[_key=${this._block.getId()}`);
-            if (node) {
-                node.remove();
-            }
+            // const node = document.querySelector(`[_key=${this._block.getId()}`);
+            // if (node) {
+            //     node.remove();
+            // }
         }
     }
 

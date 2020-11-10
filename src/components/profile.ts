@@ -53,6 +53,7 @@ export default class Profile extends Block {
             '    <img class="back" src="img/icons/back_arrow_ellipse.svg">\n' +
             '    <img class="profile_image" src="{{photo}}">\n' +
             '    <h1 class="profile_name">{{name}}</h1>\n' +
-                    form.renderToString();
+                    form.renderToString() +
+            '   </main>';
     }
 };

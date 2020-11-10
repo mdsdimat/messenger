@@ -2,10 +2,11 @@ import Sign from "../components/signin.js";
 import Router from "../modules/routing/router.js";
 import {getFormData} from "../modules/scripts.js";
 import AuthController from "../http/controllers/AuthController";
+import {ROUTES} from "../routes";
+import {HOST} from "../http/services/transport";
 
 export default class Signin extends Sign {
     constructor(props: {}) {
-        super(props);
         props = {
             typeBackground: 'sign-background',
             title: 'Регистрация',
@@ -85,7 +86,7 @@ export default class Signin extends Sign {
                     text: 'Войти',
                     action: () => {
                         const router = new Router();
-                        router.go("#/login");
+                        router.go(ROUTES.LOGIN);
                     }
                 }
             ],
@@ -93,10 +94,10 @@ export default class Signin extends Sign {
                 submit: () => {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
-                    auth.signin(formData, 'https://ya-praktikum.tech/api/v2/auth/signup');
+                    auth.signin(formData, `${HOST}/api/v2/auth/signup`);
                 }
             }
         };
-        this.setProps(props)
+        super(props);
     }
 }

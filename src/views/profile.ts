@@ -1,8 +1,12 @@
 import Profile from "../components/profile.js";
-import HTTPTransport from "../http/services/transport.js";
+import HTTPTransport, {HOST} from "../http/services/transport.js";
+import AuthController from "../http/controllers/AuthController";
+import Router from "../modules/routing/router";
+import {ROUTES} from "../routes";
 
 export default class ViewProfile extends Profile {
     constructor(props: {}) {
+        const router = new Router();
         props = {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
@@ -33,13 +37,35 @@ export default class ViewProfile extends Profile {
                     className: 'field_button button-error',
                     text: 'Выйти',
                     action: () => {
-                        console.log(34234)
                         const requester = new HTTPTransport();
-                        requester.post('https://ya-praktikum.tech/api/v2/auth/logout');
+                        requester.post(`${HOST}/api/v2/auth/logout`);
                     }
                 },
-            ]
+            ],
+            actions: {
+                submit: () => {
+                    router.go(ROUTES.EDIT_PROFILE)
+                }
+            }
         };
         super(props);
+    }
+
+    componentDidMount() {
+        const auth = new AuthController();
+        auth.getUser()
+            .then((result: XMLHttpRequest) => {
+                const response = JSON.parse(result.response)
+                const fields = this.props.fields;
+                fields.forEach((field: any) => {
+                    if (field.name === 'email') {
+                        field.value = response.email;
+                    }
+                    if (field.name === 'login') {
+                        field.value = response.login;
+                    }
+                });
+                this.setProps(this.props);
+            })
     }
 }

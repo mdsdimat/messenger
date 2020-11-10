@@ -7,6 +7,8 @@ export const STATUS_TEXTS = {
     OK: 'OK',
 };
 
+export const HOST = 'https://ya-praktikum.tech';
+
 interface IOptions {
     data?: FormData,
     timeout?: number,

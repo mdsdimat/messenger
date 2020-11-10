@@ -1,6 +1,10 @@
 // import Block from "../block.js";
 import Route from "./route.js";
 
+export const STORAGE = {
+    SAVE_PATH: 'save_path'
+}
+
 export default class Router {
     private static __instance: Router;
     private routes: any[];
@@ -50,6 +54,7 @@ export default class Router {
 
     go(pathname: string) {
         this.history.pushState({ prevUrl: this._currentRoute?this._currentRoute.getPathName():null }, "", pathname);
+        localStorage.setItem(STORAGE.SAVE_PATH, pathname)
         this._onRoute(pathname);
     }
 
@@ -65,5 +70,13 @@ export default class Router {
 
     getRoute(pathname: string) {
         return this.routes.find(route => route.match(pathname));
+    }
+
+    getSavePath() {
+        const path = localStorage.getItem(STORAGE.SAVE_PATH);
+        if (path) {
+            return path;
+        }
+        return null;
     }
 }

@@ -1,6 +1,9 @@
 import Sign from "../components/signin.js";
 import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
+import Router from "../modules/routing/router";
+import {ROUTES} from "../routes";
+import {HOST} from "../http/services/transport";
 
 export default class Login extends Sign {
     constructor(props: {}) {
@@ -47,17 +50,28 @@ export default class Login extends Sign {
                 {
                     className: 'sign-form_button-block-form_cancel',
                     text: 'Нет аккаунта?',
+                    action: () => {
+                        const router = new Router();
+                        router.go(ROUTES.SIGNIN);
+                    }
                 }
             ],
             actions: {
                 submit: () => {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
-                    auth.login(formData, 'https://ya-praktikum.tech/api/v2/auth/signin');
+                    auth.login(formData, `${HOST}/api/v2/auth/signin`);
                 }
             }
         };
         super(props);
-        this.setProps(props)
+    }
+
+    componentDidMount() {
+        const auth = new AuthController();
+        auth.getUser()
+            .then((result: XMLHttpRequest) => {
+                auth.redirectToChat(result)
+            })
     }
 }

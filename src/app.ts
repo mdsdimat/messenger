@@ -1,24 +1,30 @@
-import Router from "./modules/routing/router.js";
-import Signin from './views/signin.js';
-import Login from "./views/login.js";
-import NotFoundPage from "./views/404.js";
-import ServerErrorPage from "./views/500.js";
-import ViewProfile from "./views/profile.js";
-import ChangeProfile from "./views/changeProfile.js";
+import Router from "./modules/routing/router";
+import Signin from './views/signin';
+import Login from "./views/login";
+import NotFoundPage from "./views/404";
+import ServerErrorPage from "./views/500";
+import ViewProfile from "./views/profile";
+import ChangeProfile from "./views/changeProfile";
 import MainChat from "./views/chat";
+import {ROUTES} from "./routes";
 
 const router = new Router(".app");
 
 router
-    .use("#/signin", Signin)
-    .use("#/login", Login)
-    .use("#/404", NotFoundPage)
-    .use("#/500", ServerErrorPage)
-    .use("#/profile", ViewProfile)
-    .use("#/edit-profile", ChangeProfile)
-    .use('#/chat', MainChat)
+    .use(ROUTES.SIGNIN, Signin)
+    .use(ROUTES.LOGIN, Login)
+    .use(ROUTES.NOT_FOUND, NotFoundPage)
+    .use(ROUTES.SERVER_ERROR, ServerErrorPage)
+    .use(ROUTES.PROFILE, ViewProfile)
+    .use(ROUTES.EDIT_PROFILE, ChangeProfile)
+    .use(ROUTES.CHAT, MainChat)
     .start();
 
-router.go("#/signin");
+let path = router.getSavePath();
+if (path) {
+    router.go(path)
+} else {
+    router.go("#/signin");
+}
 
 
