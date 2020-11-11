@@ -114,7 +114,6 @@ export default class ChangeProfile extends Profile {
                                 }
                             });
                             profile.changeProfile(formData);
-
                         }
                     }
                 }

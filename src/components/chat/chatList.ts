@@ -14,11 +14,17 @@ export default class ChatList extends Block {
         return button.renderToString();
     }
 
+    getCreateChatButton() {
+        const button = new Button(this.props.createChatButton);
+        return button.renderToString();
+    }
+
     getTemplate() {
         return '<div class="chat_list">\n' +
             '        <header class="chat_list_header">\n' +
             '            <div class="flex-container">\n' +
                             this.getProfileButton() +
+                            this.getCreateChatButton() +
             '            </div>\n' +
             '            <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">\n' +
             '        </header>\n' +
