@@ -1,6 +1,7 @@
 export const METHODS = {
     GET: 'GET',
     POST: 'POST',
+    PUT: 'PUT'
 };
 
 export const STATUS_TEXTS = {
@@ -9,7 +10,10 @@ export const STATUS_TEXTS = {
 
 export const HOST = 'https://ya-praktikum.tech';
 
-interface IOptions {
+export interface IOptions {
+    headers?: {
+        'Content-Type'?: string
+    },
     data?: FormData,
     timeout?: number,
     method: string,
@@ -61,6 +65,18 @@ export default class HTTPTransport {
             })
     }
 
+    put = (url:string, options: IOptions) => {
+        options.method = METHODS.PUT;
+        return this.request(url, options)
+            .then((result) => {
+                return result;
+            })
+            .catch((err: Error) => {
+                console.log(err);
+                throw new Error("Error");
+            })
+    }
+
     // PUT, POST, DELETE
 
     // options:
@@ -85,9 +101,20 @@ export default class HTTPTransport {
                 xhr.withCredentials = true;
                 xhr.send();
             } else {
+                let contentType = null;
+                // let sendData: FormData|string = data;
+                let sendData: any = data;
+                if (options .headers && options.headers['Content-Type']) {
+                    contentType = options.headers['Content-Type'];
+                    if (contentType === 'application/json') {
+                        sendData = formDataToJson(data);
+                    }
+                }
                 xhr.withCredentials = true;
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.send(formDataToJson(data));
+                if (contentType !== null) {
+                    xhr.setRequestHeader('Content-Type', contentType);
+                }
+                xhr.send(sendData);
             }
         });
     };

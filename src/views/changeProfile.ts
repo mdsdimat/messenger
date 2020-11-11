@@ -1,14 +1,27 @@
 import Profile from "../components/profile.js";
+import Router from "../modules/routing/router";
+import {ROUTES} from "../routes";
+import AuthController from "../http/controllers/AuthController";
+import {getFormData} from "../modules/scripts";
+import ProfileController from "../http/controllers/ProfileController";
+import {HOST} from "../http/services/transport";
 
 export default class ChangeProfile extends Profile {
     constructor(props: {}) {
         props = {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
+            backButton: {
+                className: 'back',
+                action: () => {
+                    const router = new Router();
+                    router.go(ROUTES.PROFILE);
+                }
+            },
             formClassName: 'profile_form form js-form',
             fields: [
                 {
-                    name: 'name',
+                    name: 'first_name',
                     className: 'field_input',
                     type: 'text',
                     placeholder: 'Имя',
@@ -31,7 +44,7 @@ export default class ChangeProfile extends Profile {
                     value: 'Димский',
                 },
                 {
-                    name: 'view_name',
+                    name: 'display_name',
                     className: 'field_input',
                     type: 'text',
                     placeholder: 'Отображаемое имя',
@@ -64,6 +77,7 @@ export default class ChangeProfile extends Profile {
                     type: 'file',
                     placeholder: 'Аватар',
                     value: '',
+                    id: 'avatar',
                 },
                 {
                     name: 'password',
@@ -84,9 +98,46 @@ export default class ChangeProfile extends Profile {
                 {
                     className: 'profile_form_save-button',
                     text: 'Сохранить',
+                    action: () => {
+                        const formData = getFormData('js-form');
+                        if (formData) {
+                            const profile = new ProfileController();
+                            const avatar: any = formData.get('avatar');
+                            if (avatar.size !== 0) {
+                                const avatarData = new FormData();
+                                avatarData.append('avatar', avatar);
+                                profile.setAvatar(avatarData);
+                            }
+                            this.props.fields.forEach((field: any) => {
+                                if (field.name === 'avatar') {
+                                    formData.delete(field.name);
+                                }
+                            });
+                            profile.changeProfile(formData);
+
+                        }
+                    }
                 }
             ]
         };
         super(props);
+    }
+
+    componentDidMount() {
+        const auth = new AuthController();
+        auth.getUser()
+            .then((result: XMLHttpRequest) => {
+                const response = JSON.parse(result.response)
+                const fields = this.props.fields;
+                fields.forEach((field: any) => {
+                    if (response[field.name]) {
+                        field.value = response[field.name];
+                    }
+                });
+                if (response.avatar) {
+                    this.props.photo = `${HOST+response.avatar}`
+                }
+                this.setProps(this.props);
+            })
     }
 }

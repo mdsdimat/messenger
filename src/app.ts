@@ -11,6 +11,7 @@ import {ROUTES} from "./routes";
 const router = new Router(".app");
 
 router
+    .use('#/', Signin)
     .use(ROUTES.SIGNIN, Signin)
     .use(ROUTES.LOGIN, Login)
     .use(ROUTES.NOT_FOUND, NotFoundPage)
@@ -24,7 +25,7 @@ let path = router.getSavePath();
 if (path) {
     router.go(path)
 } else {
-    router.go("#/signin");
+    router.go("#/");
 }
 
 

@@ -3,6 +3,8 @@
 }
 
 .profile_image {
+    height: 60px;
+    width: 60px;
     margin-top: 60px;
 }
 
@@ -91,6 +93,10 @@
     position: absolute;
     top: 10px;
     left: 10px;
+    background: url("../img/icons/back_arrow_ellipse.svg") no-repeat center right;
+    width: 30px;
+    height: 30px;
+    border: none;
 }
 
 .profile_form_save-button {

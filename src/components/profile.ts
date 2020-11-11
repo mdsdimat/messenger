@@ -8,6 +8,9 @@ export default class Profile extends Block {
     props: {
         fields: [];
         buttons: [];
+        backButton: {},
+        formClassName: string,
+        photo: string,
     };
 
     constructor(props: {}) {
@@ -47,10 +50,14 @@ export default class Profile extends Block {
         });
         return renderField;
     }
+    getBackButton() {
+        const button = new Button(this.props.backButton);
+        return button.renderToString();
+    }
     getTemplate() {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return '<main class="profile">\n' +
-            '    <img class="back" src="img/icons/back_arrow_ellipse.svg">\n' +
+                    this.getBackButton() +
             '    <img class="profile_image" src="{{photo}}">\n' +
             '    <h1 class="profile_name">{{name}}</h1>\n' +
                     form.renderToString() +

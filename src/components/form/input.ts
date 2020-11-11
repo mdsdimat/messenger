@@ -19,6 +19,6 @@ export default class Input extends Block {
     }
 
     getTemplate() {
-        return '<input name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}">';
+        return '<input id="{{id}}" name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}">';
     }
 };

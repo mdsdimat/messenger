@@ -1,5 +1,5 @@
 import HTTPTransport, {
-    HOST,
+    HOST, IOptions,
     METHODS,
     STATUS_TEXTS
 } from "../services/transport";
@@ -9,9 +9,12 @@ import {ROUTES} from "../../routes";
 export default class AuthController {
     signin(formData: FormData | undefined, url: string) {
         const requester = new HTTPTransport();
-        const options = {
+        const options: IOptions = {
             method: METHODS.POST,
-            data: formData
+            data: formData,
+            headers: {
+                'Content-Type': 'application/json',
+            }
         }
         requester.post(url, options)
             .then((result: XMLHttpRequest) => {
@@ -21,9 +24,12 @@ export default class AuthController {
 
     login(formData: FormData | undefined, url: string) {
         const requester = new HTTPTransport();
-        const options = {
+        const options: IOptions = {
             method: METHODS.POST,
-            data: formData
+            data: formData,
+            headers: {
+                'Content-Type': 'application/json',
+            }
         }
         requester.post(url, options)
             .then((result: XMLHttpRequest) => {
@@ -47,5 +53,10 @@ export default class AuthController {
             const router = new Router();
             router.go(ROUTES.CHAT);
         }
+    }
+
+    logout() {
+        const requester = new HTTPTransport();
+        requester.post(`${HOST}/api/v2/auth/logout`);
     }
 }

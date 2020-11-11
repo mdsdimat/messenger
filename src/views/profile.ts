@@ -1,7 +1,7 @@
 import Profile from "../components/profile.js";
 import HTTPTransport, {HOST} from "../http/services/transport.js";
 import AuthController from "../http/controllers/AuthController";
-import Router from "../modules/routing/router";
+import Router, {STORAGE} from "../modules/routing/router";
 import {ROUTES} from "../routes";
 
 export default class ViewProfile extends Profile {
@@ -10,6 +10,13 @@ export default class ViewProfile extends Profile {
         props = {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
+            backButton: {
+                className: 'back',
+                action: () => {
+                    const router = new Router();
+                    router.go(ROUTES.CHAT);
+                }
+            },
             formClassName: 'profile_form form js-form',
             fields: [
                 {
@@ -32,21 +39,23 @@ export default class ViewProfile extends Profile {
                     type: 'submit',
                     text: 'Изменить данные',
                     parentClass: 'field-border',
+                    action: () => {
+                        router.go(ROUTES.EDIT_PROFILE)
+                    }
                 },
                 {
                     className: 'field_button button-error',
                     text: 'Выйти',
                     action: () => {
                         const requester = new HTTPTransport();
-                        requester.post(`${HOST}/api/v2/auth/logout`);
+                        requester.post(`${HOST}/api/v2/auth/logout`)
+                            .then(() => {
+                                localStorage.removeItem(STORAGE.SAVE_PATH);
+                                router.go('#/');
+                            })
                     }
                 },
-            ],
-            actions: {
-                submit: () => {
-                    router.go(ROUTES.EDIT_PROFILE)
-                }
-            }
+            ]
         };
         super(props);
     }
