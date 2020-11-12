@@ -1,7 +1,8 @@
 export const METHODS = {
     GET: 'GET',
     POST: 'POST',
-    PUT: 'PUT'
+    PUT: 'PUT',
+    DELETE: 'DELETE'
 };
 
 export const STATUS_TEXTS = {
@@ -67,6 +68,18 @@ export default class HTTPTransport {
 
     put = (url:string, options: IOptions) => {
         options.method = METHODS.PUT;
+        return this.request(url, options)
+            .then((result) => {
+                return result;
+            })
+            .catch((err: Error) => {
+                console.log(err);
+                throw new Error("Error");
+            })
+    }
+
+    delete = (url:string, options: IOptions) => {
+        options.method = METHODS.DELETE;
         return this.request(url, options)
             .then((result) => {
                 return result;

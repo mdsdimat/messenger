@@ -9,10 +9,15 @@ import Form from "../form/form";
 
 export default class Chat extends Block {
     props: {
+        activeChat: number|null,
         list: {
-            users: any[]
+            chats: any[]
         },
-        body: {},
+        body: {
+            header: {
+                isShowMenu: boolean
+            }
+        },
         createModal: {
             isShow: boolean,
             fields: [],

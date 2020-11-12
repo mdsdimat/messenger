@@ -22,9 +22,9 @@ export default class ChatBody extends Block {
         const footer = new ChatBodyFooter(this.props.footer);
         return '<div class="chat-body">\n' +
             '    {{#if isShow}}\n' +
-                    header.render() +
-                    body.render() +
-                    footer.render() +
+                    header.renderToString() +
+                    body.renderToString() +
+                    footer.renderToString() +
             '    {{else}}\n' +
             '      <p class="chat-body_central-text">Выберете чат чтобы отправить сообщение</p>\n' +
             '    {{/if}}\n' +

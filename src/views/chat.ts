@@ -6,6 +6,7 @@ import {getFormData} from "../modules/scripts";
 export default class MainChat extends Chat {
     constructor(props: {}) {
         props = {
+            activeChat: null,
             createModal: {
                 isShow: false,
                 formClassName: 'js-form-create-modal',
@@ -48,14 +49,22 @@ export default class MainChat extends Chat {
 
             },
             deleteModal: {
-                isShow: true,
+                isShow: false,
                 buttons: [
                     {
                         type: 'submit',
                         className: 'modal-window_buttons_error',
                         text: 'Удалить',
                         action: () => {
-                            console.log(34534)
+                            if (this.props.activeChat !== null) {
+                                const chat = new ChatController();
+                                chat.deleteChat(this.props.activeChat.toString())
+                                    .then(() => {
+                                        this.props.activeChat = null;
+                                        this.props.deleteModal.isShow = false;
+                                        this.getChatList()
+                                    })
+                            }
                         }
                     },
                     {
@@ -69,7 +78,7 @@ export default class MainChat extends Chat {
                 ],
             },
             list: {
-                users: [
+                chats: [
                     {
                         name: 'Андрей',
                         text: 'Сообщение',
@@ -108,7 +117,48 @@ export default class MainChat extends Chat {
                 isShow: true,
                 header: {
                     name: 'Андрей',
-                    desc: 'Был в сети 5 минут назад'
+                    desc: 'Был в сети 5 минут назад',
+                    isShowMenu: false,
+                    menuButton: {
+                        className: 'chat-body_header_menu_button',
+                        action: () => {
+                            this.props.body.header.isShowMenu = !this.props.body.header.isShowMenu;
+                            this.setProps(this.props);
+                        }
+                    },
+                    menu: [
+                        {
+                            icon: 'img/icons/edit.svg',
+                            name: 'Добавить пользователя',
+                            actions: {
+                                onclick: () => {
+                                    if (this.props.activeChat !== null) {
+                                        const chat = new ChatController();
+                                        chat.getChatUserList(this.props.activeChat.toString())
+                                        chat.userSearch('eantonova');
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            icon: 'img/icons/edit.svg',
+                            name: 'Изменить',
+                            actions: {
+
+                            }
+                        },
+                        {
+                            icon: 'img/icons/delete.svg',
+                            name: 'Удалить',
+                            actions: {
+                                onclick: () => {
+                                    this.props.deleteModal.isShow = true;
+                                    this.props.body.header.isShowMenu = false;
+                                    this.setProps(this.props);
+                                }
+                            }
+                        }
+                    ]
                 },
                 body: {
                     messages: [
@@ -150,12 +200,18 @@ export default class MainChat extends Chat {
         chat.getChats()
             .then((res: XMLHttpRequest) => {
                 const response = JSON.parse(res.response);
-                this.props.list.users = [];
+                this.props.list.chats = [];
                 response.forEach((chat: any) => {
-                    this.props.list.users.push({
+                    this.props.list.chats.push({
                         id: chat.id,
                         name: chat.title,
                         avatar: chat.avatar,
+                        actions: {
+                            onclick: (id: number) => {
+                                this.props.activeChat = id;
+                                this.setProps(this.props);
+                            }
+                        }
                     })
                 });
                 this.setProps(this.props)

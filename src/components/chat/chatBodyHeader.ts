@@ -2,9 +2,11 @@
 
 import Block from "../../modules/block.js";
 import Input from "../form/input.js";
+import HeaderMenuItem from "./headerMenuItem";
+import Button from "../form/button";
 
 export default class ChatBodyHeader extends Block {
-
+    props: any;
     constructor(props: {}) {
         super("div", props);
     }
@@ -15,6 +17,20 @@ export default class ChatBodyHeader extends Block {
             return input.renderToString();
         }
         return '';
+    }
+
+    getMenu() {
+        let renderField = '';
+        this.props.menu.forEach((field: {}) => {
+            const listItem = new HeaderMenuItem(field);
+            renderField += listItem.renderToString();
+        })
+        return renderField;
+    }
+
+    getMenuButton() {
+        const button = new Button(this.props.menuButton);
+        return button.renderToString();
     }
 
     getTemplate() {
@@ -32,28 +48,13 @@ export default class ChatBodyHeader extends Block {
             '            {{/if}}' +
             '              <div class="chat-body_header_menu">\n' +
             '            {{#if isShowMenu}}' +
-            '            <div class="chat-body_header_menu_list">\n' +
+            '                <div class="chat-body_header_menu_list">\n' +
             '                    <ul class="chat-body_menu-list">\n' +
-            '                        <li>\n' +
-            '                            <div class="chat-body_menu-list_item">\n' +
-            '                                <div class="chat-body_menu-list_img">\n' +
-            '                                    <img src="img/icons/edit.svg">\n' +
-            '                                </div>\n' +
-            '                                <div class="chat-body_menu-list_text">Переименовать</div>\n' +
-            '                            </div>\n' +
-            '                        </li>\n' +
-            '                        <li>\n' +
-            '                            <div class="chat-body_menu-list_item">\n' +
-            '                                <div class="chat-body_menu-list_img">\n' +
-            '                                    <img src="img/icons/delete.svg">\n' +
-            '                                </div>\n' +
-            '                                <div class="chat-body_menu-list_text">Удалить</div>\n' +
-            '                            </div>\n' +
-            '                        </li>\n' +
+                                    this.getMenu() +
             '                    </ul>\n' +
             '                </div>\n' +
-            '                {{/if}}' +
-            '                <img src="img/icons/ellipsis.svg">\n' +
+            '            {{/if}}' +
+                         this.getMenuButton() +
             '            </div>\n' +
             '        </header>';
     }
