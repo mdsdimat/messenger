@@ -1,9 +1,9 @@
 /// <reference path="../../../globals.d.ts" />
 
-import Block from "../../modules/block.js";
-import ChatBodyHeader from "./chatBodyHeader.js";
-import ChatBodyMain from "./chatBodyMain.js";
-import ChatBodyFooter from "./chatBodyFooter.js";
+import Block from "../../modules/block";
+import ChatBodyHeader from "./chatBodyHeader";
+import ChatBodyMain from "./chatBodyMain";
+import ChatBodyFooter from "./chatBodyFooter";
 
 export default class ChatBody extends Block {
     props: {

@@ -1,7 +1,7 @@
 /// <reference path="../../../globals.d.ts" />
 
-import Block from "../../modules/block.js";
-import Button from "../form/button.js";
+import Block from "../../modules/block";
+import Button from "../form/button";
 import ChatListItem from "./chatListItem";
 
 export default class ChatList extends Block {

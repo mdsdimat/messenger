@@ -1,8 +1,8 @@
 /// <reference path="../../globals.d.ts" />
-import Block from "../modules/block.js";
-import Input from "./form/input.js";
-import Button from "./form/button.js";
-import Form from "./form/form.js";
+import Block from "../modules/block";
+import Input from "./form/input";
+import Button from "./form/button";
+import Form from "./form/form";
 
 export default class Sign extends Block {
     props: any;

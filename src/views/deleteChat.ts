@@ -1,5 +1,5 @@
-import Chat from "../components/chat/chat.js";
-import {render} from "../modules/scripts.js"
+import Chat from "../components/chat/chat";
+import {render} from "../modules/scripts"
 
 const page = new Chat({
     isShowDeleteModal: true,

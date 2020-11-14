@@ -1,7 +1,7 @@
 /// <reference path="../../../globals.d.ts" />
 
-import Block from "../../modules/block.js";
-import Input from "../form/input.js";
+import Block from "../../modules/block";
+import Input from "../form/input";
 import HeaderMenuItem from "./headerMenuItem";
 import Button from "../form/button";
 

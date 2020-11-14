@@ -1,5 +1,5 @@
-import Chat from "../components/chat/chat.js";
-import Router from "../modules/routing/router.js";
+import Chat from "../components/chat/chat";
+import Router from "../modules/routing/router";
 import ChatController from "../http/controllers/ChatController";
 import {getFormData} from "../modules/scripts";
 

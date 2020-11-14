@@ -1,5 +1,5 @@
-import Profile from "../components/profile.js";
-import HTTPTransport, {HOST} from "../http/services/transport.js";
+import Profile from "../components/profile";
+import HTTPTransport, {HOST} from "../http/services/transport";
 import AuthController from "../http/controllers/AuthController";
 import Router, {STORAGE} from "../modules/routing/router";
 import {ROUTES} from "../routes";

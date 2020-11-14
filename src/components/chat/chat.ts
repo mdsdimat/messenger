@@ -1,8 +1,8 @@
 /// <reference path="../../../globals.d.ts" />
 
-import Block from "../../modules/block.js";
-import ChatList from "./chatList.js";
-import ChatBody from "./chatBody.js";
+import Block from "../../modules/block";
+import ChatList from "./chatList";
+import ChatBody from "./chatBody";
 import Input from "../form/input";
 import Button from "../form/button";
 import Form from "../form/form";

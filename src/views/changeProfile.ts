@@ -1,4 +1,4 @@
-import Profile from "../components/profile.js";
+import Profile from "../components/profile";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
 import AuthController from "../http/controllers/AuthController";

@@ -1,4 +1,4 @@
-import Sign from "../components/signin.js";
+import Sign from "../components/signin";
 import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";

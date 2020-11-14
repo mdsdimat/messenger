@@ -1,6 +1,6 @@
 /// <reference path="../../../globals.d.ts" />
 
-import Block from "../../modules/block.js";
+import Block from "../../modules/block";
 
 export default class ChatBodyMain extends Block {
 
