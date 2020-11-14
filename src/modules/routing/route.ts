@@ -1,5 +1,5 @@
-import Block from "../block.js";
-import {render} from "../scripts.js"
+import Block from "../block";
+import {render} from "../scripts"
 
 interface IProps {
     rootQuery: string
@@ -11,7 +11,7 @@ export default class Route {
     private _block: Block|null;
     private _props: IProps
     
-    constructor(pathname: string, view: Block, props: IProps) {
+    constructor(pathname: string, view: any, props: IProps) {
         this._pathname = pathname;
         this._blockClass = view;
         this._block = null;
@@ -49,10 +49,10 @@ export default class Route {
             if (this._block) {
                 render(this._props.rootQuery, this._block);
             }
-            return;
+            return this._block;
         }
 
-        this._block.show();
+        this._block.show(this._props.rootQuery);
     }
 }
 

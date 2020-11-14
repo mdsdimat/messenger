@@ -1,5 +1,8 @@
-/// <reference path="../../globals.d.ts" />
-import EventBus from "./event-bus.js";
+import EventBus from "./event-bus";
+import {render} from "./scripts";
+//для тестов
+// без сборщика jest не видит Handlebars для сборки необходимо убрать
+// import Handlebars from 'handlebars';
 abstract class Block {
     static EVENTS = {
         INIT: "init",
@@ -15,6 +18,7 @@ abstract class Block {
     static _instances: Block[];
     static hydrate: () => void;
     props: {[key: string]: unknown};
+    saveContent: object|null;
 
     protected constructor(tagName:string = "div", props:{} = {}) {
         this._id = 'uniq' + parseInt(String(Math.random() * 1000000));
@@ -31,6 +35,7 @@ abstract class Block {
         this._registerEvents();
         this.eventBus().emit(Block.EVENTS.INIT);
         this.eventBus().emit(Block.EVENTS.FLOW_CDM, this.props);
+        this.saveContent = null;
 
         Block._instances.push(this);
     }
@@ -147,12 +152,17 @@ abstract class Block {
         return document.createElement(tagName);
     }
 
-    show() {
-        this.getContent().style.display = "block";
+    show(selector: string) {
+        this._element = this.saveContent;
+        render(selector, this);
     }
 
     hide() {
-        this.getContent().style.display = "none";
+        this.saveContent = this.getContent();
+        const element = document.querySelector(`[_key=${this.getId()}`);
+        if (element !== null) {
+            element.remove();
+        }
     }
 
     abstract getTemplate():string
@@ -163,7 +173,6 @@ Block.hydrate = function() {
     for (const i of this._instances) {
         i.setElement(document.querySelector(`[_key=${i.getId()}`));
         i.initEvents(i);
-
     }
 }
 

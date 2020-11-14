@@ -1,4 +1,4 @@
-import ErrorPage from "../components/errorComponent.js";
+import ErrorPage from "../components/errorComponent";
 
 export default class NotFoundPage extends ErrorPage {
     constructor(props: {}) {

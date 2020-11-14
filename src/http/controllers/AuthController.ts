@@ -22,7 +22,8 @@ export default class AuthController {
             })
     }
 
-    login(formData: FormData | undefined, url: string) {
+    login(formData: FormData | undefined): any {
+        const url = `${HOST}/api/v2/auth/signin`;
         const requester = new HTTPTransport();
         const options: IOptions = {
             method: METHODS.POST,
@@ -31,12 +32,16 @@ export default class AuthController {
                 'Content-Type': 'application/json',
             }
         }
-        requester.post(url, options)
-            .then((result: XMLHttpRequest) => {
+        return requester.post(url, options)
+            .then((result: XMLHttpRequest):any => {
                 if (result.responseText === STATUS_TEXTS.OK) {
-                    this.getUser()
-                        .then((result: XMLHttpRequest) => {this.redirectToChat(result)})
+                    return this.getUser()
+                        .then((result: XMLHttpRequest) => {
+                            this.redirectToChat(result)
+                            return result.responseText;
+                        })
                 }
+                return result.responseText;
             })
     }
 
@@ -57,6 +62,6 @@ export default class AuthController {
 
     logout() {
         const requester = new HTTPTransport();
-        requester.post(`${HOST}/api/v2/auth/logout`);
+        return requester.post(`${HOST}/api/v2/auth/logout`);
     }
 }

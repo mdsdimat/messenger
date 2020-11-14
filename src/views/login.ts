@@ -3,7 +3,6 @@ import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
-import {HOST} from "../http/services/transport";
 
 export default class Login extends Sign {
     constructor(props: {}) {
@@ -60,7 +59,7 @@ export default class Login extends Sign {
                 submit: () => {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
-                    auth.login(formData, `${HOST}/api/v2/auth/signin`);
+                    auth.login(formData);
                 }
             }
         };

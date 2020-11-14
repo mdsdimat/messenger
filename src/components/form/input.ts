@@ -1,7 +1,6 @@
-/// <reference path="../../../globals.d.ts" />
-import Block from "../../modules/block.js";
-import {IEvent} from "../../modules/validation/validation.js";
-import InputValidation from "../../modules/validation/inputValidation.js";
+import Block from "../../modules/block";
+import {IEvent} from "../../modules/validation/validation";
+import InputValidation from "../../modules/validation/inputValidation";
 
 export default class Input extends Block {
     props: any;

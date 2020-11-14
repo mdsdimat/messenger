@@ -1,4 +1,4 @@
-import Validation, {IEvent, IField} from "./validation.js";
+import Validation, {IEvent, IField} from "./validation";
 
 export default class FormValidation extends Validation {
     validate = (e: IEvent) => {

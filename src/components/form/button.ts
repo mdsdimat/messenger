@@ -1,5 +1,5 @@
 /// <reference path="../../../globals.d.ts" />
-import Block from "../../modules/block.js";
+import Block from "../../modules/block";
 import {IEvent} from "../../modules/validation/validation";
 
 export default class Button extends Block {

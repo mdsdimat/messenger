@@ -1,5 +1,4 @@
-// import Block from "../block.js";
-import Route from "./route.js";
+import Route from "./route";
 
 export const STORAGE = {
     SAVE_PATH: 'save_path'
@@ -49,13 +48,13 @@ export default class Router {
         }
 
         this._currentRoute = route;
-        route.render(route, pathname);
+        return route.render(route, pathname);
     }
 
     go(pathname: string) {
         this.history.pushState({ prevUrl: this._currentRoute?this._currentRoute.getPathName():null }, "", pathname);
         localStorage.setItem(STORAGE.SAVE_PATH, pathname)
-        this._onRoute(pathname);
+        return this._onRoute(pathname);
     }
 
     back() {
