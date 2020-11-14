@@ -5,6 +5,31 @@ import {getFormData} from "../modules/scripts";
 
 export default class MainChat extends Chat {
     constructor(props: {}) {
+        const createChat = () =>  {
+            const formData = getFormData('js-form-create-modal');
+            if (formData) {
+                const chat = new ChatController();
+                chat.createChat(formData)
+                    .then(() => {
+                        this.props.createModal.isShow = false;
+                        this.setProps(this.props);
+                        this.getChatList();
+                    })
+            }
+        }
+
+        const deleteChat = () => {
+            if (this.props.activeChat !== null) {
+                const chat = new ChatController();
+                chat.deleteChat(this.props.activeChat.toString())
+                    .then(() => {
+                        this.props.activeChat = null;
+                        this.props.deleteModal.isShow = false;
+                        this.getChatList()
+                    })
+            }
+        }
+
         props = {
             activeChat: null,
             createModal: {
@@ -24,18 +49,7 @@ export default class MainChat extends Chat {
                         type: 'submit',
                         className: 'modal-window_buttons_error',
                         text: 'Создать',
-                        action: () => {
-                            const formData = getFormData('js-form-create-modal');
-                            if (formData) {
-                                const chat = new ChatController();
-                                chat.createChat(formData)
-                                    .then(() => {
-                                        this.props.createModal.isShow = false;
-                                        this.setProps(this.props);
-                                        this.getChatList();
-                                    })
-                            }
-                        }
+                        action: createChat
                     },
                     {
                         className: 'modal-window_buttons_cancel',
@@ -55,17 +69,7 @@ export default class MainChat extends Chat {
                         type: 'submit',
                         className: 'modal-window_buttons_error',
                         text: 'Удалить',
-                        action: () => {
-                            if (this.props.activeChat !== null) {
-                                const chat = new ChatController();
-                                chat.deleteChat(this.props.activeChat.toString())
-                                    .then(() => {
-                                        this.props.activeChat = null;
-                                        this.props.deleteModal.isShow = false;
-                                        this.getChatList()
-                                    })
-                            }
-                        }
+                        action: deleteChat
                     },
                     {
                         className: 'modal-window_buttons_cancel',
@@ -217,4 +221,5 @@ export default class MainChat extends Chat {
                 this.setProps(this.props)
             })
     }
+
 }
