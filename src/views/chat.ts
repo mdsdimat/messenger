@@ -15,6 +15,10 @@ export default class MainChat extends Chat {
                         this.setProps(this.props);
                         this.getChatList();
                     })
+                    .catch((err) => {
+                        //механизм вывода ошибк пользователю
+                        console.log(err)
+                    })
             }
         }
 
@@ -26,6 +30,9 @@ export default class MainChat extends Chat {
                         this.props.activeChat = null;
                         this.props.deleteModal.isShow = false;
                         this.getChatList()
+                    })
+                    .catch(err => {
+                        console.log(err)
                     })
             }
         }
@@ -139,7 +146,9 @@ export default class MainChat extends Chat {
                                     if (this.props.activeChat !== null) {
                                         const chat = new ChatController();
                                         chat.getChatUserList(this.props.activeChat.toString())
-                                        chat.userSearch('eantonova');
+                                            .catch(err => {
+                                                console.log(err)
+                                            })
                                     }
                                 }
                             }

@@ -1,4 +1,5 @@
-import HTTPTransport, {HOST, IOptions, METHODS} from "../services/transport";
+import HTTPTransport, {IOptions, METHODS} from "../services/transport";
+import {HOST} from "../../env";
 
 export default class ChatController {
     getChats() {
@@ -23,7 +24,7 @@ export default class ChatController {
     }
 
     deleteChat(id: string) {
-        const url = `${HOST}/api/v2/chats`
+        const url = `${HOST}/api/v2/chats2`
         const requester = new HTTPTransport();
         const formData = new FormData();
         formData.append('chatId', id)

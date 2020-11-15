@@ -2,7 +2,7 @@ import EventBus from "./event-bus";
 import {render} from "./scripts";
 //для тестов
 // без сборщика jest не видит Handlebars для сборки необходимо убрать
-import Handlebars from 'handlebars';
+// import Handlebars from 'handlebars';
 abstract class Block {
     static EVENTS = {
         INIT: "init",
@@ -19,9 +19,10 @@ abstract class Block {
     static hydrate: () => void;
     props: {[key: string]: unknown};
     saveContent: object|null;
+    static blockId: number;
 
     protected constructor(tagName:string = "div", props:{} = {}) {
-        this._id = 'uniq' + parseInt(String(Math.random() * 1000000));
+        this._id = 'uniq' + parseInt(String(Block.blockId++));
         const eventBus = new EventBus();
         this._meta = {
             tagName,
@@ -168,6 +169,7 @@ abstract class Block {
     abstract getTemplate():string
 }
 
+Block.blockId = 0;
 Block._instances = [];
 Block.hydrate = function() {
     for (const i of this._instances) {

@@ -1,4 +1,5 @@
-import HTTPTransport, {HOST, IOptions, METHODS} from "../services/transport";
+import HTTPTransport, {IOptions, METHODS} from "../services/transport";
+import {HOST} from "../../env";
 
 export default class ProfileController {
     setAvatar(formData: FormData) {
@@ -8,7 +9,7 @@ export default class ProfileController {
             method: METHODS.PUT,
             data: formData,
         }
-        requester.put(url, options)
+        return requester.put(url, options)
             .then((result: XMLHttpRequest) => {
                 console.log(result)
             })
@@ -24,7 +25,7 @@ export default class ProfileController {
                 'Content-Type': 'application/json',
             }
         }
-        requester.put(url, options)
+        return requester.put(url, options)
             .then((result: XMLHttpRequest) => {
                 console.log(result.responseText)
             })

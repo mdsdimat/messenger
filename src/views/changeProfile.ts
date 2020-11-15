@@ -4,7 +4,7 @@ import {ROUTES} from "../routes";
 import AuthController from "../http/controllers/AuthController";
 import {getFormData} from "../modules/scripts";
 import ProfileController from "../http/controllers/ProfileController";
-import {HOST} from "../http/services/transport";
+import {HOST} from "../env";
 
 export default class ChangeProfile extends Profile {
     constructor(props: {}) {
@@ -106,14 +106,20 @@ export default class ChangeProfile extends Profile {
                             if (avatar.size !== 0) {
                                 const avatarData = new FormData();
                                 avatarData.append('avatar', avatar);
-                                profile.setAvatar(avatarData);
+                                profile.setAvatar(avatarData)
+                                    .catch(err => {
+                                        console.log(err)
+                                    })
                             }
                             this.props.fields.forEach((field: any) => {
                                 if (field.name === 'avatar') {
                                     formData.delete(field.name);
                                 }
                             });
-                            profile.changeProfile(formData);
+                            profile.changeProfile(formData)
+                                .catch(err => {
+                                    console.log(err)
+                                })
                         }
                     }
                 }
@@ -137,6 +143,9 @@ export default class ChangeProfile extends Profile {
                     this.props.photo = `${HOST+response.avatar}`
                 }
                 this.setProps(this.props);
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 }

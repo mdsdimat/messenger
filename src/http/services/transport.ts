@@ -1,15 +1,16 @@
-export const METHODS = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE'
-};
+import {queryStringify} from "../../modules/queryStringify";
+import {transformDataForRequest} from "../../modules/transformDataForRequest";
+
+export enum METHODS {
+    GET= 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE'
+}
 
 export const STATUS_TEXTS = {
     OK: 'OK',
 };
-
-export const HOST = 'https://ya-praktikum.tech';
 
 export interface IOptions {
     headers?: {
@@ -18,28 +19,6 @@ export interface IOptions {
     data?: FormData,
     timeout?: number,
     method: string,
-}
-
-interface IData {
-    [key: string]: any
-}
-
-function queryStringify(data: IData|undefined): string {
-    if (data === undefined) {return ''}
-    if (Object.keys(data).length > 0) {
-        let query = '?';
-        for (let key in data) {
-            query += `${key}=${data[key]}&`;
-        }
-        return query.slice(0, -1);
-    }
-    return '';
-}
-
-function formDataToJson(formData: FormData) {
-    let object: any = {};
-    formData.forEach((value, key) => {object[key] = value});
-    return  JSON.stringify(object);
 }
 
 export default class HTTPTransport {
@@ -89,12 +68,6 @@ export default class HTTPTransport {
                 throw new Error("Error");
             })
     }
-
-    // PUT, POST, DELETE
-
-    // options:
-    // headers — obj
-    // data — obj
     request = (url: string, options: IOptions) => {
         const {method, data} = options;
         return new Promise((resolve, reject) => {
@@ -114,20 +87,12 @@ export default class HTTPTransport {
                 xhr.withCredentials = true;
                 xhr.send();
             } else {
-                let contentType = null;
-                // let sendData: FormData|string = data;
-                let sendData: any = data;
-                if (options .headers && options.headers['Content-Type']) {
-                    contentType = options.headers['Content-Type'];
-                    if (contentType === 'application/json') {
-                        sendData = formDataToJson(data);
-                    }
-                }
+                const requestData = transformDataForRequest(data, options)
                 xhr.withCredentials = true;
-                if (contentType !== null) {
-                    xhr.setRequestHeader('Content-Type', contentType);
+                if (requestData.contentType !== null) {
+                    xhr.setRequestHeader('Content-Type', requestData.contentType);
                 }
-                xhr.send(sendData);
+                xhr.send(requestData.sendData);
             }
         });
     };

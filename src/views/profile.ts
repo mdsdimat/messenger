@@ -1,7 +1,6 @@
 import Profile from "../components/profile";
-import HTTPTransport, {HOST} from "../http/services/transport";
 import AuthController from "../http/controllers/AuthController";
-import Router, {STORAGE} from "../modules/routing/router";
+import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
 
 export default class ViewProfile extends Profile {
@@ -47,11 +46,10 @@ export default class ViewProfile extends Profile {
                     className: 'field_button button-error',
                     text: 'Выйти',
                     action: () => {
-                        const requester = new HTTPTransport();
-                        requester.post(`${HOST}/api/v2/auth/logout`)
-                            .then(() => {
-                                localStorage.removeItem(STORAGE.SAVE_PATH);
-                                router.go('#/');
+                        const auth = new AuthController();
+                        auth.logout()
+                            .catch(err => {
+                                console.log(err)
                             })
                     }
                 },
@@ -75,6 +73,9 @@ export default class ViewProfile extends Profile {
                     }
                 });
                 this.setProps(this.props);
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 }

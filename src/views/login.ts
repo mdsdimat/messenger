@@ -59,7 +59,10 @@ export default class Login extends Sign {
                 submit: () => {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
-                    auth.login(formData);
+                    auth.login(formData)
+                        .catch((err: any) => {
+                            console.log(err)
+                        })
                 }
             }
         };
@@ -71,6 +74,9 @@ export default class Login extends Sign {
         auth.getUser()
             .then((result: XMLHttpRequest) => {
                 auth.redirectToChat(result)
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 }
