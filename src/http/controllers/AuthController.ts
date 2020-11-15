@@ -1,20 +1,23 @@
 import HTTPTransport, {
     IOptions,
-    METHODS,
-    STATUS_TEXTS
+    METHODS
 } from "../services/transport";
-import Router from "../../modules/routing/router";
-import {ROUTES} from "../../routes";
 import {HOST} from "../../env";
 
+const HANDS = {
+    SIGNUP: `${HOST}/api/v2/auth/signup`,
+    SIGNIN: `${HOST}/api/v2/auth/signin`,
+    GETUSER: `${HOST}/api/v2/auth/user`,
+    LOGOUT: `${HOST}/api/v2/auth/logout`
+}
+
 export default class AuthController {
-    private host: string;
+    private requester: HTTPTransport;
     constructor() {
-        this.host = HOST;
+        this.requester = new HTTPTransport();
     }
-    signin(formData: FormData | undefined) {
-        const requester = new HTTPTransport();
-        const url =`${HOST}/api/v2/auth/signup`;
+    signup(formData: FormData | undefined) {
+        const url = HANDS.SIGNUP;
         const options: IOptions = {
             method: METHODS.POST,
             data: formData,
@@ -22,15 +25,14 @@ export default class AuthController {
                 'Content-Type': 'application/json',
             }
         }
-        return requester.post(url, options)
+        return this.requester.post(url, options)
             .then((result: XMLHttpRequest) => {
                 console.log(result.responseText)
             })
     }
 
     login(formData: FormData | undefined): any {
-        const url = `${this.host}/api/v2/auth/signin`;
-        const requester = new HTTPTransport();
+        const url = HANDS.SIGNIN;
         const options: IOptions = {
             method: METHODS.POST,
             data: formData,
@@ -38,36 +40,17 @@ export default class AuthController {
                 'Content-Type': 'application/json',
             }
         }
-        return requester.post(url, options)
-            .then((result: XMLHttpRequest):any => {
-                if (result.responseText === STATUS_TEXTS.OK) {
-                    return this.getUser()
-                        .then((result: XMLHttpRequest) => {
-                            this.redirectToChat(result)
-                            return result.responseText;
-                        })
-                }
-                return result.responseText;
-            })
+        return this.requester.post(url, options)
     }
 
     getUser() {
-        const requester = new HTTPTransport();
-         return requester.get(`${this.host}/api/v2/auth/user`)
+         return this.requester.get(HANDS.GETUSER)
              .catch(error => {
                  console.log(error)
              })
     }
 
-    redirectToChat(result: XMLHttpRequest) {
-        if (result.status === 200) {
-            const router = new Router();
-            router.go(ROUTES.CHAT);
-        }
-    }
-
     logout() {
-        const requester = new HTTPTransport();
-        return requester.post(`${this.host}/api/v2/auth/logout`);
+        return this.requester.post(HANDS.LOGOUT);
     }
 }

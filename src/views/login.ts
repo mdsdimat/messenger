@@ -3,6 +3,7 @@ import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
+import {STATUS_TEXTS} from "../http/services/transport";
 
 export default class Login extends Sign {
     constructor(props: {}) {
@@ -60,6 +61,16 @@ export default class Login extends Sign {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
                     auth.login(formData)
+                        .then((result: XMLHttpRequest):any => {
+                            if (result.responseText === STATUS_TEXTS.OK) {
+                                auth.getUser()
+                                    .then((result: XMLHttpRequest) => {
+                                        this.redirectToChat(result)
+                                        return result.responseText;
+                                    })
+                            }
+                            return result.responseText;
+                        })
                         .catch((err: any) => {
                             console.log(err)
                         })
@@ -73,10 +84,17 @@ export default class Login extends Sign {
         const auth = new AuthController();
         auth.getUser()
             .then((result: XMLHttpRequest) => {
-                auth.redirectToChat(result)
+                this.redirectToChat(result)
             })
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    redirectToChat(result: XMLHttpRequest) {
+        if (result.status === 200) {
+            const router = new Router();
+            router.go(ROUTES.CHAT);
+        }
     }
 }

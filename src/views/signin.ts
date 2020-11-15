@@ -93,7 +93,7 @@ export default class Signin extends Sign {
                 submit: () => {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
-                    auth.signin(formData)
+                    auth.signup(formData)
                         .catch(err => {
                             console.log(err)
                         })

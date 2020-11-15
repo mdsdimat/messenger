@@ -1,5 +1,5 @@
 import AuthController from "../../../../http/controllers/AuthController";
-import any = jasmine.any;
+import {STATUS_TEXTS} from "../../../../http/services/transport";
 
 let auth: AuthController;
 let formData: FormData;
@@ -14,17 +14,7 @@ test('auth', async () => {
     formData.append('login', login);
     formData.append('password', 'passw');
     await auth.login(formData)
-        .then((res: string) => {
-            expect(JSON.parse(res)).toEqual({
-                avatar: any(String),
-                display_name: any(String),
-                email: any(String),
-                first_name: any(String),
-                id: any(Number),
-                login: login,
-                phone: any(String),
-                second_name: any(String)
-            })
-            return res;
+        .then((res:any) => {
+            expect(res.responseText).toEqual(STATUS_TEXTS.OK);
         })
 })

@@ -1,23 +1,30 @@
 import HTTPTransport, {IOptions, METHODS} from "../services/transport";
 import {HOST} from "../../env";
 
+const HANDS = {
+    AVATAR: `${HOST}/api/v2/user/profile/avatar`,
+    PROFILE: `${HOST}/api/v2/user/profile`,
+}
+
 export default class ProfileController {
+    private requester: HTTPTransport;
+    constructor() {
+        this.requester = new HTTPTransport();
+    }
     setAvatar(formData: FormData) {
-        const requester = new HTTPTransport();
-        const url = `${HOST}/api/v2/user/profile/avatar`
+        const url = HANDS.AVATAR;
         const options: IOptions = {
             method: METHODS.PUT,
             data: formData,
         }
-        return requester.put(url, options)
+        return this.requester.put(url, options)
             .then((result: XMLHttpRequest) => {
                 console.log(result)
             })
     }
 
     changeProfile(formData: FormData) {
-        const requester = new HTTPTransport();
-        const url = `${HOST}/api/v2/user/profile`;
+        const url = HANDS.PROFILE;
         const options: IOptions = {
             method: METHODS.PUT,
             data: formData,
@@ -25,7 +32,7 @@ export default class ProfileController {
                 'Content-Type': 'application/json',
             }
         }
-        return requester.put(url, options)
+        return this.requester.put(url, options)
             .then((result: XMLHttpRequest) => {
                 console.log(result.responseText)
             })
