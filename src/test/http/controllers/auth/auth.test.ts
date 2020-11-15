@@ -1,5 +1,6 @@
+jest.mock('transport');
+
 import AuthController from "../../../../http/controllers/AuthController";
-import {STATUS_TEXTS} from "../../../../http/services/transport";
 
 let auth: AuthController;
 let formData: FormData;
@@ -15,6 +16,6 @@ test('auth', async () => {
     formData.append('password', 'passw');
     await auth.login(formData)
         .then((res:any) => {
-            expect(res.responseText).toEqual(STATUS_TEXTS.OK);
+            expect(res.responseText).toEqual('OK');
         })
 })
