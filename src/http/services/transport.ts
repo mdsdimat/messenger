@@ -1,16 +1,6 @@
 import {queryStringify} from "../../modules/queryStringify";
 import {transformDataForRequest} from "../../modules/transformDataForRequest";
-
-export enum METHODS {
-    GET= 'GET',
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE'
-}
-
-export const STATUS_TEXTS = {
-    OK: 'OK',
-};
+import {METHODS} from "../../env";
 
 export interface IOptions {
     headers?: {

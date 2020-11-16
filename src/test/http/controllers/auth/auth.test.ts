@@ -1,9 +1,35 @@
-jest.mock('transport');
-
 import AuthController from "../../../../http/controllers/AuthController";
+import {transformDataForRequest} from "../../../../modules/transformDataForRequest";
+import {STATUS_TEXTS} from "../../../../env";
 
 let auth: AuthController;
 let formData: FormData;
+
+const users = {
+    login: 'login25435234'
+};
+
+jest.mock('../../../../http/services/transport', () => {
+    return jest.fn().mockImplementation(() => {
+        return {
+            post: (url: any, options: any) => {
+                return new Promise((resolve, reject) => {
+                    const {data} = options;
+                    const requestData = transformDataForRequest(data, options)
+                    const resultData = JSON.parse(requestData.sendData);
+                    process.nextTick(() =>
+                        users.login === resultData.login && url
+                            ? resolve({responseText: STATUS_TEXTS.OK})
+                            : reject({responseText: {
+                                    reason: "Login or password is incorrect"
+                                }
+                            }),
+                    );
+                });
+            }
+        };
+    });
+});
 
 beforeEach(() => {
     auth = new AuthController();

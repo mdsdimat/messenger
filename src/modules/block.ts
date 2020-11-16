@@ -2,7 +2,7 @@ import EventBus from "./event-bus";
 import {render} from "./scripts";
 //для тестов
 // без сборщика jest не видит Handlebars для сборки необходимо убрать
-// import Handlebars from 'handlebars';
+import Handlebars from 'handlebars';
 abstract class Block {
     static EVENTS = {
         INIT: "init",

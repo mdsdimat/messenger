@@ -1,5 +1,5 @@
-import HTTPTransport, {IOptions, METHODS} from "../services/transport";
-import {HOST} from "../../env";
+import HTTPTransport, {IOptions} from "../services/transport";
+import {HOST, METHODS} from "../../env";
 
 const HANDS = {
     AVATAR: `${HOST}/api/v2/user/profile/avatar`,

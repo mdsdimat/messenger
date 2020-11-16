@@ -38,11 +38,29 @@ export default class Sign extends Block {
         return renderFields;
     }
 
+    getUserMessage() {
+        if (this.props.userMessageModal.isShow) {
+            const button = new Button(this.props.userMessageModal.button);
+            return '    <div class="modal-wrapper">\n' +
+                '        <div class="modal-window">\n' +
+                '            <p class="modal-window_title">{{this.userMessageModal.text}}</p>\n' +
+                '            <div class="modal-window_buttons">\n' +
+                                button.renderToString() +
+                '            </div>\n' +
+                '        </div>\n' +
+                '        <div class="overlay"></div>\n' +
+                '    </div>\n';
+        } else {
+            return '';
+        }
+    }
+
     getTemplate() {
         const form = new Form(this.props, this.getFields(), this.getButtons());
-        return '<main class="sign-form {{typeBackground}}">\n' +
+        return this.getUserMessage() +
+            '<main class="sign-form {{typeBackground}}">\n' +
             '    <div class="sign-form_title">{{title}}</div>\n' +
                     form.renderToString() +
-            '</main>';
+            '   </main>';
     }
 };

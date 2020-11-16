@@ -3,7 +3,16 @@ import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
-import {STATUS_TEXTS} from "../http/services/transport";
+import {STATUS_TEXTS} from "../env";
+
+
+//
+// Вчера, когда отправлял работу на проверку, не сделал push))
+// хотел успеть то доделайна
+//
+// добавил модал для взаимодействия с пользователем, в последствии добавлю во всех местах
+//
+
 
 export default class Login extends Sign {
     constructor(props: {}) {
@@ -61,19 +70,37 @@ export default class Login extends Sign {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
                     auth.login(formData)
-                        .then((result: XMLHttpRequest):any => {
+                        .then((result: XMLHttpRequest): any => {
                             if (result.responseText === STATUS_TEXTS.OK) {
                                 auth.getUser()
                                     .then((result: XMLHttpRequest) => {
                                         this.redirectToChat(result)
-                                        return result.responseText;
                                     })
+                            } else {
+                                const response = JSON.parse(result.response)
+                                if (response.reason) {
+                                    this.showUserMessage(response.reason)
+                                } else {
+                                    this.showUserMessage('Something wrong')
+                                }
                             }
-                            return result.responseText;
                         })
                         .catch((err: any) => {
                             console.log(err)
                         })
+                }
+            },
+            userMessageModal: {
+                isShow: false,
+                text: '',
+                button: {
+                    type: 'submit',
+                    className: 'modal-window_buttons_error',
+                    text: 'Закрыть',
+                    action: () => {
+                        this.props.userMessageModal.isShow = false;
+                        this.setProps(this.props)
+                    }
                 }
             }
         };
@@ -84,17 +111,25 @@ export default class Login extends Sign {
         const auth = new AuthController();
         auth.getUser()
             .then((result: XMLHttpRequest) => {
-                this.redirectToChat(result)
+                this.redirectToChat(result, true)
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    redirectToChat(result: XMLHttpRequest) {
+    redirectToChat(result: XMLHttpRequest, init = false) {
         if (result.status === 200) {
             const router = new Router();
             router.go(ROUTES.CHAT);
+        } else if (!init) {
+            this.showUserMessage('Something wrong')
         }
+    }
+
+    showUserMessage(message: string) {
+        this.props.userMessageModal.text = message;
+        this.props.userMessageModal.isShow = true;
+        this.setProps(this.props)
     }
 }
