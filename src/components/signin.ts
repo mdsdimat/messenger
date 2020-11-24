@@ -14,16 +14,16 @@ export default class Sign extends Block {
     }
 
     getFields():string {
-        console.log(style.signForm_inputBlock_label);
+        console.log(style);
         let renderFields: string = '';
         if (this.props.fields) {
             this.props.fields.forEach((field: any) => {
                 const input = new Input(field);
-                renderFields += `<div class="${style['sign-form_input-block_label']} js-valid">\n` +
-                    `            <label class="${style['sign-form_label']}">${field.label}\n` +
+                renderFields += `<div class="${style.signFormInputBlockLabel} js-valid">\n` +
+                    `            <label class="${style.signFormLabel}">${field.label}\n` +
                                     input.renderToString() +
                     '            </label>\n' +
-                    `            <div class="${style['sign-form_error-text']} js-error-message" hidden></div>\n` +
+                    `            <div class="${style.signFormErrorText} js-error-message" hidden></div>\n` +
                     '        </div>'
             });
         }
@@ -61,8 +61,8 @@ export default class Sign extends Block {
     getTemplate() {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return this.getUserMessage() +
-            `<main class="${style['sign-form']} {{typeBackground}}">\n` +
-            `    <div class="${style['sign-form_title']}">{{title}}</div>\n` +
+            `<main class="${style.signForm} {{typeBackground}}">\n` +
+            `    <div class="${style.signFormTitle}">{{title}}</div>\n` +
                     form.renderToString() +
             '   </main>';
     }

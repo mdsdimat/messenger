@@ -3,39 +3,40 @@ import Router from "../modules/routing/router";
 import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
 import {ROUTES} from "../routes";
+import style from "../css/sign.css";
 
 export default class Signin extends Sign {
     constructor(props: {}) {
         props = {
-            typeBackground: 'sign-background',
+            typeBackground: style.signBackground,
             title: 'Регистрация',
             formClassName: 'js-form',
             fields: [
                 {
                     label: 'Имя',
                     name: 'first_name',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'text',
                     value: 'Name',
                 },
                 {
                     label: 'Фамилия',
                     name: 'second_name',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'text',
                     value: 'Second',
                 },
                 {
                     label: 'Логин',
                     name: 'login',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'text',
                     value: 'login25435234',
                 },
                 {
                     label: 'Почта',
                     name: 'email',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'text',
                     value: 'dima@yandex.ru',
                     validation: [
@@ -47,7 +48,7 @@ export default class Signin extends Sign {
                 {
                     label: 'Телефон',
                     name: 'phone',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'text',
                     value: '+79261234567',
                     validation: [
@@ -59,7 +60,7 @@ export default class Signin extends Sign {
                 {
                     label: 'Пароль',
                     name: 'password',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'password',
                     value: 'passw',
                     validation: [
@@ -73,15 +74,15 @@ export default class Signin extends Sign {
                     ]
                 }
             ],
-            buttonsClassName: 'sign-form_button-block',
+            buttonsClassName: style.signFormButtonBlock,
             buttons: [
                 {
                     type: 'submit',
-                    className: 'sign-form_button-block-form_submit',
+                    className: style.signFormButtonBlockFormSubmit,
                     text: 'Зарегистрироваться',
                 },
                 {
-                    className: 'sign-form_button-block-form_cancel',
+                    className: style.signFormButtonBlockFormCancel,
                     text: 'Войти',
                     action: () => {
                         const router = new Router();
