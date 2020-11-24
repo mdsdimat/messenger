@@ -98,6 +98,19 @@ export default class Signin extends Sign {
                             console.log(err)
                         })
                 }
+            },
+            userMessageModal: {
+                isShow: false,
+                text: '',
+                button: {
+                    type: 'submit',
+                    className: 'modal-window_buttons_error',
+                    text: 'Закрыть',
+                    action: () => {
+                        this.props.userMessageModal.isShow = false;
+                        this.setProps(this.props)
+                    }
+                }
             }
         };
         super(props);
