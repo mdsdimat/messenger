@@ -1,1 +1,2 @@
-declare var Handlebars: any;
+declare module '*.css';
+declare module '*.scss';

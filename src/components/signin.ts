@@ -3,6 +3,8 @@ import Block from "../modules/block";
 import Input from "./form/input";
 import Button from "./form/button";
 import Form from "./form/form";
+import style from "../css/sign.css";
+import "../css/sign.css"
 
 export default class Sign extends Block {
     props: any;
@@ -12,15 +14,16 @@ export default class Sign extends Block {
     }
 
     getFields():string {
+        console.log(style.signForm_inputBlock_label);
         let renderFields: string = '';
         if (this.props.fields) {
             this.props.fields.forEach((field: any) => {
                 const input = new Input(field);
-                renderFields += '<div class="sign-form_input-block_label js-valid">\n' +
-                    '            <label class="sign-form_label">' + field.label + '\n' +
-                    input.renderToString() +
+                renderFields += `<div class="${style['sign-form_input-block_label']} js-valid">\n` +
+                    `            <label class="${style['sign-form_label']}">${field.label}\n` +
+                                    input.renderToString() +
                     '            </label>\n' +
-                    '            <div class="sign-form_error-text js-error-message" hidden></div>\n' +
+                    `            <div class="${style['sign-form_error-text']} js-error-message" hidden></div>\n` +
                     '        </div>'
             });
         }
@@ -58,8 +61,8 @@ export default class Sign extends Block {
     getTemplate() {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return this.getUserMessage() +
-            '<main class="sign-form {{typeBackground}}">\n' +
-            '    <div class="sign-form_title">{{title}}</div>\n' +
+            `<main class="${style['sign-form']} {{typeBackground}}">\n` +
+            `    <div class="${style['sign-form_title']}">{{title}}</div>\n` +
                     form.renderToString() +
             '   </main>';
     }
