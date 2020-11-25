@@ -1,8 +1,4 @@
-export default {
-    setupFiles: [
-        "<rootDir>/globals.d.ts",
-        'handlebars'
-    ],
+module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jsdom',
 };
