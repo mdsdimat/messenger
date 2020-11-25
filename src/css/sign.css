@@ -1,18 +1,18 @@
 .sign-background {
-    position: absolute;
     width: 340px;
     height: auto;
-    left: 470px;
     top: 15px;
     padding-bottom: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .login-background {
-    position: absolute;
     width: 340px;
     height: 460px;
-    left: 470px;
     top: 130px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .sign-form {

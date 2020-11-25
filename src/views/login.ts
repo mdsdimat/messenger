@@ -4,27 +4,20 @@ import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
 import {STATUS_TEXTS} from "../env";
-
-
-//
-// Вчера, когда отправлял работу на проверку, не сделал push))
-// хотел успеть то доделайна
-//
-// добавил модал для взаимодействия с пользователем, в последствии добавлю во всех местах
-//
+import style from "../css/sign.css"
 
 
 export default class Login extends Sign {
     constructor(props: {}) {
         props = {
-            typeBackground: 'login-background',
+            typeBackground: style.loginBackground,
             title: 'Вход',
             formClassName: 'js-form',
             fields: [
                 {
                     label: 'Логин',
                     name: 'login',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'text',
                     value: 'login25435234',
                     validation: [
@@ -40,7 +33,7 @@ export default class Login extends Sign {
                 {
                     label: 'Пароль',
                     name: 'password',
-                    className: 'sign-form_input',
+                    className: style.signFormInput,
                     type: 'password',
                     value: 'passw',
                     validation: [
@@ -50,14 +43,14 @@ export default class Login extends Sign {
                     ]
                 },
             ],
-            buttonsClassName: 'sign-form_button-block',
+            buttonsClassName: style.signFormButtonBlock,
             buttons: [
                 {
-                    className: 'sign-form_button-block-form_submit',
+                    className: style.signFormButtonBlockFormSubmit,
                     text: 'Авторизоваться',
                 },
                 {
-                    className: 'sign-form_button-block-form_cancel',
+                    className: style.signFormButtonBlockFormCancel,
                     text: 'Нет аккаунта?',
                     action: () => {
                         const router = new Router();

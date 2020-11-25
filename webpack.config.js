@@ -39,7 +39,22 @@ module.exports = {
                                 exportLocalsConvention: 'camelCase'
                             }
                         }
-                    }
+                    },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            // Options
+                                        },
+                                    ],
+                                ],
+                            },
+                        },
+                    },
                 ],
             },
         ]

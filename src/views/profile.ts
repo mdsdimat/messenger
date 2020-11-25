@@ -2,6 +2,7 @@ import Profile from "../components/profile";
 import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
+import {STATUS_TEXTS} from "../env";
 
 export default class ViewProfile extends Profile {
     constructor(props: {}) {
@@ -48,6 +49,11 @@ export default class ViewProfile extends Profile {
                     action: () => {
                         const auth = new AuthController();
                         auth.logout()
+                            .then((res: XMLHttpRequest) => {
+                                if (res.responseText === STATUS_TEXTS.OK) {
+                                    router.go(ROUTES.LOGIN)
+                                }
+                            })
                             .catch(err => {
                                 console.log(err)
                             })
