@@ -103,7 +103,7 @@ export default class ChangeProfile extends Profile {
                         if (formData) {
                             const profile = new ProfileController();
                             const avatar: any = formData.get('avatar');
-                            if (avatar.size !== 0) {
+                            if (avatar !== null && avatar.size !== 0) {
                                 const avatarData = new FormData();
                                 avatarData.append('avatar', avatar);
                                 profile.setAvatar(avatarData)
@@ -111,7 +111,7 @@ export default class ChangeProfile extends Profile {
                                         console.log(err)
                                     })
                             }
-                            this.props.fields.forEach((field: any) => {
+                            this.props.fields.forEach((field) => {
                                 if (field.name === 'avatar') {
                                     formData.delete(field.name);
                                 }
@@ -128,15 +128,15 @@ export default class ChangeProfile extends Profile {
         super(props);
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         const auth = new AuthController();
         auth.getUser()
             .then((result: XMLHttpRequest) => {
                 const response = JSON.parse(result.response)
                 const fields = this.props.fields;
-                fields.forEach((field: any) => {
-                    if (response[field.name]) {
-                        field.value = response[field.name];
+                fields.forEach((field) => {
+                    if (response[<string>field.name]) {
+                        field.value = response[<string>field.name];
                     }
                 });
                 if (response.avatar) {

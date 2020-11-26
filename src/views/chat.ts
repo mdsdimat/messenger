@@ -4,7 +4,7 @@ import ChatController from "../http/controllers/ChatController";
 import {getFormData} from "../modules/scripts";
 
 export default class MainChat extends Chat {
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         const createChat = () =>  {
             const formData = getFormData('js-form-create-modal');
             if (formData) {
@@ -177,14 +177,7 @@ export default class MainChat extends Chat {
                     messages: [
                         {
                             self: false,
-                            text: 'Привет! Смотри, тут всплыл интересный кусок лунной космической\n' +
-                                '                    истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну.\n' +
-                                '                    Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер\n' +
-                                '                    все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.\n' +
-                                '\n' +
-                                '                    Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда\n' +
-                                '                    и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000\n' +
-                                '                    евро.',
+                            text: 'Привет! Смотри, тут всплыл интересный кусок лунной космической\n',
                             time: '11:56'
                         },
                         {
@@ -204,11 +197,11 @@ export default class MainChat extends Chat {
         super(props);
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.getChatList()
     }
 
-    getChatList() {
+    getChatList(): void {
         const chat = new ChatController();
         chat.getChats()
             .then((res: XMLHttpRequest) => {

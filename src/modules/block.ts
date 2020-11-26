@@ -1,7 +1,5 @@
 import EventBus from "./event-bus";
 import {render} from "./scripts";
-//для тестов
-// без сборщика jest не видит Handlebars для сборки необходимо убрать
 import Handlebars from 'handlebars';
 abstract class Block {
     static EVENTS = {
@@ -12,16 +10,16 @@ abstract class Block {
     };
 
     _element:any = null;
-    _meta: {tagName: string, props: {}|null};
+    _meta: {tagName: string, props: Record<string, unknown>|null};
     private readonly _id: string;
     private eventBus: () => EventBus;
     static _instances: Block[];
     static hydrate: () => void;
     props: Record<string, unknown>;
-    saveContent: object|null;
+    saveContent: Element|null;
     static blockId: number;
 
-    protected constructor(tagName = "div", props:{} = {}) {
+    protected constructor(tagName = "div", props:Record<string, unknown> = {}) {
         this._id = 'uniq' + parseInt(String(Block.blockId++));
         const eventBus = new EventBus();
         this._meta = {
@@ -64,10 +62,11 @@ abstract class Block {
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidMount() {
+    componentDidMount(): void {
+        return;
     }
 
-    _componentDidUpdate = (oldProps: {}, newProps: {}): void => {
+    _componentDidUpdate = (oldProps: Record<string, unknown>, newProps: Record<string, unknown>): void => {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (response && {...oldProps} !== {...newProps}) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -76,7 +75,7 @@ abstract class Block {
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidUpdate(oldProps: {}, newProps: {}) {
+    componentDidUpdate(oldProps: Record<string, unknown>, newProps: Record<string, unknown>): boolean|undefined {
         if (oldProps && newProps) {
             return true;
         }
@@ -88,36 +87,36 @@ abstract class Block {
         }
     }
 
-    setProps = (nextProps: {}) => {
+    setProps = (nextProps: Record<string, unknown>): undefined => {
         if (!nextProps) {
             return;
         }
         Object.assign(this.props, nextProps);
     };
 
-    getId() {
+    getId(): string {
         return this._id;
     }
 
-    get element() {
+    get element(): Element {
         return this._element;
     }
 
-    _render = () => {
+    _render = (): void => {
         const block = this.render();
         if (this._element) {
             this._element.innerHTML = block;
         }
     }
 
-    renderToString() {
+    renderToString(): string {
         const wrapper = document.createElement('div');
         this._element.innerHTML = this.render();
         wrapper.appendChild(this._element);
         return wrapper.innerHTML;
     }
 
-    setElement(element:HTMLElement) {
+    setElement(element:HTMLElement): void {
         this._element = element;
     }
 
@@ -126,13 +125,12 @@ abstract class Block {
         return Handlebars.compile(this.getTemplate())(this.props);
     }
 
-    getContent() {
+    getContent(): Element {
         return this.element;
     }
 
-    _makePropsProxy(props: {[key:string]: unknown}) {
-        // Можно и так передать this
-        // Такой способ больше не применяется с приходом ES6+
+    _makePropsProxy(props: {[key:string]: unknown}): Record<string, unknown> {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const self = this;
         return new Proxy(props, {
             set(target: {[key:string]: unknown}, prop: string, value) {
@@ -148,17 +146,17 @@ abstract class Block {
         });
     }
 
-    _createDocumentElement(tagName:string) {
+    _createDocumentElement(tagName:string): Element {
         // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 
-    show(selector: string) {
+    show(selector: string): void {
         this._element = this.saveContent;
         render(selector, this);
     }
 
-    hide() {
+    hide(): void {
         this.saveContent = this.getContent();
         const element = document.querySelector(`[_key=${this.getId()}`);
         if (element !== null) {

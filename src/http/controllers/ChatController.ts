@@ -10,14 +10,14 @@ export default class ChatController {
     constructor() {
         this.requester = new HTTPTransport();
     }
-    getChats() {
+    getChats(): Promise<unknown> {
         return this.requester.get(HANDS.CHATS)
             .catch(error => {
                 console.log(error)
             })
     }
 
-    createChat(formData: FormData) {
+    createChat(formData: FormData): Promise<unknown> {
         const url = HANDS.CHATS
         const options: IOptions = {
             method: METHODS.POST,
@@ -29,7 +29,7 @@ export default class ChatController {
         return this.requester.post(url, options)
     }
 
-    deleteChat(id: string) {
+    deleteChat(id: string): Promise<unknown> {
         const url = HANDS.CHATS
         const formData = new FormData();
         formData.append('chatId', id)
@@ -43,7 +43,7 @@ export default class ChatController {
         return this.requester.post(url, options)
     }
 
-    getChatUserList(id: string) {
+    getChatUserList(id: string): Promise<unknown> {
         return this.requester.get(`${HOST}/api/v2/chats/${id}/users`)
             .catch(error => {
                 //механизм вывода ошибок

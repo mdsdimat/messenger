@@ -5,7 +5,7 @@ import {ROUTES} from "../routes";
 import {STATUS_TEXTS} from "../env";
 
 export default class ViewProfile extends Profile {
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         const router = new Router();
         props = {
             photo: 'img/profilePhoto.svg',
@@ -64,13 +64,13 @@ export default class ViewProfile extends Profile {
         super(props);
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         const auth = new AuthController();
         auth.getUser()
             .then((result: XMLHttpRequest) => {
                 const response = JSON.parse(result.response)
                 const fields = this.props.fields;
-                fields.forEach((field: any) => {
+                fields.forEach((field) => {
                     if (field.name === 'email') {
                         field.value = response.email;
                     }

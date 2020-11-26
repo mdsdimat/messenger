@@ -1,5 +1,5 @@
 interface IListeners {
-    [key: string]: ((...args: {}[]) => void)[];
+    [key: string]: ((...args: Record<string, unknown>[]) => void)[];
 }
 
 class EventBus {
@@ -8,7 +8,7 @@ class EventBus {
         this.listeners = {};
     }
 
-    on(event: string, callback: (...args: {}[]) => void) {
+    on(event: string, callback: (...args: Record<string, unknown>[]) => void): void {
         if (!this.listeners[event]) {
             this.listeners[event] = [];
         }
@@ -16,7 +16,7 @@ class EventBus {
         this.listeners[event].push(callback);
     }
 
-    off(event: string, callback: (...args: {}[]) => void) {
+    off(event: string, callback: (...args: Record<string, unknown>[]) => void): void {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`);
         }
@@ -26,8 +26,8 @@ class EventBus {
         );
     }
 
-    emit(event: string, ...args: {}[]) {
-        this.listeners[event].forEach(function(listener: (...args: {}[]) => void) {
+    emit(event: string, ...args: Record<string, unknown>[]): void {
+        this.listeners[event].forEach(function(listener: (...args: Record<string, unknown>[]) => void) {
             listener(...args);
         });
     }

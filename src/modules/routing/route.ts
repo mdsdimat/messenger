@@ -18,18 +18,18 @@ export default class Route {
         this._props = props;
     }
 
-    navigate(pathname: string) {
+    navigate(pathname: string): void {
         if (this.match(pathname)) {
             this._pathname = pathname;
             this.render();
         }
     }
 
-    getPathName() {
+    getPathName(): string {
         return this._pathname;
     }
 
-    leave() {
+    leave(): void {
         if (this._block) {
             this._block.hide();
             // const node = document.querySelector(`[_key=${this._block.getId()}`);
@@ -39,11 +39,11 @@ export default class Route {
         }
     }
 
-    match(pathname: string) {
+    match(pathname: string): boolean {
         return isEqual(pathname, this._pathname);
     }
 
-    render() {
+    render(): Block|null|undefined {
         if (!this._block) {
             this._block = new this._blockClass();
             if (this._block) {
@@ -56,6 +56,6 @@ export default class Route {
     }
 }
 
-function isEqual(lhs: string, rhs: string) {
+function isEqual(lhs: string, rhs: string): boolean {
     return lhs === rhs;
 }

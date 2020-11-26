@@ -1,6 +1,6 @@
 import Block from "./block";
 
-export function render(query:string, block: Block) {
+export function render(query:string, block: Block): Element | null {
     const root = document.querySelector(query);
     if (root !== null) {
         root.appendChild(block.getContent());

@@ -63,7 +63,7 @@ export default class Login extends Sign {
                     const formData = getFormData(this.props.formClassName)
                     const auth = new AuthController();
                     auth.login(formData)
-                        .then((result: XMLHttpRequest): any => {
+                        .then((result: XMLHttpRequest): void => {
                             if (result.responseText === STATUS_TEXTS.OK) {
                                 auth.getUser()
                                     .then((result: XMLHttpRequest) => {
@@ -78,7 +78,7 @@ export default class Login extends Sign {
                                 }
                             }
                         })
-                        .catch((err: any) => {
+                        .catch((err: unknown) => {
                             console.log(err)
                         })
                 }
@@ -100,7 +100,7 @@ export default class Login extends Sign {
         super(props);
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         const auth = new AuthController();
         auth.getUser()
             .then((result: XMLHttpRequest) => {
@@ -111,7 +111,7 @@ export default class Login extends Sign {
             })
     }
 
-    redirectToChat(result: XMLHttpRequest, init = false) {
+    redirectToChat(result: XMLHttpRequest, init = false): void {
         if (result.status === 200) {
             const router = new Router();
             router.go(ROUTES.CHAT);
@@ -120,7 +120,7 @@ export default class Login extends Sign {
         }
     }
 
-    showUserMessage(message: string) {
+    showUserMessage(message: string): void {
         this.props.userMessageModal.text = message;
         this.props.userMessageModal.isShow = true;
         this.setProps(this.props)

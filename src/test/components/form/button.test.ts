@@ -12,5 +12,6 @@ beforeEach(() => {
 })
 
 test('render Button', () => {
+    // eslint-disable-next-line max-len
     expect(input.renderToString()).toBe(`<div _key="uniq0"><button type="submit" class="sign-form_button-block-form_submit">Зарегистрироваться</button></div>`)
 })

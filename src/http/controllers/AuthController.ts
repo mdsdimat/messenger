@@ -15,7 +15,7 @@ export default class AuthController {
     constructor() {
         this.requester = new HTTPTransport();
     }
-    signup(formData: FormData | undefined) {
+    signup(formData: FormData | undefined): Promise<unknown> {
         const url = HANDS.SIGNUP;
         const options: IOptions = {
             method: METHODS.POST,
@@ -30,7 +30,7 @@ export default class AuthController {
             })
     }
 
-    login(formData: FormData | undefined): any {
+    login(formData: FormData | undefined): Promise<unknown> {
         const url = HANDS.SIGNIN;
         const options: IOptions = {
             method: METHODS.POST,
@@ -42,14 +42,14 @@ export default class AuthController {
         return this.requester.post(url, options)
     }
 
-    getUser() {
+    getUser():Promise<unknown> {
          return this.requester.get(HANDS.GETUSER)
              .catch(error => {
                  console.log(error)
              })
     }
 
-    logout() {
+    logout(): Promise<unknown> {
         return this.requester.post(HANDS.LOGOUT);
     }
 }

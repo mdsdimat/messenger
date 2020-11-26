@@ -1,7 +1,7 @@
 import Validation, {IEvent, IField} from "./validation";
 
 export default class FormValidation extends Validation {
-    validate = (e: IEvent) => {
+    validate = (e: IEvent): boolean => {
         e.preventDefault();
         const target = e.target;
         const inputs = target.getElementsByTagName('input');

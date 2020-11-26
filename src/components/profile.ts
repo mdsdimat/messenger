@@ -5,7 +5,7 @@ import Form from "./form/form";
 
 export default class Profile extends Block {
     props: {
-        fields: [];
+        fields: Record<string, unknown>[];
         buttons: [];
         backButton: Record<string, unknown>,
         formClassName: string,
@@ -57,7 +57,7 @@ export default class Profile extends Block {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return '<main class="profile">\n' +
                     this.getBackButton() +
-            '    <img class="profile_image" src="{{photo}}">\n' +
+            '    <img class="profile_image" src="{{photo}}" alt="">\n' +
             '    <h1 class="profile_name">{{name}}</h1>\n' +
                     form.renderToString() +
             '   </main>';

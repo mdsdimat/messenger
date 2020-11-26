@@ -1,7 +1,7 @@
 import ErrorPage from "../components/errorComponent";
 
 export default class NotFoundPage extends ErrorPage {
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         props = {
             text: '404',
             desc: 'Не туда попали',

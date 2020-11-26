@@ -12,7 +12,7 @@ export interface IOptions {
 }
 
 export default class HTTPTransport {
-    get = (url: string, options: IOptions = {method: METHODS.GET}) => {
+    get = (url: string, options: IOptions = {method: METHODS.GET}): Promise<unknown> => {
         const queryUrl = url + queryStringify(options.data)
         return this.request(queryUrl, options)
             .then((result) => {
@@ -24,7 +24,7 @@ export default class HTTPTransport {
             })
     };
 
-    post = (url:string, options: IOptions = {method: METHODS.POST}) => {
+    post = (url:string, options: IOptions = {method: METHODS.POST}): Promise<unknown> => {
         return this.request(url, options)
             .then((result) => {
                 return result;
@@ -35,7 +35,7 @@ export default class HTTPTransport {
             })
     }
 
-    put = (url:string, options: IOptions) => {
+    put = (url:string, options: IOptions): Promise<unknown> => {
         options.method = METHODS.PUT;
         return this.request(url, options)
             .then((result) => {
@@ -47,7 +47,7 @@ export default class HTTPTransport {
             })
     }
 
-    delete = (url:string, options: IOptions) => {
+    delete = (url:string, options: IOptions): Promise<unknown> => {
         options.method = METHODS.DELETE;
         return this.request(url, options)
             .then((result) => {
@@ -58,7 +58,7 @@ export default class HTTPTransport {
                 throw new Error("Error");
             })
     }
-    request = (url: string, options: IOptions) => {
+    request = (url: string, options: IOptions): Promise<unknown> => {
         const {method, data} = options;
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();

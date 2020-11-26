@@ -12,7 +12,7 @@ const users = {
 jest.mock('../../../../http/services/transport', () => {
     return jest.fn().mockImplementation(() => {
         return {
-            post: (url: any, options: any) => {
+            post: (url: string, options: any) => {
                 return new Promise((resolve, reject) => {
                     const {data} = options;
                     const requestData = transformDataForRequest(data, options)
@@ -41,7 +41,7 @@ test('auth', async () => {
     formData.append('login', login);
     formData.append('password', 'passw');
     await auth.login(formData)
-        .then((res:any) => {
+        .then((res: XMLHttpRequest) => {
             expect(res.responseText).toEqual('OK');
         })
 })

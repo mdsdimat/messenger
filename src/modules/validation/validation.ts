@@ -29,7 +29,7 @@ export interface IField {
 
 export default abstract class Validation {
     props: IProps;
-    regMobile = new RegExp(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/);
+    regMobile = new RegExp(/^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/);
     regEmail = new RegExp(/\S+@\S+\.\S+/);
 
     constructor(props: IProps) {

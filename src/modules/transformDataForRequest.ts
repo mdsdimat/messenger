@@ -1,8 +1,8 @@
 import {IOptions} from "../http/services/transport";
 
-export function transformDataForRequest(data:any, options: IOptions) {
-    let contentType = null;
-    let sendData: any = data;
+export function transformDataForRequest(data: FormData, options: IOptions): { contentType: string, sendData: any} {
+    let contentType = '';
+    let sendData = {};
     if (options.headers && options.headers['Content-Type']) {
         contentType = options.headers['Content-Type'];
         if (contentType === 'application/json') {
@@ -17,7 +17,7 @@ export function transformDataForRequest(data:any, options: IOptions) {
 }
 
 function formDataToJson(formData: FormData) {
-    const object: any = {};
+    const object: Record<string, unknown> = {};
     formData.forEach((value, key) => {object[key] = value});
     return  JSON.stringify(object);
 }

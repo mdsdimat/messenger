@@ -1,4 +1,5 @@
 import Route from "./route";
+import Block from "../block";
 
 export const STORAGE = {
     SAVE_PATH: 'save_path'
@@ -6,7 +7,7 @@ export const STORAGE = {
 
 export default class Router {
     private static __instance: Router;
-    private routes: any[];
+    private routes: Route[];
     private history: History;
     private _currentRoute: Route|null;
     private readonly _rootQuery: string;
@@ -23,13 +24,13 @@ export default class Router {
         Router.__instance = this;
     }
 
-    use(pathname: string, block: any) {
+    use(pathname: string, block: any): Router {
         const route = new Route(pathname, block, {rootQuery: this._rootQuery});
         this.routes.push(route);
         return this;
     }
 
-    start() {
+    start(): void {
         window.onpopstate = (event: any) => {
             this._onRoute(event.currentTarget.location.pathname);
         };
@@ -37,7 +38,7 @@ export default class Router {
         this._onRoute(window.location.pathname);
     }
 
-    _onRoute(pathname: string) {
+    _onRoute(pathname: string): Block|null|undefined {
         const route = this.getRoute(pathname);
         if (!route) {
             return;
@@ -48,30 +49,30 @@ export default class Router {
         }
 
         this._currentRoute = route;
-        return route.render(route, pathname);
+        return route.render();
     }
 
-    go(pathname: string) {
+    go(pathname: string): Block|null|undefined {
         this.history.pushState({ prevUrl: this._currentRoute?this._currentRoute.getPathName():null }, "", pathname);
         localStorage.setItem(STORAGE.SAVE_PATH, pathname)
         return this._onRoute(pathname);
     }
 
-    back() {
+    back(): void {
         if (this.history.state.prevUrl) {
             this.go(this.history.state.prevUrl)
         }
     }
 
-    forward() {
+    forward(): void {
         window.history.forward();
     }
 
-    getRoute(pathname: string) {
+    getRoute(pathname: string): Route|undefined {
         return this.routes.find(route => route.match(pathname));
     }
 
-    getSavePath() {
+    getSavePath(): string|null {
         const path = localStorage.getItem(STORAGE.SAVE_PATH);
         if (path) {
             return path;

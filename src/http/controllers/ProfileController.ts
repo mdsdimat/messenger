@@ -11,7 +11,7 @@ export default class ProfileController {
     constructor() {
         this.requester = new HTTPTransport();
     }
-    setAvatar(formData: FormData) {
+    setAvatar(formData: FormData): Promise<unknown> {
         const url = HANDS.AVATAR;
         const options: IOptions = {
             method: METHODS.PUT,
@@ -23,7 +23,7 @@ export default class ProfileController {
             })
     }
 
-    changeProfile(formData: FormData) {
+    changeProfile(formData: FormData): Promise<unknown> {
         const url = HANDS.PROFILE;
         const options: IOptions = {
             method: METHODS.PUT,
