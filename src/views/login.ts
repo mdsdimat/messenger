@@ -8,7 +8,7 @@ import style from "../css/sign.css"
 
 
 export default class Login extends Sign {
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         props = {
             typeBackground: style.loginBackground,
             title: 'Вход',

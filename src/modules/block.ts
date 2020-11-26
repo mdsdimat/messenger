@@ -17,7 +17,7 @@ abstract class Block {
     private eventBus: () => EventBus;
     static _instances: Block[];
     static hydrate: () => void;
-    props: {[key: string]: unknown};
+    props: Record<string, unknown>;
     saveContent: object|null;
     static blockId: number;
 

@@ -6,7 +6,7 @@ import {ROUTES} from "../routes";
 import style from "../css/sign.css";
 
 export default class Signin extends Sign {
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         props = {
             typeBackground: style.signBackground,
             title: 'Регистрация',

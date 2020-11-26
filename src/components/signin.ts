@@ -6,16 +6,27 @@ import style from "../css/sign.css";
 import "../css/sign.css"
 
 export default class Sign extends Block {
-    props: any;
+    props: {
+        fields: [
+            Record<string, unknown>
+        ],
+        buttons: [],
+        userMessageModal: {
+            isShow: boolean,
+            button: Record<string, unknown>,
+            text?: string,
+        },
+        formClassName: string,
+    };
 
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
     getFields():string {
-        let renderFields: string = '';
+        let renderFields = '';
         if (this.props.fields) {
-            this.props.fields.forEach((field: any) => {
+            this.props.fields.forEach((field) => {
                 const input = new Input(field);
                 renderFields += `<div class="${style.signFormInputBlockLabel} js-valid">\n` +
                     `            <label class="${style.signFormLabel}">${field.label}\n` +
@@ -29,9 +40,9 @@ export default class Sign extends Block {
     }
 
     getButtons():string {
-        let renderFields: string = '';
+        let renderFields = '';
         if (this.props.buttons) {
-            this.props.buttons.forEach((field: any) => {
+            this.props.buttons.forEach((field) => {
                 const button = new Button(field);
                 renderFields += button.renderToString();
             });
@@ -39,7 +50,7 @@ export default class Sign extends Block {
         return renderFields;
     }
 
-    getUserMessage() {
+    getUserMessage(): string {
         if (this.props.userMessageModal.isShow) {
             const button = new Button(this.props.userMessageModal.button);
             return '    <div class="modal-wrapper">\n' +
@@ -56,7 +67,7 @@ export default class Sign extends Block {
         }
     }
 
-    getTemplate() {
+    getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return this.getUserMessage() +
             `<main class="${style.signForm} {{typeBackground}}">\n` +
@@ -64,4 +75,4 @@ export default class Sign extends Block {
                     form.renderToString() +
             '   </main>';
     }
-};
+}
