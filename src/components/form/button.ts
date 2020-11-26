@@ -3,10 +3,10 @@ import {IEvent} from "../../modules/validation/validation";
 
 export default class Button extends Block {
     props: {
-        action: () => {}
-    };
+        action?: () => Record<string, unknown>
+    }
 
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
@@ -14,12 +14,14 @@ export default class Button extends Block {
         if (block._element && this.props.action) {
             block._element.onclick = (e: IEvent) => {
                 e.preventDefault();
-                this.props.action();
+                if (this.props.action) {
+                    this.props.action()
+                }
             };
         }
     }
 
-    getTemplate() {
+    getTemplate(): string {
         return '<button type="{{type}}" class="{{className}}">{{text}}</button>';
     }
-};
+}

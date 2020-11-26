@@ -1,6 +1,6 @@
-interface IProps {
+export interface IProps {
     fields: IField[],
-    validation: [],
+    validation?: [],
 }
 
 interface ITarget {

@@ -21,7 +21,7 @@ router
     .use(ROUTES.CHAT, MainChat)
     .start();
 
-let path = router.getSavePath();
+const path = router.getSavePath();
 if (path) {
     router.go(path)
 } else {

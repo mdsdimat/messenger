@@ -10,7 +10,7 @@ export default class Router {
     private history: History;
     private _currentRoute: Route|null;
     private readonly _rootQuery: string;
-    constructor(rootQuery: string = '.app') {
+    constructor(rootQuery = '.app') {
         if (Router.__instance) {
             return Router.__instance;
         }

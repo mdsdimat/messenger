@@ -6,7 +6,7 @@ export default class FormValidation extends Validation {
         const target = e.target;
         const inputs = target.getElementsByTagName('input');
         let isValid = true;
-        for (let input of inputs) {
+        for (const input of inputs) {
             const searchedField: IField | undefined = this.getField(input.name);
             if (searchedField !== undefined) {
                 if (!this.doValidation(searchedField.validation, input)) {

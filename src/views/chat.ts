@@ -214,7 +214,7 @@ export default class MainChat extends Chat {
             .then((res: XMLHttpRequest) => {
                 const response = JSON.parse(res.response);
                 this.props.list.chats = [];
-                response.forEach((chat: any) => {
+                response.forEach((chat: Record<string, unknown>) => {
                     this.props.list.chats.push({
                         id: chat.id,
                         name: chat.title,

@@ -7,16 +7,16 @@ export default class Profile extends Block {
     props: {
         fields: [];
         buttons: [];
-        backButton: {},
+        backButton: Record<string, unknown>,
         formClassName: string,
         photo: string,
     };
 
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
-    getFields() {
+    getFields(): string {
         let renderField = '';
         this.props.fields.forEach((field: {type: string, placeholder: string}) => {
             const input = new Input(field);
@@ -39,7 +39,7 @@ export default class Profile extends Block {
         });
         return renderField;
     }
-    getButtons() {
+    getButtons(): string {
         let renderField = '';
         this.props.buttons.forEach((field: {buttonsClassName: string}) => {
             const button = new Button(field);
@@ -49,11 +49,11 @@ export default class Profile extends Block {
         });
         return renderField;
     }
-    getBackButton() {
+    getBackButton(): string {
         const button = new Button(this.props.backButton);
         return button.renderToString();
     }
-    getTemplate() {
+    getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return '<main class="profile">\n' +
                     this.getBackButton() +
@@ -62,4 +62,4 @@ export default class Profile extends Block {
                     form.renderToString() +
             '   </main>';
     }
-};
+}

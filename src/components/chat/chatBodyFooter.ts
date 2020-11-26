@@ -2,11 +2,11 @@ import Block from "../../modules/block";
 
 export default class ChatBodyFooter extends Block {
 
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
-    getTemplate() {
+    getTemplate(): string {
         return '<footer class="chat-body_footer">\n' +
             '                {{#if isShowMenu}}'+
             '                <div class="chat-body_footer_menu">\n' +
@@ -39,9 +39,9 @@ export default class ChatBodyFooter extends Block {
             '            </div>\n' +
             '            {{/if}}' +
             '            <div class="chat-body_footer_clip">\n' +
-            '                <img src="img/icons/clip.svg">\n' +
+            '                <img src="img/icons/clip.svg" alt="">\n' +
             '            </div>\n' +
             '            <input class="chat-body_footer_message" placeholder="Сообщение">\n' +
             '        </footer>';
     }
-};
+}

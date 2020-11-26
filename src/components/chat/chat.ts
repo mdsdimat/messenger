@@ -9,7 +9,7 @@ export default class Chat extends Block {
     props: {
         activeChat: number|null,
         list: {
-            chats: any[]
+            chats: Record<string, unknown>[]
         },
         body: {
             header: {
@@ -27,14 +27,14 @@ export default class Chat extends Block {
         }
     };
 
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
-    getCreateModelFields() {
-        let renderFields: string = '';
+    getCreateModelFields(): string {
+        let renderFields = '';
         if (this.props.createModal.fields) {
-            this.props.createModal.fields.forEach((field: any) => {
+            this.props.createModal.fields.forEach((field) => {
                 const input = new Input(field);
                 renderFields += `${input.renderToString()}`
             });
@@ -42,10 +42,10 @@ export default class Chat extends Block {
         return renderFields;
     }
 
-    getCreateModelButtons() {
-        let renderFields: string = '';
+    getCreateModelButtons(): string {
+        let renderFields = '';
         if (this.props.createModal.buttons) {
-            this.props.createModal.buttons.forEach((field: any) => {
+            this.props.createModal.buttons.forEach((field) => {
                 const button = new Button(field);
                 renderFields += button.renderToString();
             });
@@ -53,7 +53,7 @@ export default class Chat extends Block {
         return renderFields;
     }
 
-    getCreateChatModal() {
+    getCreateChatModal(): string {
         if (this.props.createModal.isShow) {
             const form = new Form(this.props.createModal, this.getCreateModelFields(), this.getCreateModelButtons());
             return '    <div class="modal-wrapper">\n' +
@@ -67,7 +67,7 @@ export default class Chat extends Block {
         }
     }
 
-    getDeleteModal() {
+    getDeleteModal(): string {
         if (this.props.deleteModal.isShow) {
             return '    <div class="modal-wrapper">\n' +
                 '        <div class="modal-window">\n' +
@@ -83,10 +83,10 @@ export default class Chat extends Block {
         }
     }
 
-    getDeleteModalButtons() {
-        let renderFields: string = '';
+    getDeleteModalButtons(): string {
+        let renderFields = '';
         if (this.props.deleteModal.buttons) {
-            this.props.deleteModal.buttons.forEach((field: any) => {
+            this.props.deleteModal.buttons.forEach((field) => {
                 const button = new Button(field);
                 renderFields += button.renderToString();
             });
@@ -94,7 +94,7 @@ export default class Chat extends Block {
         return renderFields;
     }
 
-    getTemplate() {
+    getTemplate(): string {
         const list = new ChatList(this.props.list);
         const body = new ChatBody(this.props.body);
         return '<main class="chat">' +
@@ -104,4 +104,4 @@ export default class Chat extends Block {
                 body.render() +
             '  </main>';
     }
-};
+}

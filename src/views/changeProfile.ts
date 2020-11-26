@@ -7,7 +7,7 @@ import ProfileController from "../http/controllers/ProfileController";
 import {HOST} from "../env";
 
 export default class ChangeProfile extends Profile {
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         props = {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',

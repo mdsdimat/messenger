@@ -8,13 +8,13 @@ export default class Form extends Block {
     fields: string;
     buttons: string;
 
-    constructor(props: {}, fields: string, buttons: string) {
+    constructor(props: Record<string, unknown>, fields: string, buttons: string) {
         super("div", props);
         this.fields = fields;
         this.buttons = buttons;
     }
 
-    initEvents(block: Block) {
+    initEvents(block: Block): void {
         if (block._element) {
             const validation = new FormValidation(this.props);
             block._element.onsubmit = (e: IEvent) => {
@@ -26,7 +26,7 @@ export default class Form extends Block {
         }
     }
 
-    getTemplate() {
+    getTemplate(): string {
         return '<form class="{{formClassName}}">\n' +
                         this.fields +
             '        <div class="{{buttonsClassName}}">\n' +
@@ -34,4 +34,4 @@ export default class Form extends Block {
             '        </div>\n' +
             '    </form>';
     }
-};
+}

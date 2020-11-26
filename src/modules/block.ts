@@ -21,7 +21,7 @@ abstract class Block {
     saveContent: object|null;
     static blockId: number;
 
-    protected constructor(tagName:string = "div", props:{} = {}) {
+    protected constructor(tagName = "div", props:{} = {}) {
         this._id = 'uniq' + parseInt(String(Block.blockId++));
         const eventBus = new EventBus();
         this._meta = {

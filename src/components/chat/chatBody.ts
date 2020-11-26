@@ -5,16 +5,16 @@ import ChatBodyFooter from "./chatBodyFooter";
 
 export default class ChatBody extends Block {
     props: {
-        header: {},
-        body: {},
-        footer: {},
+        header: Record<string, unknown>,
+        body: Record<string, unknown>,
+        footer: Record<string, unknown>,
     };
 
-    constructor(props: {}) {
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
-    getTemplate() {
+    getTemplate(): string {
         const header = new ChatBodyHeader(this.props.header);
         const body = new ChatBodyMain(this.props.body);
         const footer = new ChatBodyFooter(this.props.footer);
@@ -28,4 +28,4 @@ export default class ChatBody extends Block {
             '    {{/if}}\n' +
             '    </div>';
     }
-};
+}

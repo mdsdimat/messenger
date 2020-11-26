@@ -4,12 +4,16 @@ import HeaderMenuItem from "./headerMenuItem";
 import Button from "../form/button";
 
 export default class ChatBodyHeader extends Block {
-    props: any;
-    constructor(props: {}) {
+    props: {
+        isRename: boolean,
+        menu: [],
+        menuButton: Record<string, unknown>
+    };
+    constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
-    getHeaderInput() {
+    getHeaderInput(): string {
         if (this.props.isRename) {
             const input = new Input(this.props);
             return input.renderToString();
@@ -17,27 +21,27 @@ export default class ChatBodyHeader extends Block {
         return '';
     }
 
-    getMenu() {
+    getMenu(): string {
         let renderField = '';
-        this.props.menu.forEach((field: {}) => {
+        this.props.menu.forEach((field: Record<string, unknown>) => {
             const listItem = new HeaderMenuItem(field);
             renderField += listItem.renderToString();
         })
         return renderField;
     }
 
-    getMenuButton() {
+    getMenuButton(): string {
         const button = new Button(this.props.menuButton);
         return button.renderToString();
     }
 
-    getTemplate() {
+    getTemplate(): string {
         return '<header class="chat-body_header">\n' +
             '            {{#if isRename}}' +
                             this.getHeaderInput() +
             '            {{else}}' +
             '              <div class="chat-body_header_photo">\n' +
-            '                  <img src="img/icons/little_ellipse.svg">\n' +
+            '                  <img src="img/icons/little_ellipse.svg" alt="">\n' +
             '              </div>\n' +
             '              <div class="chat-body_header_desc">\n' +
             '                  <div class="chat_list_body_item_message_name">{{name}}</div>\n' +
@@ -56,4 +60,4 @@ export default class ChatBodyHeader extends Block {
             '            </div>\n' +
             '        </header>';
     }
-};
+}

@@ -17,7 +17,7 @@ export function transformDataForRequest(data:any, options: IOptions) {
 }
 
 function formDataToJson(formData: FormData) {
-    let object: any = {};
+    const object: any = {};
     formData.forEach((value, key) => {object[key] = value});
     return  JSON.stringify(object);
 }
