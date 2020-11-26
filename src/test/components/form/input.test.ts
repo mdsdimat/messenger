@@ -1,4 +1,3 @@
-/// <reference path="../../../../globals.d.ts" />
 import Input from "../../../components/form/input";
 
 let input: Input;

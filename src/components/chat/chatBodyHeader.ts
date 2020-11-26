@@ -1,5 +1,3 @@
-/// <reference path="../../../globals.d.ts" />
-
 import Block from "../../modules/block";
 import Input from "../form/input";
 import HeaderMenuItem from "./headerMenuItem";

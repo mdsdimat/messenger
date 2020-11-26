@@ -1,4 +1,3 @@
-/// <reference path="../../../globals.d.ts" />
 import Block from "../../modules/block";
 import {IEvent} from "../../modules/validation/validation";
 

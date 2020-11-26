@@ -1,5 +1,3 @@
-/// <reference path="../../../globals.d.ts" />
-
 import Block from "../../modules/block";
 import ChatList from "./chatList";
 import ChatBody from "./chatBody";

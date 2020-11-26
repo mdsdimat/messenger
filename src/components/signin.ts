@@ -1,4 +1,3 @@
-/// <reference path="../../globals.d.ts" />
 import Block from "../modules/block";
 import Input from "./form/input";
 import Button from "./form/button";
@@ -14,7 +13,6 @@ export default class Sign extends Block {
     }
 
     getFields():string {
-        console.log(style);
         let renderFields: string = '';
         if (this.props.fields) {
             this.props.fields.forEach((field: any) => {

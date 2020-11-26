@@ -1,5 +1,3 @@
-/// <reference path="../../../globals.d.ts" />
-
 import Block from "../../modules/block";
 
 export default class ChatBodyFooter extends Block {
