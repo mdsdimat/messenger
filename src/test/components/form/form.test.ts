@@ -15,5 +15,5 @@ test('render Form', () => {
         `<div _key="uniq0"><form class="js-form">\n` +
             `        <div class="modal-window_buttons">\n` +
             `        </div>\n` +
-            `    </form></div>adfasfasdfasd`)
+            `    </form></div>adfasfasdfa`)
 })
