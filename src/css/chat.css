@@ -260,8 +260,19 @@
   height: 54px;
   border-top: 1px solid #eaeaea;
   margin: 0 10px;
-  background: url("../img/icons/arrow_ellipse.svg") no-repeat center right;
   display: flex;
+}
+
+.chat-body_footer_send {
+  margin-left: auto;
+}
+
+.chat-body_footer_send-button {
+  width: 30px;
+  border: none;
+  background: url("../img/icons/arrow_ellipse.svg") no-repeat center right;
+  margin-top: 12px;
+  min-height: 30px;
 }
 
 .chat-body_footer_clip {
@@ -269,6 +280,11 @@
 }
 
 .chat-body_footer_message {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.chat-body_footer_message-input {
   margin-right: auto;
   height: 32px;
   margin-top: 11px;
@@ -280,12 +296,13 @@
   font-size: 12px;
   line-height: 12px;
   color: #999;
-  width: inherit;
+  width: 100%;
 }
 
 .chat-body_main {
   border-top: 1px solid #eaeaea;
   margin: 0 10px;
+  padding-bottom: 55px;
 }
 
 .chat-body_main_message {

@@ -10,3 +10,7 @@ export enum METHODS {
 export const STATUS_TEXTS = {
     OK: 'OK',
 };
+
+export const LOCAL_STORAGE = {
+    USER_ID: 'user_id'
+}

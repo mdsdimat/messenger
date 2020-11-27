@@ -6,7 +6,7 @@ export interface IOptions {
     headers?: {
         'Content-Type'?: string
     },
-    data?: FormData,
+    data?: FormData|Record<string, unknown>,
     timeout?: number,
     method: string,
 }

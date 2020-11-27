@@ -3,7 +3,7 @@ import {getFormData} from "../modules/scripts";
 import AuthController from "../http/controllers/AuthController";
 import Router from "../modules/routing/router";
 import {ROUTES} from "../routes";
-import {STATUS_TEXTS} from "../env";
+import {LOCAL_STORAGE, STATUS_TEXTS} from "../env";
 import style from "../css/sign.css"
 
 
@@ -113,6 +113,8 @@ export default class Login extends Sign {
 
     redirectToChat(result: XMLHttpRequest, init = false): void {
         if (result.status === 200) {
+            const response = JSON.parse(result.response);
+            localStorage.setItem(LOCAL_STORAGE.USER_ID, response.id);
             const router = new Router();
             router.go(ROUTES.CHAT);
         } else if (!init) {

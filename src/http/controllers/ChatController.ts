@@ -3,6 +3,7 @@ import {HOST, METHODS} from "../../env";
 
 const HANDS = {
     CHATS: `${HOST}/api/v2/chats`,
+    USERS: `${HOST}/api/v2/chats/users`,
 }
 
 export default class ChatController {
@@ -29,6 +30,18 @@ export default class ChatController {
         return this.requester.post(url, options)
     }
 
+    addUser(formData: Record<string, unknown>): Promise<unknown> {
+        const url = HANDS.USERS
+        const options: IOptions = {
+            method: METHODS.PUT,
+            data: formData,
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        return this.requester.put(url, options)
+    }
+
     deleteChat(id: string): Promise<unknown> {
         const url = HANDS.CHATS
         const formData = new FormData();
@@ -45,6 +58,14 @@ export default class ChatController {
 
     getChatUserList(id: string): Promise<unknown> {
         return this.requester.get(`${HOST}/api/v2/chats/${id}/users`)
+            .catch(error => {
+                //механизм вывода ошибок
+                console.log(error)
+            })
+    }
+
+    getChatToken(id: string): Promise<unknown> {
+        return this.requester.post(`${HOST}/api/v2/chats/token/${id}`)
             .catch(error => {
                 //механизм вывода ошибок
                 console.log(error)

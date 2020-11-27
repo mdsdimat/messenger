@@ -2,6 +2,7 @@ import Chat from "../components/chat/chat";
 import Router from "../modules/routing/router";
 import ChatController from "../http/controllers/ChatController";
 import {getFormData} from "../modules/scripts";
+import {LOCAL_STORAGE} from "../env";
 
 export default class MainChat extends Chat {
     constructor(props: Record<string, unknown>) {
@@ -12,6 +13,27 @@ export default class MainChat extends Chat {
                 chat.createChat(formData)
                     .then(() => {
                         this.props.createModal.isShow = false;
+                        this.setProps(this.props);
+                        this.getChatList();
+                    })
+                    .catch((err) => {
+                        //механизм вывода ошибк пользователю
+                        console.log(err)
+                    })
+            }
+        }
+
+        const addUser = () =>  {
+            const userId = <HTMLInputElement>document.getElementById('user_id')
+            if (userId && this.props.activeChat !== null) {
+                const sendData = {
+                    users: [userId.value],
+                    chatId: Number(this.props.activeChat)
+                }
+                const chat = new ChatController();
+                chat.addUser(sendData)
+                    .then(() => {
+                        this.props.addUserModal.isShow = false;
                         this.setProps(this.props);
                         this.getChatList();
                     })
@@ -69,6 +91,37 @@ export default class MainChat extends Chat {
                 ],
 
             },
+            addUserModal: {
+                isShow: false,
+                formClassName: 'js-form-add-modal',
+                fields: [
+                    {
+                        id: 'user_id',
+                        label: 'Пользователь',
+                        name: 'user',
+                        className: '',
+                        type: 'text',
+                    },
+                ],
+                buttonsClassName: 'modal-window_buttons',
+                buttons: [
+                    {
+                        type: 'submit',
+                        className: 'modal-window_buttons_error',
+                        text: 'Добавить',
+                        action: addUser
+                    },
+                    {
+                        className: 'modal-window_buttons_cancel',
+                        text: 'Закрыть',
+                        action: () => {
+                            this.props.createModal.isShow = false;
+                            this.setProps(this.props);
+                        }
+                    }
+                ],
+
+            },
             deleteModal: {
                 isShow: false,
                 buttons: [
@@ -91,20 +144,10 @@ export default class MainChat extends Chat {
             list: {
                 chats: [
                     {
-                        name: 'Андрей',
-                        text: 'Сообщение',
-                        time: '11:15',
-                    },
-                    {
                         name: 'Валера',
                         text: 'Как дела?',
                         time: '11:15',
                         count: 2,
-                    },
-                    {
-                        name: 'Сергей',
-                        text: 'Нормально',
-                        time: '11:15',
                     },
                 ],
                 profileButton: {
@@ -144,11 +187,13 @@ export default class MainChat extends Chat {
                             actions: {
                                 onclick: () => {
                                     if (this.props.activeChat !== null) {
-                                        const chat = new ChatController();
-                                        chat.getChatUserList(this.props.activeChat.toString())
-                                            .catch(err => {
-                                                console.log(err)
-                                            })
+                                        this.props.addUserModal.isShow = true;
+                                        this.setProps(this.props);
+                                        // const chat = new ChatController();
+                                        // chat.getChatUserList(this.props.activeChat.toString())
+                                        //     .catch(err => {
+                                        //         console.log(err)
+                                        //     })
                                     }
                                 }
                             }
@@ -174,23 +219,27 @@ export default class MainChat extends Chat {
                     ]
                 },
                 body: {
-                    messages: [
-                        {
-                            self: false,
-                            text: 'Привет! Смотри, тут всплыл интересный кусок лунной космической\n',
-                            time: '11:56'
-                        },
-                        {
-                            self: false,
-                            img: 'img/jonas-allert-Rpz-455NaQw-unsplash.jpg',
-                            time: '11:56'
-                        },
-                        {
-                            self: true,
-                            text: 'Круто!',
-                            time: '11:56'
+                    messages: []
+                },
+                footer: {
+                    message: {
+                        id: 'message',
+                        name: 'message',
+                        className: 'chat-body_footer_message-input',
+                        placeholder: 'Сообщение'
+                    },
+                    sendButton: {
+                        className: 'chat-body_footer_send-button',
+                        action: () => {
+                            const message = <HTMLInputElement>document.getElementById('message')
+                            if (message !== null && this.props.activeSocket !== null) {
+                                this.props.activeSocket.send(JSON.stringify({
+                                    content: message.value,
+                                    type: 'message',
+                                }));
+                            }
                         }
-                    ]
+                    }
                 }
             }
         };
@@ -199,11 +248,12 @@ export default class MainChat extends Chat {
 
     componentDidMount(): void {
         this.getChatList()
+
     }
 
     getChatList(): void {
-        const chat = new ChatController();
-        chat.getChats()
+        const chatController = new ChatController();
+        chatController.getChats()
             .then((res: XMLHttpRequest) => {
                 const response = JSON.parse(res.response);
                 this.props.list.chats = [];
@@ -216,6 +266,7 @@ export default class MainChat extends Chat {
                             onclick: (id: number) => {
                                 this.props.activeChat = id;
                                 this.setProps(this.props);
+                                this.startMessaging(chatController, id);
                             }
                         }
                     })
@@ -224,4 +275,70 @@ export default class MainChat extends Chat {
             })
     }
 
+    startMessaging(chatController: ChatController, id: number): void {
+        chatController.getChatToken(id.toString())
+            .then((res: XMLHttpRequest) => {
+                const response = JSON.parse(res.response);
+                this.props.activeToken = response.token;
+                this.props.activeSocket = this.createSocket(response.token);
+                this.setProps(this.props);
+            })
+    }
+
+    createSocket(token:number): WebSocket {
+        const userId = localStorage.getItem(LOCAL_STORAGE.USER_ID);
+        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${this.props.activeChat}/${token}`);
+
+        socket.addEventListener('open', () => {
+            console.log('Соединение установлено');
+
+            socket.send(JSON.stringify({
+                content: '0',
+                type: 'get old',
+            }));
+        });
+
+        socket.addEventListener('close', event => {
+            if (event.wasClean) {
+                console.log('Соединение закрыто чисто');
+            } else {
+                console.log('Обрыв соединения');
+            }
+
+            console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+        });
+
+        socket.addEventListener('message', event => {
+            this.getMessagesData(event.data);
+        });
+
+        socket.addEventListener('error', (event: any) => {
+            console.log('Ошибка', event.message);
+        });
+
+        return socket;
+    }
+
+    getMessagesData(stringData: string): void {
+        const data = JSON.parse(stringData);
+        if (Array.isArray(data)){
+            data.forEach(element => {
+                this.addMessage(element)
+            });
+        } else {
+            this.addMessage(data);
+        }
+        this.setProps(this.props);
+    }
+
+    addMessage(element: {user_id?: number, userId?: number, content: string, time: string }): void {
+        const date = new Date(element.time);
+        const userId = element.user_id?element.user_id:element.userId;
+        const message = {
+            self: userId === Number(localStorage.getItem(LOCAL_STORAGE.USER_ID)),
+            text: element.content,
+            time: `${date.getHours()}:${date.getMinutes()}`
+        }
+        this.props.body.body.messages.push(message)
+    }
 }

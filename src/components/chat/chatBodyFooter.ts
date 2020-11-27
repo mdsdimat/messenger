@@ -1,12 +1,20 @@
 import Block from "../../modules/block";
+import Input from "../form/input";
+import Button from "../form/button";
 
 export default class ChatBodyFooter extends Block {
+    props: {
+        message: Record<string, unknown>,
+        sendButton: Record<string, unknown>
+    }
 
     constructor(props: Record<string, unknown>) {
         super("div", props);
     }
 
     getTemplate(): string {
+        const input = new Input(this.props.message);
+        const button = new Button(this.props.sendButton);
         return '<footer class="chat-body_footer">\n' +
             '                {{#if isShowMenu}}'+
             '                <div class="chat-body_footer_menu">\n' +
@@ -41,7 +49,12 @@ export default class ChatBodyFooter extends Block {
             '            <div class="chat-body_footer_clip">\n' +
             '                <img src="img/icons/clip.svg" alt="">\n' +
             '            </div>\n' +
-            '            <input class="chat-body_footer_message" placeholder="Сообщение">\n' +
+            '            <div class="chat-body_footer_message">' +
+                            input.renderToString() +
+            '            </div>' +
+            '            <div class="chat-body_footer_send">' +
+                            button.renderToString() +
+            '            </div>' +
             '        </footer>';
     }
 }

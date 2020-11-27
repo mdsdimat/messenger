@@ -8,15 +8,25 @@ import Form from "../form/form";
 export default class Chat extends Block {
     props: {
         activeChat: number|null,
+        activeToken: string|null,
+        activeSocket: WebSocket|null;
         list: {
             chats: Record<string, unknown>[]
         },
         body: {
             header: {
                 isShowMenu: boolean
+            },
+            body: {
+                messages: Record<string, unknown>[]
             }
         },
         createModal: {
+            isShow: boolean,
+            fields: [],
+            buttons: [],
+        },
+        addUserModal: {
             isShow: boolean,
             fields: [],
             buttons: [],
@@ -67,6 +77,42 @@ export default class Chat extends Block {
         }
     }
 
+    getAddUserFields(): string {
+        let renderFields = '';
+        if (this.props.addUserModal.fields) {
+            this.props.addUserModal.fields.forEach((field) => {
+                const input = new Input(field);
+                renderFields += `${input.renderToString()}`
+            });
+        }
+        return renderFields;
+    }
+
+    getaddUserButtons(): string {
+        let renderFields = '';
+        if (this.props.addUserModal.buttons) {
+            this.props.addUserModal.buttons.forEach((field) => {
+                const button = new Button(field);
+                renderFields += button.renderToString();
+            });
+        }
+        return renderFields;
+    }
+
+    getAddUserModal(): string {
+        if (this.props.addUserModal.isShow) {
+            const form = new Form(this.props.addUserModal, this.getAddUserFields(), this.getaddUserButtons());
+            return '    <div class="modal-wrapper">\n' +
+                '        <div class="modal-window">\n' +
+                        form.renderToString() +
+                '        </div>\n' +
+                '        <div class="overlay"></div>\n' +
+                '    </div>\n';
+        } else {
+            return '';
+        }
+    }
+
     getDeleteModal(): string {
         if (this.props.deleteModal.isShow) {
             return '    <div class="modal-wrapper">\n' +
@@ -100,6 +146,7 @@ export default class Chat extends Block {
         return '<main class="chat">' +
                 this.getDeleteModal() +
                 this.getCreateChatModal() +
+                this.getAddUserModal() +
                 list.render()+
                 body.render() +
             '  </main>';
