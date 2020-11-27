@@ -52,10 +52,13 @@ export default class ViewProfile extends Profile {
                             .then((res: XMLHttpRequest) => {
                                 if (res.responseText === STATUS_TEXTS.OK) {
                                     router.go(ROUTES.LOGIN)
+                                } else {
+                                    router.go(ROUTES.LOGIN)
                                 }
                             })
                             .catch(err => {
                                 console.log(err)
+                                router.go(ROUTES.LOGIN)
                             })
                     }
                 },
