@@ -10,7 +10,7 @@ export default class Button extends Block {
         super("div", props);
     }
 
-    initEvents(block: Block) {
+    initEvents(block: Block): void {
         if (block._element && this.props.action) {
             block._element.onclick = (e: IEvent) => {
                 e.preventDefault();

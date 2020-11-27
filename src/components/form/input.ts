@@ -1,9 +1,12 @@
 import Block from "../../modules/block";
-import {IEvent} from "../../modules/validation/validation";
+import {IEvent, IField} from "../../modules/validation/validation";
 import InputValidation from "../../modules/validation/inputValidation";
 
 export default class Input extends Block {
-    props: any;
+    props: {
+        fields: IField[],
+        validation?: [],
+    };
 
     constructor(props: Record<string, unknown>) {
         super("div", props);
