@@ -1,91 +1,90 @@
 .sign-background {
-    width: 340px;
-    height: auto;
-    top: 15px;
-    padding-bottom: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 340px;
+  height: auto;
+  top: 15px;
+  padding-bottom: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .login-background {
-    width: 340px;
-    height: 460px;
-    top: 130px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 340px;
+  height: 460px;
+  top: 130px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .sign-form {
-    background: #FFFFFF;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-    border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
 }
 
 .sign-form_title {
-    text-align: center;
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 40px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
 
-    margin-top: 70px;
-    margin-bottom: 40px;
+  /* identical to box height, or 100% */
 
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 20px;
-    /* identical to box height, or 100% */
-
-    color: #1E1E1E;
+  color: #1e1e1e;
 }
 
 .sign-form_input-block_label {
-    margin: 0 30px 16px 30px;
-    color: #999999;
+  margin: 0 30px 16px 30px;
+  color: #999;
 }
 
 .sign-form_label {
-    font-size: 9px;
+  font-size: 9px;
 }
 
 .sign-form_input {
-    font-size: 13px;
-    border: none;
-    border-bottom: 1px solid #3369F3;
-    width: 100%;
+  font-size: 13px;
+  border: none;
+  border-bottom: 1px solid #3369f3;
+  width: 100%;
 }
 
 .sign-form_button-block {
-    text-align: center;
-    margin-top: 64px;
-    display: grid;
+  text-align: center;
+  margin-top: 64px;
+  display: grid;
 }
 
 .sign-form_button-block-form_submit {
-    width: 280px;
-    height: 37px;
-    background: #3369F3;
-    border-radius: 8px;
-    border: none;
-    color: #FFFFFF;
-    margin: auto;
+  width: 280px;
+  height: 37px;
+  background: #3369f3;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  margin: auto;
 }
 
 .sign-form_button-block-form_cancel {
-    font-size: 11px;
-    color: #3369F3;
-    background-color: #FFFFFF;
-    border: none;
-    margin-top: 14px;
+  font-size: 11px;
+  color: #3369f3;
+  background-color: #fff;
+  border: none;
+  margin-top: 14px;
 }
 
 .sign-form_input-error {
-    color: #FF2F2F;
+  color: #ff2f2f;
 }
 
 .sign-form_error-text {
-    height: 8px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 11px;
-    line-height: 8px;
-    color: #FF2F2F;
-    margin-top: 5px;
+  height: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 8px;
+  color: #ff2f2f;
+  margin-top: 5px;
 }

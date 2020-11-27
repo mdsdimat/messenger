@@ -1,114 +1,114 @@
 .profile {
-    text-align: center;
+  text-align: center;
 }
 
 .profile_image {
-    height: 60px;
-    width: 60px;
-    margin-top: 60px;
+  height: 60px;
+  width: 60px;
+  margin-top: 60px;
 }
 
 .profile_name {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 16px;
-    text-align: center;
-    color: #1E1E1E;
-    margin-top: 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  color: #1e1e1e;
+  margin-top: 20px;
 }
 
 .profile_form {
-    margin: 100px auto;
-    max-width: 400px;
+  margin: 100px auto;
+  max-width: 400px;
 }
 
 .field {
-    clear: both;
-    text-align: right;
-    margin: 10px;
-    padding-bottom: 10px;
-    display: flex;
+  clear: both;
+  text-align: right;
+  margin: 10px;
+  padding-bottom: 10px;
+  display: flex;
 }
 
 .field-border {
-    border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .field_label {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    color: #1E1E1E;
-    margin-right: auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  color: #1e1e1e;
+  margin-right: auto;
 }
 
 .field_input {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    text-align: right;
-    color: #999999;
-    border: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: right;
+  color: #999;
+  border: none;
 }
 
 .field_input-file {
-    display: none;
+  display: none;
 }
 
 .field_input-file-label {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    text-align: right;
-    color: #999999;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: right;
+  color: #999;
 }
 
 .profile_buttons {
-    text-align: left;
+  text-align: left;
 }
 
 .field_button {
-    width: 130px;
-    height: 13px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    color: #3369F3;
-    border: none;
-    background: #ffffff;
-    text-align: left;
-    margin: 10px 0;
+  width: 130px;
+  height: 13px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  color: #3369f3;
+  border: none;
+  background: #fff;
+  text-align: left;
+  margin: 10px 0;
 }
 
 .field_button-error {
-    color: #FF0000;
+  color: #f00;
 }
 
 .back {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: url("../img/icons/back_arrow_ellipse.svg") no-repeat center right;
-    width: 30px;
-    height: 30px;
-    border: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: url("../img/icons/back_arrow_ellipse.svg") no-repeat center right;
+  width: 30px;
+  height: 30px;
+  border: none;
 }
 
 .profile_form_save-button {
-    width: 280px;
-    height: 37px;
-    background: #3369F3;
-    border-radius: 8px;
-    border: none;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 13px;
-    text-align: center;
-    color: #FFFFFF;
+  width: 280px;
+  height: 37px;
+  background: #3369f3;
+  border-radius: 8px;
+  border: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  text-align: center;
+  color: #fff;
 }
