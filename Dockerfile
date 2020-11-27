@@ -1,9 +1,5 @@
 FROM node:14.13
 
-ENV http_proxy 'http://192.168.15.240:3128'
-
-ENV https_proxy 'http://192.168.15.240:3128'
-
 WORKDIR /usr/src/app
 
 COPY package*.json ./

@@ -115,7 +115,7 @@ export default class MainChat extends Chat {
                         className: 'modal-window_buttons_cancel',
                         text: 'Закрыть',
                         action: () => {
-                            this.props.createModal.isShow = false;
+                            this.props.addUserModal.isShow = false;
                             this.setProps(this.props);
                         }
                     }
@@ -142,14 +142,7 @@ export default class MainChat extends Chat {
                 ],
             },
             list: {
-                chats: [
-                    {
-                        name: 'Валера',
-                        text: 'Как дела?',
-                        time: '11:15',
-                        count: 2,
-                    },
-                ],
+                chats: [],
                 profileButton: {
                     className: 'chat_list_header_profile-link',
                     text: 'Профиль',
@@ -168,7 +161,7 @@ export default class MainChat extends Chat {
                 }
             },
             body: {
-                isShow: true,
+                isShow: false,
                 header: {
                     name: 'Андрей',
                     desc: 'Был в сети 5 минут назад',
@@ -265,6 +258,7 @@ export default class MainChat extends Chat {
                         actions: {
                             onclick: (id: number) => {
                                 this.props.activeChat = id;
+                                this.props.body.isShow = true;
                                 this.setProps(this.props);
                                 this.startMessaging(chatController, id);
                             }
@@ -322,7 +316,8 @@ export default class MainChat extends Chat {
     getMessagesData(stringData: string): void {
         const data = JSON.parse(stringData);
         if (Array.isArray(data)){
-            data.forEach(element => {
+            const reversed = data.reverse();
+            reversed.forEach(element => {
                 this.addMessage(element)
             });
         } else {

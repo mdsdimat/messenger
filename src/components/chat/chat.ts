@@ -1,9 +1,8 @@
 import Block from "../../modules/block";
 import ChatList from "./chatList";
 import ChatBody from "./chatBody";
-import Input from "../form/input";
 import Button from "../form/button";
-import Form from "../form/form";
+import Modal from "../modal";
 
 export default class Chat extends Block {
     props: {
@@ -14,6 +13,7 @@ export default class Chat extends Block {
             chats: Record<string, unknown>[]
         },
         body: {
+            isShow: boolean,
             header: {
                 isShowMenu: boolean
             },
@@ -41,73 +41,19 @@ export default class Chat extends Block {
         super("div", props);
     }
 
-    getCreateModelFields(): string {
-        let renderFields = '';
-        if (this.props.createModal.fields) {
-            this.props.createModal.fields.forEach((field) => {
-                const input = new Input(field);
-                renderFields += `${input.renderToString()}`
-            });
-        }
-        return renderFields;
-    }
-
-    getCreateModelButtons(): string {
-        let renderFields = '';
-        if (this.props.createModal.buttons) {
-            this.props.createModal.buttons.forEach((field) => {
-                const button = new Button(field);
-                renderFields += button.renderToString();
-            });
-        }
-        return renderFields;
-    }
-
     getCreateChatModal(): string {
         if (this.props.createModal.isShow) {
-            const form = new Form(this.props.createModal, this.getCreateModelFields(), this.getCreateModelButtons());
-            return '    <div class="modal-wrapper">\n' +
-                '        <div class="modal-window">\n' +
-                            form.renderToString() +
-                '        </div>\n' +
-                '        <div class="overlay"></div>\n' +
-                '    </div>\n';
+            const modal = new Modal(this.props.createModal)
+            return modal.renderToString();
         } else {
             return '';
         }
     }
 
-    getAddUserFields(): string {
-        let renderFields = '';
-        if (this.props.addUserModal.fields) {
-            this.props.addUserModal.fields.forEach((field) => {
-                const input = new Input(field);
-                renderFields += `${input.renderToString()}`
-            });
-        }
-        return renderFields;
-    }
-
-    getaddUserButtons(): string {
-        let renderFields = '';
-        if (this.props.addUserModal.buttons) {
-            this.props.addUserModal.buttons.forEach((field) => {
-                const button = new Button(field);
-                renderFields += button.renderToString();
-            });
-        }
-        return renderFields;
-    }
-
     getAddUserModal(): string {
         if (this.props.addUserModal.isShow) {
-            const form = new Form(this.props.addUserModal, this.getAddUserFields(), this.getaddUserButtons());
-            return '    <div class="modal-wrapper">\n' +
-                '        <div class="modal-window">\n' +
-                        form.renderToString() +
-                '        </div>\n' +
-                '        <div class="overlay"></div>\n' +
-                '    </div>\n';
+            const modal = new Modal(this.props.addUserModal)
+            return modal.renderToString();
         } else {
             return '';
         }
