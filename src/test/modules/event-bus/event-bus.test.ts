@@ -1,4 +1,4 @@
-import EventBus from "../../../modules/event-bus";
+import EventBus from "modules/Event-bus";
 
 let eventBus: EventBus;
 let testObj: {count: number};

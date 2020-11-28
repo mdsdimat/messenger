@@ -59,6 +59,7 @@
     "@types/node": "14.11.11",
     "autoprefixer": "10.0.1",
     "handlebars": "4.7.6",
+    "modules": "^0.4.0",
     "postcss-cli": "8.1.0",
     "postcss-scss": "3.0.2"
   }

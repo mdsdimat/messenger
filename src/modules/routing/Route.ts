@@ -1,5 +1,5 @@
-import Block from "../block";
-import {render} from "../scripts"
+import {render} from "modules/scripts";
+import Block from "modules/Block";
 
 interface IProps {
     rootQuery: string
@@ -45,7 +45,11 @@ export default class Route {
 
     render(): Block|null|undefined {
         if (!this._block) {
-            this._block = new this._blockClass();
+            if (typeof this._blockClass === "function") {
+                this._block = new this._blockClass();
+            } else if (typeof this._blockClass === "object") {
+                this._block = this._blockClass;
+            }
             if (this._block) {
                 render(this._props.rootQuery, this._block);
             }

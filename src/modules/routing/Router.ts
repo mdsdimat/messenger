@@ -1,5 +1,6 @@
-import Route from "./route";
-import Block from "../block";
+import Route from "modules/routing/Route";
+import Block from "modules/Block";
+
 
 export const STORAGE = {
     SAVE_PATH: 'save_path'

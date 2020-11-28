@@ -1,6 +1,6 @@
 import AuthController from "../../../../http/controllers/AuthController";
-import {transformDataForRequest} from "../../../../modules/transformDataForRequest";
-import {STATUS_TEXTS} from "../../../../env";
+import {STATUS_TEXTS} from "modules/constants";
+import {transformDataForRequest} from "modules/transformDataForRequest";
 
 let auth: AuthController;
 let formData: FormData;
@@ -9,7 +9,7 @@ const users = {
     login: 'login25435234'
 };
 
-jest.mock('../../../../http/services/transport', () => {
+jest.mock('http/services/transport', () => {
     return jest.fn().mockImplementation(() => {
         return {
             post: (url: string, options: any) => {

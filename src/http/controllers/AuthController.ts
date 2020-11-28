@@ -1,7 +1,7 @@
 import HTTPTransport, {
     IOptions
 } from "../services/transport";
-import {HOST, METHODS} from "../../env";
+import {HOST, METHODS} from "modules/constants";
 
 const HANDS = {
     SIGNUP: `${HOST}/api/v2/auth/signup`,

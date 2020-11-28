@@ -1,6 +1,6 @@
-import Router from "../../../modules/routing/router";
-import NotFoundPage from "../../../views/404";
-import {ROUTES} from "../../../routes";
+import Router from "modules/routing/Router";
+import {ROUTES} from "modules/constants";
+import {NotFoundPage} from "views/404";
 
 let router: Router;
 

@@ -1,13 +1,13 @@
-import Sign from "../components/signin";
-import Router from "../modules/routing/router";
-import {getFormData} from "../modules/scripts";
-import AuthController from "../http/controllers/AuthController";
-import {ROUTES} from "../routes";
-import style from "../css/sign.css";
+import Sign from "components/Signin";
+import Router from "modules/routing/Router";
+import AuthController from "http/controllers/AuthController";
+import style from "css/sign.css";
+import {ROUTES} from "modules/constants";
+import {getFormData} from "modules/scripts";
 
 export default class Signin extends Sign {
-    constructor(props: Record<string, unknown>) {
-        props = {
+    constructor() {
+        const props = {
             typeBackground: style.signBackground,
             title: 'Регистрация',
             formClassName: 'js-form',

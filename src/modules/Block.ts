@@ -1,6 +1,6 @@
-import EventBus from "./event-bus";
-import {render} from "./scripts";
 import Handlebars from 'handlebars';
+import {render} from "modules/scripts";
+import EventBus from "modules/Event-bus";
 abstract class Block {
     static EVENTS = {
         INIT: "init",
@@ -165,6 +165,17 @@ abstract class Block {
     }
 
     abstract getTemplate():string
+
+    renderElement = (elements: Record<string, unknown>[], ElementClass: any) => {
+        let renderFields = '';
+        if (elements) {
+            elements.forEach((field) => {
+                const el = new ElementClass(field);
+                renderFields += el.renderToString();
+            });
+        }
+        return renderFields;
+    };
 }
 
 Block.blockId = 0;

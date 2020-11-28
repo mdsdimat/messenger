@@ -1,12 +1,7 @@
-import ErrorPage from "../components/errorComponent";
+import ErrorPage from "components/EerrorComponent";
 
-export default class ServerErrorPage extends ErrorPage {
-    constructor(props: Record<string, unknown>) {
-        props = {
-            text: '500',
-            desc: 'Мы уже фиксим',
-            linkText: 'Назад к чатам'
-        };
-        super(props);
-    }
-}
+export const ServerErrorPage = new ErrorPage({
+    text: '500',
+    desc: 'Мы уже фиксим',
+    linkText: 'Назад к чатам'
+})

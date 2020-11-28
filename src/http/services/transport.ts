@@ -1,6 +1,6 @@
-import {queryStringify} from "../../modules/queryStringify";
-import {transformDataForRequest} from "../../modules/transformDataForRequest";
-import {METHODS} from "../../env";
+import {METHODS} from "modules/constants";
+import {queryStringify} from "modules/queryStringify";
+import {transformDataForRequest} from "modules/transformDataForRequest";
 
 export interface IOptions {
     headers?: {

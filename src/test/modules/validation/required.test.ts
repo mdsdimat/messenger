@@ -1,4 +1,4 @@
-import InputValidation from "../../../modules/validation/inputValidation";
+import InputValidation from "modules/validation/InputValidation";
 
 let validation: InputValidation;
 beforeEach(() => {

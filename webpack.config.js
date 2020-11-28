@@ -8,6 +8,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: {
+        modules: [path.resolve(__dirname, 'src'), 'node_modules'],
         extensions: ['.ts', '.js', '.json'],
         alias: {
             'handlebars' : 'handlebars/dist/handlebars.js'

@@ -1,14 +1,14 @@
-import Router from "./modules/routing/router";
-import Signin from './views/signin';
-import Login from "./views/login";
-import NotFoundPage from "./views/404";
-import ServerErrorPage from "./views/500";
-import ViewProfile from "./views/profile";
-import ChangeProfile from "./views/changeProfile";
-import MainChat from "./views/chat";
-import {ROUTES} from "./routes";
+import {ROUTES} from "modules/constants";
+import MainChat from "views/Chat";
+import ChangeProfile from "views/ChangeProfile";
+import ViewProfile from "views/Profile";
+import {ServerErrorPage} from "views/500";
+import {NotFoundPage} from "views/404";
+import Login from "views/Login";
+import Signin from "views/Signin";
+import Router from "modules/routing/Router";
 
-const router = new Router(".app");
+const router = new Router('.app');
 
 router
     .use('#/', Signin)
@@ -25,7 +25,7 @@ const path = router.getSavePath();
 if (path) {
     router.go(path)
 } else {
-    router.go("#/");
+    router.go('#/');
 }
 
 

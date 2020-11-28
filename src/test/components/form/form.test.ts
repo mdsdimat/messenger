@@ -1,4 +1,4 @@
-import Form from "../../../components/form/form";
+import Form from "components/form/Form";
 
 let input: Form;
 
@@ -12,8 +12,10 @@ beforeEach(() => {
 
 test('render Form', () => {
     expect(input.renderToString()).toBe(
-        `<div _key="uniq0"><form class="js-form">\n` +
-            `        <div class="modal-window_buttons">\n` +
-            `        </div>\n` +
-            `    </form></div>`)
+        `<div _key="uniq0"><form class="js-form">
+                        
+                    <div class="modal-window_buttons">
+                        
+                    </div>
+                </form></div>`)
 })

@@ -1,13 +1,12 @@
-import Profile from "../components/profile";
-import AuthController from "../http/controllers/AuthController";
-import Router from "../modules/routing/router";
-import {ROUTES} from "../routes";
-import {STATUS_TEXTS} from "../env";
+import Profile from "components/Profile";
+import AuthController from "http/controllers/AuthController";
+import Router from "modules/routing/Router";
+import {ROUTES, STATUS_TEXTS} from "modules/constants";
 
 export default class ViewProfile extends Profile {
-    constructor(props: Record<string, unknown>) {
+    constructor() {
         const router = new Router();
-        props = {
+        const props = {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
             backButton: {

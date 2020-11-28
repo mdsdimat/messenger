@@ -11,7 +11,11 @@
     "noUnusedParameters": true,
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "src/*"]
+    }
   },
   "exclude": [
     "src/test"

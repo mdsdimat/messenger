@@ -1,4 +1,5 @@
-import Button from "../../../components/form/button";
+import Button from "components/form/Button";
+
 
 let input: Button;
 

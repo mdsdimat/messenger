@@ -1,4 +1,5 @@
-import Validation, {IEvent, IField} from "./validation";
+import Validation, {IEvent, IField} from "modules/validation/Validation";
+
 
 export default class FormValidation extends Validation {
     validate = (e: IEvent): boolean => {

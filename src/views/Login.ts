@@ -1,15 +1,14 @@
-import Sign from "../components/signin";
-import {getFormData} from "../modules/scripts";
-import AuthController from "../http/controllers/AuthController";
-import Router from "../modules/routing/router";
-import {ROUTES} from "../routes";
-import {LOCAL_STORAGE, STATUS_TEXTS} from "../env";
-import style from "../css/sign.css"
+import Sign from "components/Signin";
+import {getFormData} from "modules/scripts";
+import AuthController from "http/controllers/AuthController";
+import Router from "modules/routing/Router";
+import style from "css/sign.css"
+import {LOCAL_STORAGE, ROUTES, STATUS_TEXTS} from "modules/constants";
 
 
 export default class Login extends Sign {
-    constructor(props: Record<string, unknown>) {
-        props = {
+    constructor() {
+        const props = {
             typeBackground: style.loginBackground,
             title: 'Вход',
             formClassName: 'js-form',

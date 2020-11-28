@@ -1,6 +1,6 @@
-import Block from "../../modules/block";
-import Button from "../form/button";
-import ChatListItem from "./chatListItem";
+import ChatListItem from "components/chat/ChatListItem";
+import Button from "components/form/Button";
+import Block from "modules/Block";
 
 export default class ChatList extends Block {
     props: {
@@ -8,6 +8,7 @@ export default class ChatList extends Block {
         createChatButton: Record<string, unknown>,
         chats: []
     };
+
     constructor(props: Record<string, unknown>) {
         super("div", props);
     }
@@ -32,19 +33,19 @@ export default class ChatList extends Block {
     }
 
     getTemplate(): string {
-        return '<div class="chat_list">\n' +
-            '        <header class="chat_list_header">\n' +
-            '            <div class="flex-container">\n' +
-                            this.getProfileButton() +
-                            this.getCreateChatButton() +
-            '            </div>\n' +
-            '            <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">\n' +
-            '        </header>\n' +
-            '        <div class="chat_list_body">\n' +
-            '            <ul class="chat_list_body_common">\n' +
-                            this.getChatsList() +
-            '            </ul>\n' +
-            '        </div>\n' +
-            '    </div>';
+        return `<div class="chat_list">
+                    <header class="chat_list_header">
+                        <div class="flex-container">
+                            ${this.getProfileButton()}
+                            ${this.getCreateChatButton()}
+                        </div>
+                        <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">
+                    </header>
+                    <div class="chat_list_body">
+                        <ul class="chat_list_body_common">
+                            ${this.getChatsList()}
+                        </ul>
+                    </div>
+                </div>`;
     }
 }

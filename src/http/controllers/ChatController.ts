@@ -1,5 +1,6 @@
-import HTTPTransport, {IOptions} from "../services/transport";
-import {HOST, METHODS} from "../../env";
+
+import HTTPTransport, {IOptions} from "http/services/transport";
+import {HOST, METHODS} from "modules/constants";
 
 const HANDS = {
     CHATS: `${HOST}/api/v2/chats`,

@@ -1,14 +1,13 @@
-import Profile from "../components/profile";
-import Router from "../modules/routing/router";
-import {ROUTES} from "../routes";
-import AuthController from "../http/controllers/AuthController";
-import {getFormData} from "../modules/scripts";
-import ProfileController from "../http/controllers/ProfileController";
-import {HOST} from "../env";
+import Profile from "components/Profile";
+import Router from "modules/routing/Router";
+import {HOST, ROUTES} from "modules/constants";
+import {getFormData} from "modules/scripts";
+import AuthController from "http/controllers/AuthController";
+import ProfileController from "http/controllers/ProfileController";
 
 export default class ChangeProfile extends Profile {
-    constructor(props: Record<string, unknown>) {
-        props = {
+    constructor() {
+        const props = {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
             backButton: {

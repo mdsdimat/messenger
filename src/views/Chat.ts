@@ -1,11 +1,11 @@
-import Chat from "../components/chat/chat";
-import Router from "../modules/routing/router";
-import ChatController from "../http/controllers/ChatController";
-import {getFormData} from "../modules/scripts";
-import {LOCAL_STORAGE} from "../env";
+import {LOCAL_STORAGE} from "modules/constants";
+import Chat from "components/chat/Chat";
+import {getFormData} from "modules/scripts";
+import ChatController from "http/controllers/ChatController";
+import Router from "modules/routing/Router";
 
 export default class MainChat extends Chat {
-    constructor(props: Record<string, unknown>) {
+    constructor() {
         const createChat = () =>  {
             const formData = getFormData('js-form-create-modal');
             if (formData) {
@@ -22,7 +22,6 @@ export default class MainChat extends Chat {
                     })
             }
         }
-
         const addUser = () =>  {
             const userId = <HTMLInputElement>document.getElementById('user_id')
             if (userId && this.props.activeChat !== null) {
@@ -43,7 +42,6 @@ export default class MainChat extends Chat {
                     })
             }
         }
-
         const deleteChat = () => {
             if (this.props.activeChat !== null) {
                 const chat = new ChatController();
@@ -58,8 +56,7 @@ export default class MainChat extends Chat {
                     })
             }
         }
-
-        props = {
+        const props = {
             activeChat: null,
             createModal: {
                 isShow: false,

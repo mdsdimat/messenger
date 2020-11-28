@@ -1,8 +1,8 @@
-import Block from "../../modules/block";
-import ChatList from "./chatList";
-import ChatBody from "./chatBody";
-import Button from "../form/button";
-import Modal from "../modal";
+import Modal from "components/Modal";
+import Button from "components/form/Button";
+import ChatBody from "components/chat/ChatBody";
+import ChatList from "components/chat/ChatList";
+import Block from "modules/Block";
 
 export default class Chat extends Block {
     props: {
@@ -61,15 +61,15 @@ export default class Chat extends Block {
 
     getDeleteModal(): string {
         if (this.props.deleteModal.isShow) {
-            return '    <div class="modal-wrapper">\n' +
-                '        <div class="modal-window">\n' +
-                '            <p class="modal-window_title">Вы хотите удалить чат</p>\n' +
-                '            <div class="modal-window_buttons">\n' +
-                                this.getDeleteModalButtons() +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="overlay"></div>\n' +
-                '    </div>\n';
+            return `    <div class="modal-wrapper">
+                        <div class="modal-window">
+                            <p class="modal-window_title">Вы хотите удалить чат</p>
+                            <div class="modal-window_buttons">
+                                ${this.getDeleteModalButtons()}
+                            </div>
+                        </div>
+                        <div class="overlay"></div>
+                    </div>`;
         } else {
             return '';
         }

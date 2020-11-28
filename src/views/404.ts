@@ -1,12 +1,7 @@
-import ErrorPage from "../components/errorComponent";
+import ErrorPage from "components/EerrorComponent";
 
-export default class NotFoundPage extends ErrorPage {
-    constructor(props: Record<string, unknown>) {
-        props = {
-            text: '404',
-            desc: 'Не туда попали',
-            linkText: 'Назад к чатам'
-        };
-        super(props);
-    }
-}
+export const NotFoundPage = new ErrorPage({
+    text: '404',
+    desc: 'Не туда попали',
+    linkText: 'Назад к чатам'
+})
