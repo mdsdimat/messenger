@@ -1,22 +1,24 @@
-import Block from "../modules/block";
-import Input from "./form/input";
-import Button from "./form/button";
-import Form from "./form/form";
-import style from "../css/sign.css";
-import "../css/sign.css"
+import Input from "components/form/Input";
+import Button from "components/form/Button";
+import Form from "components/form/Form";
+import style from "css/sign.css";
+import "css/sign.css"
+import Block from "modules/Block";
 
 export default class Sign extends Block {
     props: {
-        fields: [
-            Record<string, unknown>
-        ],
-        buttons: [],
+        typeBackground: string,
+        title: string,
+        formClassName: string,
+        fields: Record<string, unknown>[],
+        buttonsClassName: string,
+        buttons: Record<string, unknown>[],
+        actions: Record<string, unknown>,
         userMessageModal: {
             isShow: boolean,
             button: Record<string, unknown>,
             text?: string,
         },
-        formClassName: string,
     };
 
     constructor(props: Record<string, unknown>) {
@@ -28,40 +30,34 @@ export default class Sign extends Block {
         if (this.props.fields) {
             this.props.fields.forEach((field) => {
                 const input = new Input(field);
-                renderFields += `<div class="${style.signFormInputBlockLabel} js-valid">\n` +
-                    `            <label class="${style.signFormLabel}">${field.label}\n` +
-                                    input.renderToString() +
-                    '            </label>\n' +
-                    `            <div class="${style.signFormErrorText} js-error-message" hidden></div>\n` +
-                    '        </div>'
+                renderFields += `
+                            <div class="${style.signFormInputBlockLabel} js-valid">
+                                <label class="${style.signFormLabel}">${field.label}
+                                    ${input.renderToString()}
+                                </label>
+                                <div class="${style.signFormErrorText} js-error-message" hidden></div>
+                            </div>`
             });
         }
         return renderFields;
     }
 
     getButtons():string {
-        let renderFields = '';
-        if (this.props.buttons) {
-            this.props.buttons.forEach((field) => {
-                const button = new Button(field);
-                renderFields += button.renderToString();
-            });
-        }
-        return renderFields;
+        return this.renderElement(this.props.buttons, Button)
     }
 
     getUserMessage(): string {
         if (this.props.userMessageModal.isShow) {
             const button = new Button(this.props.userMessageModal.button);
-            return '    <div class="modal-wrapper">\n' +
-                '        <div class="modal-window">\n' +
-                '            <p class="modal-window_title">{{this.userMessageModal.text}}</p>\n' +
-                '            <div class="modal-window_buttons">\n' +
-                                button.renderToString() +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="overlay"></div>\n' +
-                '    </div>\n';
+            return ` <div class="modal-wrapper">
+                        <div class="modal-window">
+                            <p class="modal-window_title">{{this.userMessageModal.text}}</p>
+                            <div class="modal-window_buttons">
+                                ${button.renderToString()}
+                            </div>
+                        </div>
+                        <div class="overlay"></div>
+                    </div>`;
         } else {
             return '';
         }
@@ -70,9 +66,9 @@ export default class Sign extends Block {
     getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
         return this.getUserMessage() +
-            `<main class="${style.signForm} {{typeBackground}}">\n` +
-            `    <div class="${style.signFormTitle}">{{title}}</div>\n` +
-                    form.renderToString() +
-            '   </main>';
+            `<main class="${style.signForm} {{typeBackground}}">
+                <div class="${style.signFormTitle}">{{title}}</div>
+                    ${form.renderToString()}
+            </main>`;
     }
 }

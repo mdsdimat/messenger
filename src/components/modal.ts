@@ -1,7 +1,8 @@
-import Block from "../modules/block";
-import Form from "./form/form";
-import Input from "./form/input";
-import Button from "./form/button";
+import Input from "components/form/Input";
+import Button from "components/form/Button";
+import Form from "components/form/Form";
+import Block from "modules/Block";
+
 
 export default class Modal extends Block {
     props: {
@@ -14,35 +15,21 @@ export default class Modal extends Block {
     }
 
     getFields(): string {
-        let renderFields = '';
-        if (this.props.fields) {
-            this.props.fields.forEach((field) => {
-                const input = new Input(field);
-                renderFields += `${input.renderToString()}`
-            });
-        }
-        return renderFields;
+        return this.renderElement(this.props.fields, Input)
     }
 
     getButtons(): string {
-        let renderFields = '';
-        if (this.props.buttons) {
-            this.props.buttons.forEach((field) => {
-                const button = new Button(field);
-                renderFields += button.renderToString();
-            });
-        }
-        return renderFields;
+        return this.renderElement(this.props.buttons, Button)
     }
 
     getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
-        return '    <div class="modal-wrapper">\n' +
-            '        <div class="modal-window">\n' +
-                        form.renderToString() +
-            '        </div>\n' +
-            '        <div class="overlay"></div>\n' +
-            '    </div>\n';
+        return `<div class="modal-wrapper">
+                    <div class="modal-window">
+                        ${form.renderToString()}
+                    </div>
+                    <div class="overlay"></div>
+               </div>`;
     }
 
 }

@@ -1,7 +1,7 @@
-import Block from "../modules/block";
-import Input from "./form/input";
-import Button from "./form/button";
-import Form from "./form/form";
+import Input from "components/form/Input";
+import Button from "components/form/Button";
+import Form from "components/form/Form";
+import Block from "modules/Block";
 
 export default class Profile extends Block {
     props: {
@@ -21,20 +21,21 @@ export default class Profile extends Block {
         this.props.fields.forEach((field: {type: string, placeholder: string}) => {
             const input = new Input(field);
             if (field.type === 'file') {
-                renderField += '' +
-                    '        <div class="field field-border js-valid">\n' +
-                    '            <label class="field_label">Аватар</label>\n' +
-                    '            <label class="field_input-file-label">\n' +
-                                     input.renderToString() +
-                    '                Выберете файл\n' +
-                    '            </label>\n' +
-                    '        </div>'
+                renderField += `
+                            <div class="field field-border js-valid">
+                                <label class="field_label">Аватар</label>
+                                <label class="field_input-file-label">
+                                     ${input.renderToString()}
+                                    Выберете файл
+                                </label>
+                            </div>`
             } else {
-                renderField += '<div class="field field-border js-valid">\n' +
-                    '            <label class="field_label">' + field.placeholder + '</label>\n' +
-                                 input.renderToString() +
-                    '            <div class="field_label input-error js-error-message" hidden></div>\n' +
-                    '        </div>';
+                renderField += `
+                           <div class="field field-border js-valid">
+                                <label class="field_label">${field.placeholder}</label>
+                                 ${input.renderToString()}
+                                <div class="field_label input-error js-error-message" hidden></div>
+                            </div>`;
             }
         });
         return renderField;
@@ -43,9 +44,9 @@ export default class Profile extends Block {
         let renderField = '';
         this.props.buttons.forEach((field: {buttonsClassName: string}) => {
             const button = new Button(field);
-            renderField += `<div ${field.buttonsClassName ? `class="${field.buttonsClassName}"` : ''}>\n` +
-                                button.renderToString() +
-                '           </div>\n';
+            renderField += `<div ${field.buttonsClassName ? 'class="${field.buttonsClassName}"' : ""}>
+                                ${button.renderToString()}
+                           </div>`;
         });
         return renderField;
     }
@@ -55,11 +56,11 @@ export default class Profile extends Block {
     }
     getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
-        return '<main class="profile">\n' +
-                    this.getBackButton() +
-            '    <img class="profile_image" src="{{photo}}" alt="">\n' +
-            '    <h1 class="profile_name">{{name}}</h1>\n' +
-                    form.renderToString() +
-            '   </main>';
+        return `<main class="profile">
+                    ${this.getBackButton()}
+                <img class="profile_image" src="{{photo}}" alt="">
+                <h1 class="profile_name">{{name}}</h1>
+                    ${form.renderToString()}
+               </main>`;
     }
 }

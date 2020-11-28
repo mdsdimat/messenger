@@ -1,6 +1,6 @@
-import Block from "../../modules/block";
-import Input from "../form/input";
-import Button from "../form/button";
+import Input from "components/form/Input";
+import Button from "components/form/Button";
+import Block from "modules/Block";
 
 export default class ChatBodyFooter extends Block {
     props: {
@@ -15,46 +15,46 @@ export default class ChatBodyFooter extends Block {
     getTemplate(): string {
         const input = new Input(this.props.message);
         const button = new Button(this.props.sendButton);
-        return '<footer class="chat-body_footer">\n' +
-            '                {{#if isShowMenu}}'+
-            '                <div class="chat-body_footer_menu">\n' +
-            '                <ul class="chat-body_menu-list">\n' +
-            '                    <li>\n' +
-            '                        <div class="chat-body_menu-list_item">\n' +
-            '                            <div class="chat-body_menu-list_img">\n' +
-            '                                <img src="img/icons/picture.svg">\n' +
-            '                            </div>\n' +
-            '                            <div class="chat-body_menu-list_text">Изображение</div>\n' +
-            '                        </div>\n' +
-            '                    </li>\n' +
-            '                    <li>\n' +
-            '                        <div class="chat-body_menu-list_item">\n' +
-            '                            <div class="chat-body_menu-list_img">\n' +
-            '                                <img src="img/icons/file.svg">\n' +
-            '                            </div>\n' +
-            '                            <div class="chat-body_menu-list_text">Файл</div>\n' +
-            '                        </div>\n' +
-            '                    </li>\n' +
-            '                    <li>\n' +
-            '                        <div class="chat-body_menu-list_item">\n' +
-            '                            <div class="chat-body_menu-list_img">\n' +
-            '                                <img src="img/icons/location.svg">\n' +
-            '                            </div>\n' +
-            '                            <div class="chat-body_menu-list_text">Локация</div>\n' +
-            '                        </div>\n' +
-            '                    </li>\n' +
-            '                </ul>\n' +
-            '            </div>\n' +
-            '            {{/if}}' +
-            '            <div class="chat-body_footer_clip">\n' +
-            '                <img src="img/icons/clip.svg" alt="">\n' +
-            '            </div>\n' +
-            '            <div class="chat-body_footer_message">' +
-                            input.renderToString() +
-            '            </div>' +
-            '            <div class="chat-body_footer_send">' +
-                            button.renderToString() +
-            '            </div>' +
-            '        </footer>';
+        return `<footer class="chat-body_footer">
+                            {{#if isShowMenu}}
+                            <div class="chat-body_footer_menu">
+                            <ul class="chat-body_menu-list">
+                                <li>
+                                    <div class="chat-body_menu-list_item">
+                                        <div class="chat-body_menu-list_img">
+                                            <img src="img/icons/picture.svg">
+                                        </div>
+                                        <div class="chat-body_menu-list_text">Изображение</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chat-body_menu-list_item">
+                                        <div class="chat-body_menu-list_img">
+                                           <img src="img/icons/file.svg">
+                                        </div>
+                                       <div class="chat-body_menu-list_text">Файл</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="chat-body_menu-list_item">
+                                        <div class="chat-body_menu-list_img">
+                                            <img src="img/icons/location.svg">
+                                        </div>
+                                        <div class="chat-body_menu-list_text">Локация</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        {{/if}}
+                        <div class="chat-body_footer_clip">
+                            <img src="img/icons/clip.svg" alt="">
+                        </div>
+                        <div class="chat-body_footer_message">
+                            ${input.renderToString()}
+                        </div>
+                        <div class="chat-body_footer_send">
+                            ${button.renderToString()}
+                        </div>
+                    </footer>`;
     }
 }

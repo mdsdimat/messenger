@@ -1,4 +1,4 @@
-import Block from "../../modules/block";
+import Block from "modules/Block";
 
 export default class ChatListItem extends Block {
     props: {
@@ -10,31 +10,33 @@ export default class ChatListItem extends Block {
         super("div", props);
     }
 
+    handleClick = (e: any): void => {
+        const id = e.target.closest('li').id;
+        this.props.actions.onclick(id);
+    }
+
     initEvents(block: Block): void {
         if (block._element) {
-            block._element.onclick = (e: any) => {
-                const id = e.target.closest('li').id;
-                this.props.actions.onclick(id);
-            }
+            block._element.addEventListener('click', this.handleClick);
         }
     }
 
     getTemplate(): string {
-        return '             <li id="{{this.id}}" class="chat_list_body_item">\n' +
-            '                    <div class="chat_list_body_item_photo">\n' +
-            '                        <img src="img/icons/ellipse.svg" alt="">\n' +
-            '                    </div>\n' +
-            '                    <div class="chat_list_body_item_message">\n' +
-            '                        <div class="chat_list_body_item_message_name">{{this.name}}</div>\n' +
-            '                        <div class="chat_list_body_item_message_content">{{this.text}}</div>\n' +
-            '                    </div>\n' +
-            '                    <div class="chat_list_body_item_desc">\n' +
-            '                        <div class="chat_list_body_item_desc_date">{{this.time}}</div>\n' +
-            '                        {{#if this.count}}\n' +
-            '                           <div class="chat_list_body_item_desc_count">{{this.count}}</div>\n' +
-            '                        {{/if}}\n' +
-            '                    </div>\n' +
-            '                </li>\n';
+        return `<li id="{{this.id}}" class="chat_list_body_item">
+                    <div class="chat_list_body_item_photo">
+                        <img src="img/icons/ellipse.svg" alt="">
+                    </div>
+                    <div class="chat_list_body_item_message">
+                        <div class="chat_list_body_item_message_name">{{this.name}}</div>
+                        <div class="chat_list_body_item_message_content">{{this.text}}</div>
+                    </div>
+                    <div class="chat_list_body_item_desc">
+                        <div class="chat_list_body_item_desc_date">{{this.time}}</div>
+                        {{#if this.count}}
+                           <div class="chat_list_body_item_desc_count">{{this.count}}</div>
+                        {{/if}}
+                    </div>
+                </li>`;
     }
 
 

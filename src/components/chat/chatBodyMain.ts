@@ -1,4 +1,4 @@
-import Block from "../../modules/block";
+import Block from "modules/Block";
 
 export default class ChatBodyMain extends Block {
 
@@ -7,31 +7,31 @@ export default class ChatBodyMain extends Block {
     }
 
     getMessage(): string {
-        return '{{#if text}}\n' +
-            '      <p class="chat-body_main_message_text">{{text}}</p>\n' +
-            '      <div class="chat-body_main_message_time">{{time}}</div>\n' +
-            '    {{/if}}\n' +
-            '    {{#if img}}\n' +
-            '      <img class="chat-body_main_img" src="{{img}}" alt="">\n' +
-            '      <div class="chat-body_main_message_time">{{time}}</div>\n' +
-            '    {{/if}}\n';
+        return `{{#if text}}
+                  <p class="chat-body_main_message_text">{{text}}</p>
+                  <div class="chat-body_main_message_time">{{time}}</div>
+                {{/if}}
+                {{#if img}}
+                  <img class="chat-body_main_img" src="{{img}}" alt="">
+                  <div class="chat-body_main_message_time">{{time}}</div>
+                {{/if}}`;
     }
 
     getTemplate(): string {
-        return '<div class="chat-body_main">\n' +
-            '            {{#each messages}}\n' +
-            '                {{#if self}}\n' +
-            '                  <div class="flex-container">\n' +
-            '                    <div class="chat-body_main_message-self">\n' +
-                                    this.getMessage() +
-            '                    </div>\n' +
-            '                  </div>' +
-            '                {{else}}\n' +
-            '                  <div class="chat-body_main_message">\n' +
-                                    this.getMessage() +
-            '                  </div>\n' +
-            '                {{/if}}\n' +
-            '            {{/each}}\n' +
-            '        </div>';
+        return `<div class="chat-body_main">
+                        {{#each messages}}
+                            {{#if self}}
+                              <div class="flex-container">
+                                <div class="chat-body_main_message-self">
+                                    ${this.getMessage()}
+                                </div>
+                              </div>
+                            {{else}}
+                              <div class="chat-body_main_message">
+                                    ${this.getMessage()}
+                              </div>
+                            {{/if}}
+                        {{/each}}
+                    </div>`;
     }
 }

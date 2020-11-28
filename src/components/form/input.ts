@@ -1,6 +1,7 @@
-import Block from "../../modules/block";
-import {IEvent, IField} from "../../modules/validation/validation";
-import InputValidation from "../../modules/validation/inputValidation";
+import InputValidation from "modules/validation/InputValidation";
+import Block from "modules/Block";
+import {IEvent, IField} from "modules/validation/Validation";
+
 
 export default class Input extends Block {
     props: {
@@ -12,15 +13,19 @@ export default class Input extends Block {
         super("div", props);
     }
 
+    handleFocus = (e: IEvent): void => {
+        const validation = new InputValidation(this.props);
+        validation.validate(e)
+    }
+
     initEvents(block: Block): void {
         if (block._element) {
-            const validation = new InputValidation(this.props);
-            block._element.firstChild.onfocus = (e: IEvent) => {validation.validate(e)};
-            block._element.firstChild.onblur = (e: IEvent) => {validation.validate(e)};
+            block._element.addEventListener('focus', this.handleFocus);
+            block._element.addEventListener('blur', this.handleFocus);
         }
     }
 
     getTemplate(): string {
-        return '<input id="{{id}}" name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}">';
+        return `<input id="{{id}}" name="{{name}}" class="{{className}}" type="{{type}}" value="{{value}}" placeholder="{{placeholder}}">`;
     }
 }

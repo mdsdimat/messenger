@@ -1,4 +1,4 @@
-import Block from "../../modules/block";
+import Block from "modules/Block";
 
 export default class HeaderMenuItem extends Block {
     props: {
@@ -10,23 +10,24 @@ export default class HeaderMenuItem extends Block {
         super("div", props);
     }
 
+    handleClick = (): void => {
+        this.props.actions.onclick();
+    }
+
     initEvents(block: Block): void {
         if (block._element) {
-            block._element.onclick = () => {
-                this.props.actions.onclick();
-            }
+            block._element.addEventListener('click', this.handleClick);
         }
     }
 
     getTemplate(): string {
-        return '<li>\n' +
-            '       <div class="chat-body_menu-list_item">\n' +
-            '           <div class="chat-body_menu-list_img">\n' +
-            '               <img src="{{this.icon}}" alt="">\n' +
-            '           </div>\n' +
-            '           <div class="chat-body_menu-list_text">{{name}}</div>\n' +
-            '       </div>\n' +
-            '   </li>\n';
+        return `<li>
+                   <div class="chat-body_menu-list_item">
+                       <div class="chat-body_menu-list_img">
+                           <img src="{{this.icon}}" alt="">
+                       </div>
+                       <div class="chat-body_menu-list_text">{{name}}</div>
+                   </div>
+               </li>`;
     }
-
 }

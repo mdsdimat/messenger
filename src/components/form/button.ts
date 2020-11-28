@@ -1,5 +1,5 @@
-import Block from "../../modules/block";
-import {IEvent} from "../../modules/validation/validation";
+import Block from "modules/Block";
+import {IEvent} from "modules/validation/Validation";
 
 export default class Button extends Block {
     props: {
@@ -10,18 +10,20 @@ export default class Button extends Block {
         super("div", props);
     }
 
+    handleClick = (e: IEvent): void => {
+        e.preventDefault();
+        if (this.props.action) {
+            this.props.action()
+        }
+    }
+
     initEvents(block: Block): void {
         if (block._element && this.props.action) {
-            block._element.onclick = (e: IEvent) => {
-                e.preventDefault();
-                if (this.props.action) {
-                    this.props.action()
-                }
-            };
+            block._element.addEventListener('click', this.handleClick);
         }
     }
 
     getTemplate(): string {
-        return '<button type="{{type}}" class="{{className}}">{{text}}</button>';
+        return `<button type="{{type}}" class="{{className}}">{{text}}</button>`;
     }
 }
