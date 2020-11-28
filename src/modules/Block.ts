@@ -12,7 +12,7 @@ abstract class Block {
     _element:any = null;
     _meta: {tagName: string, props: Record<string, unknown>|null};
     private readonly _id: string;
-    private eventBus: () => EventBus;
+    eventBus: () => EventBus;
     static _instances: Block[];
     static hydrate: () => void;
     props: Record<string, unknown>;
@@ -129,17 +129,15 @@ abstract class Block {
         return this.element;
     }
 
-    _makePropsProxy(props: {[key:string]: unknown}): Record<string, unknown> {
-        // eslint-disable-next-line @typescript-eslint/no-this-alias
-        const self = this;
+    _makePropsProxy = (props: {[key:string]: unknown}): Record<string, unknown> => {
         return new Proxy(props, {
-            set(target: {[key:string]: unknown}, prop: string, value) {
+            set: (target: {[key:string]: unknown}, prop: string, value) => {
                 const oldProp = {...target};
                 target[prop] = value;
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProp, target);
+                this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProp, target);
                 return true;
             },
-            get(target: {[key:string]: unknown}, prop: string) {
+            get: (target: {[key:string]: unknown}, prop: string) => {
                 const value = target[prop];
                 return typeof value === "function" ? value.bind(target) : value;
             }
@@ -147,7 +145,6 @@ abstract class Block {
     }
 
     _createDocumentElement(tagName:string): Element {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 

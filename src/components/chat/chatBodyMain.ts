@@ -1,4 +1,5 @@
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 export default class ChatBodyMain extends Block {
 
@@ -8,26 +9,26 @@ export default class ChatBodyMain extends Block {
 
     getMessage(): string {
         return `{{#if text}}
-                  <p class="chat-body_main_message_text">{{text}}</p>
-                  <div class="chat-body_main_message_time">{{time}}</div>
+                  <p class="${style.chatBodyMainMessageText}">{{text}}</p>
+                  <div class="${style.chatBodyMainMessageTime}">{{time}}</div>
                 {{/if}}
                 {{#if img}}
-                  <img class="chat-body_main_img" src="{{img}}" alt="">
-                  <div class="chat-body_main_message_time">{{time}}</div>
+                  <img class="${style.chatBodyMainImg}" src="{{img}}" alt="">
+                  <div class="${style.chatBodyMainMessageTime}">{{time}}</div>
                 {{/if}}`;
     }
 
     getTemplate(): string {
-        return `<div class="chat-body_main">
+        return `<div class="${style.chatBodyMain}">
                         {{#each messages}}
                             {{#if self}}
-                              <div class="flex-container">
-                                <div class="chat-body_main_message-self">
+                              <div class="${style.flexContainer}">
+                                <div class="${style.chatBodyMainMessageSelf}">
                                     ${this.getMessage()}
                                 </div>
                               </div>
                             {{else}}
-                              <div class="chat-body_main_message">
+                              <div class="${style.chatBodyMainMessage}">
                                     ${this.getMessage()}
                               </div>
                             {{/if}}

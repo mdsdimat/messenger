@@ -3,6 +3,7 @@ import Chat from "components/chat/Chat";
 import {getFormData} from "modules/scripts";
 import ChatController from "http/controllers/ChatController";
 import Router from "modules/routing/Router";
+import chatStyle from "css/chat.css";
 
 export default class MainChat extends Chat {
     constructor() {
@@ -69,16 +70,16 @@ export default class MainChat extends Chat {
                         type: 'text',
                     },
                 ],
-                buttonsClassName: 'modal-window_buttons',
+                buttonsClassName: chatStyle.modalWindowButtons,
                 buttons: [
                     {
                         type: 'submit',
-                        className: 'modal-window_buttons_error',
+                        className: chatStyle.modalWindowButtonsError,
                         text: 'Создать',
                         action: createChat
                     },
                     {
-                        className: 'modal-window_buttons_cancel',
+                        className: chatStyle.modalWindowButtonsCancel,
                         text: 'Закрыть',
                         action: () => {
                             this.props.createModal.isShow = false;
@@ -100,16 +101,16 @@ export default class MainChat extends Chat {
                         type: 'text',
                     },
                 ],
-                buttonsClassName: 'modal-window_buttons',
+                buttonsClassName: chatStyle.modalWindowButtons,
                 buttons: [
                     {
                         type: 'submit',
-                        className: 'modal-window_buttons_error',
+                        className: chatStyle.modalWindowButtonsError,
                         text: 'Добавить',
                         action: addUser
                     },
                     {
-                        className: 'modal-window_buttons_cancel',
+                        className: chatStyle.modalWindowButtonsCancel,
                         text: 'Закрыть',
                         action: () => {
                             this.props.addUserModal.isShow = false;
@@ -124,12 +125,12 @@ export default class MainChat extends Chat {
                 buttons: [
                     {
                         type: 'submit',
-                        className: 'modal-window_buttons_error',
+                        className: chatStyle.modalWindowButtonsError,
                         text: 'Удалить',
                         action: deleteChat
                     },
                     {
-                        className: 'modal-window_buttons_cancel',
+                        className: chatStyle.modalWindowButtonsCancel,
                         text: 'Закрыть',
                         action: () => {
                             this.props.deleteModal.isShow = false;
@@ -141,7 +142,7 @@ export default class MainChat extends Chat {
             list: {
                 chats: [],
                 profileButton: {
-                    className: 'chat_list_header_profile-link',
+                    className: chatStyle.chatListHeaderProfileLink,
                     text: 'Профиль',
                     action: () => {
                         const router = new Router();
@@ -149,7 +150,7 @@ export default class MainChat extends Chat {
                     }
                 },
                 createChatButton: {
-                    className: 'chat_list_header_profile-link',
+                    className: chatStyle.chatListHeaderProfileLink,
                     text: 'Добавить чат',
                     action: () => {
                         this.props.createModal.isShow = true;
@@ -164,7 +165,7 @@ export default class MainChat extends Chat {
                     desc: 'Был в сети 5 минут назад',
                     isShowMenu: false,
                     menuButton: {
-                        className: 'chat-body_header_menu_button',
+                        className: chatStyle.chatBodyHeaderMenuButton,
                         action: () => {
                             this.props.body.header.isShowMenu = !this.props.body.header.isShowMenu;
                             this.setProps(this.props);
@@ -179,11 +180,6 @@ export default class MainChat extends Chat {
                                     if (this.props.activeChat !== null) {
                                         this.props.addUserModal.isShow = true;
                                         this.setProps(this.props);
-                                        // const chat = new ChatController();
-                                        // chat.getChatUserList(this.props.activeChat.toString())
-                                        //     .catch(err => {
-                                        //         console.log(err)
-                                        //     })
                                     }
                                 }
                             }
@@ -215,11 +211,11 @@ export default class MainChat extends Chat {
                     message: {
                         id: 'message',
                         name: 'message',
-                        className: 'chat-body_footer_message-input',
+                        className: chatStyle.chatBodyFooterMessageInput,
                         placeholder: 'Сообщение'
                     },
                     sendButton: {
-                        className: 'chat-body_footer_send-button',
+                        className: chatStyle.chatBodyFooterSendButton,
                         action: () => {
                             const message = <HTMLInputElement>document.getElementById('message')
                             if (message !== null && this.props.activeSocket !== null) {

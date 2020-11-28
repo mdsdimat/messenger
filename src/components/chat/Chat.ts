@@ -3,6 +3,7 @@ import Button from "components/form/Button";
 import ChatBody from "components/chat/ChatBody";
 import ChatList from "components/chat/ChatList";
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 export default class Chat extends Block {
     props: {
@@ -61,14 +62,14 @@ export default class Chat extends Block {
 
     getDeleteModal(): string {
         if (this.props.deleteModal.isShow) {
-            return `    <div class="modal-wrapper">
-                        <div class="modal-window">
-                            <p class="modal-window_title">Вы хотите удалить чат</p>
-                            <div class="modal-window_buttons">
+            return `    <div class="${style.modalWrapper}">
+                        <div class="${style.modalWindow}">
+                            <p class="${style.modalWindowTitle}">Вы хотите удалить чат</p>
+                            <div class="${style.modalWindowButtons}">
                                 ${this.getDeleteModalButtons()}
                             </div>
                         </div>
-                        <div class="overlay"></div>
+                        <div class="${style.overlay}"></div>
                     </div>`;
         } else {
             return '';
@@ -89,12 +90,12 @@ export default class Chat extends Block {
     getTemplate(): string {
         const list = new ChatList(this.props.list);
         const body = new ChatBody(this.props.body);
-        return '<main class="chat">' +
-                this.getDeleteModal() +
-                this.getCreateChatModal() +
-                this.getAddUserModal() +
-                list.render()+
-                body.render() +
-            '  </main>';
+        return `<main class="${style.chat}">
+                ${this.getDeleteModal()}
+                ${this.getCreateChatModal()}
+                ${this.getAddUserModal()}
+                ${list.render()}
+                ${body.render()}
+              </main>`;
     }
 }

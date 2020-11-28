@@ -12,6 +12,6 @@ export function render(query:string, block: Block): Element | null {
 export const getFormData = (className: string): FormData | undefined => {
     const form = <HTMLFormElement>document.querySelector(`.${className}`)
     if (form) {
-        return  new FormData(form);
+        return new FormData(form);
     }
 }

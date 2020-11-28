@@ -1,4 +1,5 @@
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 export default class HeaderMenuItem extends Block {
     props: {
@@ -22,11 +23,11 @@ export default class HeaderMenuItem extends Block {
 
     getTemplate(): string {
         return `<li>
-                   <div class="chat-body_menu-list_item">
-                       <div class="chat-body_menu-list_img">
+                   <div class="${style.chatBodyMenuListItem}">
+                       <div class="${style.chatBodyMenuListImg}">
                            <img src="{{this.icon}}" alt="">
                        </div>
-                       <div class="chat-body_menu-list_text">{{name}}</div>
+                       <div class="${style.chatBodyMenuListText}">{{name}}</div>
                    </div>
                </li>`;
     }

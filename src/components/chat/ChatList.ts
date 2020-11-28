@@ -1,6 +1,7 @@
 import ChatListItem from "components/chat/ChatListItem";
 import Button from "components/form/Button";
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 export default class ChatList extends Block {
     props: {
@@ -33,16 +34,16 @@ export default class ChatList extends Block {
     }
 
     getTemplate(): string {
-        return `<div class="chat_list">
-                    <header class="chat_list_header">
-                        <div class="flex-container">
+        return `<div class="${style.chatList}">
+                    <header class="${style.chatListHeader}">
+                        <div class="${style.flexContainer}">
                             ${this.getProfileButton()}
                             ${this.getCreateChatButton()}
                         </div>
-                        <input type="text" name="search" class="chat_list_header_profile-search" placeholder="Поиск">
+                        <input type="text" name="search" class="${style.chatListHeaderProfileSearch}" placeholder="Поиск">
                     </header>
-                    <div class="chat_list_body">
-                        <ul class="chat_list_body_common">
+                    <div class="${style.chatListBody}">
+                        <ul class="${style.chatListBodyCommon}">
                             ${this.getChatsList()}
                         </ul>
                     </div>

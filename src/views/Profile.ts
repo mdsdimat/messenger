@@ -2,6 +2,7 @@ import Profile from "components/Profile";
 import AuthController from "http/controllers/AuthController";
 import Router from "modules/routing/Router";
 import {ROUTES, STATUS_TEXTS} from "modules/constants";
+import style from "css/profile.css";
 
 export default class ViewProfile extends Profile {
     constructor() {
@@ -10,23 +11,23 @@ export default class ViewProfile extends Profile {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
             backButton: {
-                className: 'back',
+                className: style.back,
                 action: () => {
                     const router = new Router();
                     router.go(ROUTES.CHAT);
                 }
             },
-            formClassName: 'profile_form form js-form',
+            formClassName: `${style.profileForm} ${style.form} js-form`,
             fields: [
                 {
                     name: 'email',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Почта',
                 },
                 {
                     name: 'login',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Логин',
                 }
@@ -34,16 +35,16 @@ export default class ViewProfile extends Profile {
             buttonsClassName: '',
             buttons: [
                 {
-                    className: 'field_button',
+                    className: style.fieldButton,
                     type: 'submit',
                     text: 'Изменить данные',
-                    parentClass: 'field-border',
+                    parentClass: style.fieldBorder,
                     action: () => {
                         router.go(ROUTES.EDIT_PROFILE)
                     }
                 },
                 {
-                    className: 'field_button button-error',
+                    className: `${style.fieldButton} ${style.buttonError}`,
                     text: 'Выйти',
                     action: () => {
                         const auth = new AuthController();

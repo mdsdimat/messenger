@@ -54,7 +54,10 @@ export default class Router {
     }
 
     go(pathname: string): Block|null|undefined {
-        this.history.pushState({ prevUrl: this._currentRoute?this._currentRoute.getPathName():null }, "", pathname);
+        this.history.pushState(
+            {prevUrl: this._currentRoute ? this._currentRoute.getPathName() : null},
+            "",
+            pathname);
         localStorage.setItem(STORAGE.SAVE_PATH, pathname)
         return this._onRoute(pathname);
     }
@@ -75,9 +78,6 @@ export default class Router {
 
     getSavePath(): string|null {
         const path = localStorage.getItem(STORAGE.SAVE_PATH);
-        if (path) {
-            return path;
-        }
-        return null;
+        return path || null;
     }
 }

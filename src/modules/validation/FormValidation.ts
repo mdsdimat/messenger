@@ -9,20 +9,14 @@ export default class FormValidation extends Validation {
         let isValid = true;
         for (const input of inputs) {
             const searchedField: IField | undefined = this.getField(input.name);
-            if (searchedField !== undefined) {
-                if (!this.doValidation(searchedField.validation, input)) {
-                    isValid = false;
-                }
+            if (searchedField !== undefined && !this.doValidation(searchedField.validation, input)) {
+                isValid = false;
             }
         }
         return isValid;
     }
 
     getField(name: string): IField | undefined {
-        return this.props.fields.find((field: { name: string }) => {
-            if (field.name === name) {
-                return name;
-            }
-        });
+        return this.props.fields.find((field) => field.name === name);
     }
 }

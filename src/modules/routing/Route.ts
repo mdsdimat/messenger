@@ -32,15 +32,11 @@ export default class Route {
     leave(): void {
         if (this._block) {
             this._block.hide();
-            // const node = document.querySelector(`[_key=${this._block.getId()}`);
-            // if (node) {
-            //     node.remove();
-            // }
         }
     }
 
     match(pathname: string): boolean {
-        return isEqual(pathname, this._pathname);
+        return pathname === this._pathname;
     }
 
     render(): Block|null|undefined {
@@ -58,8 +54,4 @@ export default class Route {
 
         this._block.show(this._props.rootQuery);
     }
-}
-
-function isEqual(lhs: string, rhs: string): boolean {
-    return lhs === rhs;
 }

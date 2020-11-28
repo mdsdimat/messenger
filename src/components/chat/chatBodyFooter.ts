@@ -1,6 +1,7 @@
 import Input from "components/form/Input";
 import Button from "components/form/Button";
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 export default class ChatBodyFooter extends Block {
     props: {
@@ -15,9 +16,9 @@ export default class ChatBodyFooter extends Block {
     getTemplate(): string {
         const input = new Input(this.props.message);
         const button = new Button(this.props.sendButton);
-        return `<footer class="chat-body_footer">
+        return `<footer class="${style.chatBodyFooter}">
                             {{#if isShowMenu}}
-                            <div class="chat-body_footer_menu">
+                            <div class="${style.chatBodyFooterMenu}">
                             <ul class="chat-body_menu-list">
                                 <li>
                                     <div class="chat-body_menu-list_item">
@@ -46,13 +47,13 @@ export default class ChatBodyFooter extends Block {
                             </ul>
                         </div>
                         {{/if}}
-                        <div class="chat-body_footer_clip">
+                        <div class="${style.chatBodyFooterClip}">
                             <img src="img/icons/clip.svg" alt="">
                         </div>
-                        <div class="chat-body_footer_message">
+                        <div class="${style.chatBodyFooterMessage}">
                             ${input.renderToString()}
                         </div>
-                        <div class="chat-body_footer_send">
+                        <div class="${style.chatBodyFooterSend}">
                             ${button.renderToString()}
                         </div>
                     </footer>`;

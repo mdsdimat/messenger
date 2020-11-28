@@ -2,7 +2,7 @@ import Input from "components/form/Input";
 import HeaderMenuItem from "components/chat/HeaderMenuItem";
 import Button from "components/form/Button";
 import Block from "modules/Block";
-
+import style from "css/chat.css";
 
 export default class ChatBodyHeader extends Block {
     props: {
@@ -37,22 +37,22 @@ export default class ChatBodyHeader extends Block {
     }
 
     getTemplate(): string {
-        return `<header class="chat-body_header">
+        return `<header class="${style.chatBodyHeader}">
                         {{#if isRename}}
                             ${this.getHeaderInput()}
                         {{else}}
-                          <div class="chat-body_header_photo">
+                          <div class="${style.chatBodyHeaderPhoto}">
                               <img src="img/icons/little_ellipse.svg" alt="">
                           </div>
-                          <div class="chat-body_header_desc">
-                              <div class="chat_list_body_item_message_name">{{name}}</div>
-                              <div class="chat_list_body_item_message_content">{{desc}}</div>
+                          <div class="${style.chatBodyHeaderDesc}">
+                              <div class="${style.chatListBodyItemMessageName}">{{name}}</div>
+                              <div class="${style.chatListBodyItemMessageContent}">{{desc}}</div>
                           </div>
                         {{/if}}
-                          <div class="chat-body_header_menu">
+                          <div class="${style.chatBodyHeaderMenu}">
                         {{#if isShowMenu}}
-                            <div class="chat-body_header_menu_list">
-                                <ul class="chat-body_menu-list">
+                            <div class="${style.chatBodyHeaderMenuList}">
+                                <ul class="${style.chatBodyMenuList}">
                                     ${this.getMenu()}
                                 </ul>
                             </div>

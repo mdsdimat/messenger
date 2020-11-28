@@ -4,6 +4,7 @@ import {HOST, ROUTES} from "modules/constants";
 import {getFormData} from "modules/scripts";
 import AuthController from "http/controllers/AuthController";
 import ProfileController from "http/controllers/ProfileController";
+import style from "css/profile.css";
 
 export default class ChangeProfile extends Profile {
     constructor() {
@@ -11,17 +12,17 @@ export default class ChangeProfile extends Profile {
             photo: 'img/profilePhoto.svg',
             name: 'Дима',
             backButton: {
-                className: 'back',
+                className: style.back,
                 action: () => {
                     const router = new Router();
                     router.go(ROUTES.PROFILE);
                 }
             },
-            formClassName: 'profile_form form js-form',
+            formClassName: `${style.profileForm} ${style.form} js-form`,
             fields: [
                 {
                     name: 'first_name',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Имя',
                     value: 'Дима',
@@ -37,42 +38,42 @@ export default class ChangeProfile extends Profile {
                 },
                 {
                     name: 'second_name',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Фамилия',
                     value: 'Димский',
                 },
                 {
                     name: 'display_name',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Отображаемое имя',
                     value: 'Dima',
                 },
                 {
                     name: 'login',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Логин',
                     value: 'Dima',
                 },
                 {
                     name: 'email',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Email',
                     value: 'test@yandex.ru',
                 },
                 {
                     name: 'phone',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Телфон',
                     value: '+375291234567',
                 },
                 {
                     name: 'avatar',
-                    className: 'field_input-file',
+                    className: style.fieldInputFile,
                     type: 'file',
                     placeholder: 'Аватар',
                     value: '',
@@ -80,14 +81,14 @@ export default class ChangeProfile extends Profile {
                 },
                 {
                     name: 'password',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Пароль',
                     value: 'password',
                 },
                 {
                     name: 'confirm_password',
-                    className: 'field_input',
+                    className: style.fieldInput,
                     type: 'text',
                     placeholder: 'Пароль (ещё раз)',
                     value: 'password',
@@ -95,7 +96,7 @@ export default class ChangeProfile extends Profile {
             ],
             buttons: [
                 {
-                    className: 'profile_form_save-button',
+                    className: style.profileFormSaveButton,
                     text: 'Сохранить',
                     action: () => {
                         const formData = getFormData('js-form');

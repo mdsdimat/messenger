@@ -1,4 +1,5 @@
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 export default class ChatListItem extends Block {
     props: {
@@ -22,18 +23,18 @@ export default class ChatListItem extends Block {
     }
 
     getTemplate(): string {
-        return `<li id="{{this.id}}" class="chat_list_body_item">
-                    <div class="chat_list_body_item_photo">
+        return `<li id="{{this.id}}" class="${style.chatListBodyItem}">
+                    <div class="${style.chatListBodyItemPhoto}">
                         <img src="img/icons/ellipse.svg" alt="">
                     </div>
-                    <div class="chat_list_body_item_message">
-                        <div class="chat_list_body_item_message_name">{{this.name}}</div>
-                        <div class="chat_list_body_item_message_content">{{this.text}}</div>
+                    <div class="${style.chatListBodyItemMessage}">
+                        <div class="${style.chatListBodyItemMessageName}">{{this.name}}</div>
+                        <div class="${style.chatListBodyItemMessageContent}">{{this.text}}</div>
                     </div>
-                    <div class="chat_list_body_item_desc">
-                        <div class="chat_list_body_item_desc_date">{{this.time}}</div>
+                    <div class="${style.chatListBodyItemDesc}">
+                        <div class="${style.chatListBodyItemDescDate}">{{this.time}}</div>
                         {{#if this.count}}
-                           <div class="chat_list_body_item_desc_count">{{this.count}}</div>
+                           <div class="${style.chatListBodyItemDescCount}">{{this.count}}</div>
                         {{/if}}
                     </div>
                 </li>`;

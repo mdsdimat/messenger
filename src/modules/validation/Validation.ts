@@ -44,6 +44,7 @@ export default abstract class Validation {
         let isValid = true;
         for (let i = 0; i < validation.length; i++) {
             const validResult = this.getValidationFunction(validation[i], target.value);
+            // Если validResult.valid не false то это условие не будет выполняться
             if (validResult !== undefined && !validResult.valid) {
                 target.classList.add('input-error');
                 this.showErrorMessage(message, validResult.message);

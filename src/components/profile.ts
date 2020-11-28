@@ -2,6 +2,7 @@ import Input from "components/form/Input";
 import Button from "components/form/Button";
 import Form from "components/form/Form";
 import Block from "modules/Block";
+import style from "css/profile.css";
 
 export default class Profile extends Block {
     props: {
@@ -22,19 +23,19 @@ export default class Profile extends Block {
             const input = new Input(field);
             if (field.type === 'file') {
                 renderField += `
-                            <div class="field field-border js-valid">
-                                <label class="field_label">Аватар</label>
-                                <label class="field_input-file-label">
+                            <div class="${style.field} ${style.fieldBorder} js-valid">
+                                <label class="${style.fieldLabel}">Аватар</label>
+                                <label class="${style.fieldInputFileLabel}">
                                      ${input.renderToString()}
                                     Выберете файл
                                 </label>
                             </div>`
             } else {
                 renderField += `
-                           <div class="field field-border js-valid">
-                                <label class="field_label">${field.placeholder}</label>
+                           <div class="${style.field} ${style.fieldBorder} js-valid">
+                                <label class="${style.fieldLabel}">${field.placeholder}</label>
                                  ${input.renderToString()}
-                                <div class="field_label input-error js-error-message" hidden></div>
+                                <div class="${style.fieldLabel} ${style.inputError} js-error-message" hidden></div>
                             </div>`;
             }
         });
@@ -56,10 +57,10 @@ export default class Profile extends Block {
     }
     getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
-        return `<main class="profile">
+        return `<main class="${style.profile}">
                     ${this.getBackButton()}
-                <img class="profile_image" src="{{photo}}" alt="">
-                <h1 class="profile_name">{{name}}</h1>
+                <img class="${style.profileImage}" src="{{photo}}" alt="">
+                <h1 class="${style.profileName}">{{name}}</h1>
                     ${form.renderToString()}
                </main>`;
     }
