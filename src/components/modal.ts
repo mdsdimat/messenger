@@ -2,6 +2,7 @@ import Input from "components/form/Input";
 import Button from "components/form/Button";
 import Form from "components/form/Form";
 import Block from "modules/Block";
+import style from "css/chat.css";
 
 
 export default class Modal extends Block {
@@ -24,11 +25,11 @@ export default class Modal extends Block {
 
     getTemplate(): string {
         const form = new Form(this.props, this.getFields(), this.getButtons());
-        return `<div class="modal-wrapper">
-                    <div class="modal-window">
+        return `<div class="${style.modalWrapper}">
+                    <div class="${style.modalWindow}">
                         ${form.renderToString()}
                     </div>
-                    <div class="overlay"></div>
+                    <div class="${style.overlay}"></div>
                </div>`;
     }
 

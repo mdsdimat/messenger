@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest",
     "build-tsc": "node ./node_modules/.bin/webpack",
-    "build-css": "npx postcss src/css/*.css --use autoprefixer -d static/css/",
-    "build": "npm run build-tsc && cp -r src/img/ static/ && cp -a src/pages/. static/",
+    "build": "npm run build-tsc && cp -r src/img/ static/ && cp -a pages/. static/",
     "start": "npm run build && node server.js",
     "eslint": "node_modules/.bin/eslint . --fix",
     "stylelint": "npx stylelint \"**/*.css\" --fix",
