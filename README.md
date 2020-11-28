@@ -1,7 +1,7 @@
 Проект messenger для yandex praktikum
 
 ### **Heroku**
-https://messenger-for-praktikum.herokuapp.com/static/#/login
+https://messenger-for-praktikum.herokuapp.com/static
 
 ### **Netlify**
 https://condescending-sinoussi-9e3337.netlify.app
